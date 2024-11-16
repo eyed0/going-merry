@@ -1,0 +1,99 @@
+#   CONFIG   #
+
+theme = "kanagawa"
+
+[editor]
+line-number = "absolute" # or relative
+mouse = true
+scrolloff = 12
+cursorline = true
+# cursorcolumn = true
+auto-completion = true
+auto-format = true
+auto-save = true
+idle-timeout = 300
+completion-trigger-len = 2
+auto-pairs = true
+completion-replace = true
+auto-info = true
+true-color = true
+bufferline = "multiple"
+color-modes = true
+# TODO text-width = 80 # ccan specify any number
+# TODO soft wrap
+
+[editor.gutters]
+layout = ["diff", "diagnostics", "line-numbers", "spacer"]
+
+[editor.gutters.line-numbers]
+min-width = 2
+
+[editor.statusline]
+left = ["mode", "total-line-numbers", "spinner", "file-type", "file-name", "file-modification-indicator"] 
+right = ["diagnostics", "selections", "file-encoding"]
+center = ["position", "position-percentage"]
+
+[editor.lsp]
+enable = true
+display-messages = true
+auto-signature-help = true
+display-inlay-hints = true
+snippets = true
+goto-reference-include-declaration = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.whitespace]
+# or control each character
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+newline = "none"
+nbsp = "all"
+tabpad = "all"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+tab = "→"
+# newline = "⏎"
+tabpad = "·" # Tabs will look like "→···" (depending on tab width)
+
+[editor.indent-guides]
+render = true
+character = "〡" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 2
+
+[editor.soft-wrap]
+enable = true
+
+[keys.normal]
+"=" = [":format"]
+"D" = ["extend_to_line_bounds", "delete_selection"]
+"Z" = { Q = ":quit!", Z = ":write-quit!" , S = ":write"}
+esc = ["collapse_selection", "keep_primary_selection"]
+A-x = "command_mode"
+"C-right" = "goto_next_buffer"
+"C-left" = "goto_previous_buffer"
+#"C-space" = "signature_help"
+
+[keys.insert.z]
+s = ":w"
+n = "normal_mode"
+v = "select_mode"
+#"right" = "goto_next_buffer"
+#"left" = "goto_previous_buffer"
+
+[keys.insert]
+A-x = "command_mode"
+"C-right" = "goto_next_buffer"
+"C-left" = "goto_previous_buffer"
+
+[keys.select]
+A-x = "command_mode"
