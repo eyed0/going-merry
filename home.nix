@@ -5,6 +5,7 @@
     ./home/stylix/stylix.nix 
 	./home/wayland/default.nix
 	./home/kdeconnect.nix
+	./home/mpv/mpv.nix
   ];
   home.username = "heehaw";
   home.homeDirectory = "/home/heehaw";

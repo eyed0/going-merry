@@ -7,6 +7,10 @@
         enable32Bit = true;
         extraPackages = with pkgs; [
           amdvlk
+		  vulkan-loader
+          vulkan-tools
+          libvdpau
+          libva
         ];
     };
 

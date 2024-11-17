@@ -37,7 +37,6 @@
 
       #       apps
 
-      mpv
       nicotine-plus # soulseek
       #appimage-run
       #inkscape
@@ -65,8 +64,8 @@
       qbittorrent
       nvtopPackages.full # top for gpu
       typst # latex alternative
-      typstwriter # typst editor
-      tinymist # lsp for typst
+      #typstwriter # typst editor
+      #tinymist # lsp for typst
       yazi # terminal file manager
       #digikam5
       #kate
