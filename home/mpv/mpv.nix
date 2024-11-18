@@ -8,9 +8,9 @@
           
     config = {
       # General
-      "profile" = "gpu-hq";
-      "gpu-api" = "vulkan";  # Vulkan for better performance
-      "hwdec" = "nvdec-copy";  # Better quality while maintaining hardware acceleration
+      "profile" = "gpu-hq"; # other options default, low-latency, gpu-hq, gpu
+      "gpu-api" = "auto";  # other options vulkan, opengl
+      "hwdec" = "auto";  # other options vulkan, rpi, vaapi
       "reset-on-next-file" = "pause";
 
       # Enhanced Video Quality Settings
@@ -80,6 +80,48 @@
       "input-cursor" = true;
       "input-right-alt-gr" = true;
       "input-vo-keyboard" = true;
+
+	  # Enhanced Audio Settings
+      "audio-format" = "float";
+      "audio-samplerate" = 96000;
+      "audio-pitch-correction" = "no";
+      "audio-channels" = "auto";
+      "audio-normalize-downmix" = "no";
+      "audio-resample-filter-size" = 32;
+      "audio-resample-phase-shift" = 12;
+      "audio-resample-cutoff" = 0.976;
+
+      # Advanced audio settings
+      "audio-buffer" = 200;
+      "audio-stream-silence" = "no";
+      "gapless-audio" = "yes";
+      "hr-seek-framedrop" = "no";
+
+      # Audio filter
+      af = "scaletempo2";
+      # Uncomment the following line for room correction if needed
+      # af-add=equalizer=2:5:10:-5:10:-5:10:-3:10:8  # Example EQ curve
+
+      # Channel layouts - uncomment as needed
+      # "audio-channels"= [7.1,5.1,stereo];  # Enables 7.1, 5.1, and stereo output
+      #audio-spdif-codecs=ac3,dts    # Enable passthrough for AC3 and DTS
+
+      # Audio device selection
+      "audio-device" = "auto";             # Let Pipewire handle device selection
+      "audio-exclusive" = "yes";           # Uncomment for exclusive device access
+
+
+      # OSD Settings
+      "osd-bar" = "yes";
+      "osd-font" = "Atkingson Hyperlegible";
+      "osd-font-size" = 32;
+      "osd-color" = "#CCFFFFFF";
+      "osd-border-color" = "#DD322640";
+      "osd-bar-align-y" = 0;
+      "osd-border-size" = 2;
+      "osd-bar-h" = 2;
+      "osd-bar-w" = 60;
+	  
     };
 
     profiles = {
