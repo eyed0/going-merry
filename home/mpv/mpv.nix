@@ -10,7 +10,7 @@
       # General
       "profile" = "gpu-hq"; # other options default, low-latency, gpu-hq, gpu
       "gpu-api" = "auto";  # other options vulkan, opengl
-      "hwdec" = "auto";  # other options vulkan, rpi, vaapi
+      "hwdec" = "vaapi";  # other options vulkan, rpi, vaapi, auto
       "reset-on-next-file" = "pause";
 
       # Enhanced Video Quality Settings
