@@ -1,3 +1,5 @@
+# Too power consumming for laptop
+
 {
   pkgs, ...
 }:
