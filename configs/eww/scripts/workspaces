@@ -1,0 +1,26 @@
+#!/bin/bash
+# scripts/get-workspaces
+hyprctl workspaces -j | jq '[.[] | {id: .id, focused: .focused}] | sort_by(.id)'
+
+#!/bin/bash
+# scripts/get-network
+if [[ "$(nmcli -t -f STATE g)" == "connected" ]]; then
+    if [[ "$(nmcli -t -f DEVICE,TYPE c show --active | grep wifi)" != "" ]]; then
+        echo "wifi"
+    else
+        echo "ethernet"
+    fi
+else
+    echo "disconnected"
+fi
+
+#!/bin/bash
+# scripts/get-battery
+battery="/sys/class/power_supply/BAT0"
+if [ -d "$battery" ]; then
+    status=$(cat "$battery/status")
+    percentage=$(cat "$battery/capacity")
+    echo "{\"status\": \"$status\", \"percentage\": $percentage}"
+else
+    echo "{\"status\": \"Unknown\", \"percentage\": 100}"
+fi

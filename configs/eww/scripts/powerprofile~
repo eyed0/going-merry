@@ -1,0 +1,14 @@
+#!/bin/bash
+
+current_profile=$(powerprofilesctl get)
+
+if [ "$current_profile" = "performance" ]; then
+    powerprofilesctl set balanced
+elif [ "$current_profile" = "balanced" ]; then
+    powerprofilesctl set power-saver
+else
+    powerprofilesctl set performance
+fi
+
+# Notify Eww about the profile change
+eww update power_profile=$(powerprofilesctl get)

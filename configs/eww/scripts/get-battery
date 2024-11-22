@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Check if battery exists in sysfs
+BATTERY="/sys/class/power_supply/BAT0"
+if [ ! -d "$BATTERY" ]; then
+    BATTERY="/sys/class/power_supply/BAT1"
+fi
+
+if [ -d "$BATTERY" ]; then
+    # Get battery percentage
+    capacity=$(cat "$BATTERY/capacity")
+    # Get charging status
+    status=$(cat "$BATTERY/status")
+    
+    echo '{"percentage": '"$capacity"', "status": "'"$status"'"}'
+else
+    # No battery found
+    echo '{"percentage": 0, "status": "Unknown"}'
+fi

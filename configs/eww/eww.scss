@@ -1,0 +1,189 @@
+* {
+  all: unset;
+  font-family: "RobotoMono Nerd Font";
+  font-size: 14px;
+}
+
+.bar {
+  background-color: rgba(30, 30, 30, 0.9);
+  color: #ffffff;
+  padding: 4px;
+}
+
+// Shared border mixin for modules
+@mixin module-border {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+// Workspaces
+.workspaces {
+  margin: 8px 0;
+  padding: 0 4px;
+  @include module-border;
+}
+
+.workspace-btn {
+  color: #888888;
+  padding: 8px 4px;
+  min-width: 20px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  &.focused {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// Systray
+.systray {
+  margin: 8px 0;
+  padding: 0 4px;
+  @include module-border;
+}
+
+// Volume module
+.volume-module {
+  color: #89b4fa;
+  padding: 4px;
+  margin: 4px 0;
+  @include module-border;
+}
+
+.volume-icon {
+  font-size: 16px;
+  font-family: "RobotoMono Nerd Font";
+  margin-bottom: 4px;
+}
+
+.volume-text {
+  font-size: 12px;
+}
+
+.volume-slider {
+  margin: 8px 0;
+  
+  trough {
+    background-color: rgba(137, 180, 250, 0.2);
+    border-radius: 16px;
+    min-height: 100px;
+    min-width: 10px;
+    margin: 0 4px;
+    
+    highlight {
+      background-color: #89b4fa;
+      border-radius: 16px;
+    }
+  }
+}
+
+// Power profile
+.power-profile {
+  color: #cba6f7;
+  padding: 4px;
+  margin: 4px 0;
+  font-family: "RobotoMono Nerd Font";
+  @include module-border;
+}
+
+// Bluetooth
+.bluetooth {
+  @include module-border;
+}
+
+// Battery
+.battery {
+  color: #a6e3a1;
+  padding: 4px;
+  margin: 2px 0;
+  @include module-border;
+
+  .battery-icon {
+    font-size: 16px;
+    font-family: "RobotoMono Nerd Font";
+    margin-bottom: 2px;
+  }
+
+  .battery-text {
+    font-size: 12px;
+  }
+
+  &.warning {
+    color: #f9e2af;
+  }
+
+  &.critical {
+    color: #f38ba8;
+  }
+
+  &.charging {
+    color: #94e2d5;
+  }
+}
+
+// Brightness module
+.brightness-module {
+  color: #f9e2af;
+  padding: 4px;
+  margin: 4px 0;
+  @include module-border;
+}
+
+.brightness-icon {
+  font-size: 16px;
+  font-family: "RobotoMono Nerd Font";
+  margin-bottom: 4px;
+}
+
+.brightness-text {
+  font-size: 12px;
+}
+
+.brightness-slider {
+  margin: 8px 0;
+  
+  trough {
+    background-color: rgba(249, 226, 175, 0.2);
+    border-radius: 16px;
+    min-height: 100px;
+    min-width: 10px;
+    margin: 0 4px;
+    
+    highlight {
+      background-color: #f9e2af;
+      border-radius: 16px;
+    }
+  }
+}
+
+// Clock
+.clock {
+  color: #cba6f7;
+  padding: 4px;
+  margin: 4px 0;
+  margin-bottom: 8px;
+  @include module-border;
+  font-weight: bold;
+
+  label {
+    font-size: 14px;
+  }
+
+  .date, .day {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+}
+
+// Power
+.power {
+  color: #f38ba8;
+  padding: 8px 4px;
+  margin: 8px 0;
+  @include module-border;
+  font-family: "RobotoMono Nerd Font";
+  font-size: 16px;
+}

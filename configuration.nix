@@ -63,7 +63,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  hardware.bluetooth.enable = true;
+  #hardware.bluetooth.enable = true;
   networking.nftables.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
 

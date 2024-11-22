@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Save as ~/.config/eww/scripts/get-battery
+# Make executable with: chmod +x ~/.config/eww/scripts/get-battery
+
+# First try BAT0, then BAT1 if BAT0 doesn't exist
+for battery in BAT0 BAT1; do
+    if [ -d "/sys/class/power_supply/$battery" ]; then
+        status=$(cat "/sys/class/power_supply/$battery/status" 2>/dev/null)
+        percentage=$(cat "/sys/class/power_supply/$battery/capacity" 2>/dev/null)
+        
+        if [ ! -z "$status" ] && [ ! -z "$percentage" ]; then
+            echo "{\"status\": \"$status\", \"percentage\": $percentage}"
+            exit 0
+        fi
+    fi
+done
+
+# Fallback if no battery is found
+echo "{\"status\": \"Unknown\", \"percentage\": 100}"

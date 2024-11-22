@@ -2,15 +2,32 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Disable PulseAudio
+  # Existing PipeWire configuration
   hardware.pulseaudio.enable = false;
+  
+  # Enable Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
+    };
+  };
+
+  # Enable blueman for Bluetooth management
+  services.blueman.enable = true;
 
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     pulse.enable = true;
     jack.enable = true;
-
+    # Add Bluetooth support
+    audio.enable = true;
+    
     # WirePlumber configuration for highest quality
     wireplumber = {
       enable = true;
@@ -33,11 +50,25 @@
               },
             },
           }
+
+          bluetooth_monitor.rules = {
+            {
+              matches = {{{ "node.name", "matches", "bluez_*" }}};
+              apply_properties = {
+                ["bluez5.autoswitch-profile"] = true,
+                ["bluez5.codecs"] = "[ ldac aac aptx aptx_hd sbc_xq ]",
+                ["bluez5.enable-sbc-xq"] = true,
+                ["bluez5.enable-msbc"] = true,
+                ["bluez5.enable-hw-volume"] = true,
+                ["session.suspend-timeout-seconds"] = 0,
+              },
+            },
+          }
         '')
       ];
     };
 
-    # PipeWire core settings for high quality using the new format
+    # Your existing PipeWire core settings
     extraConfig.pipewire."92-high-quality" = {
       "context.properties" = {
         "default.clock.rate" = 96000;
@@ -69,7 +100,7 @@
       ];
     };
 
-    # PulseAudio compatibility settings for high quality
+    # Your existing PulseAudio compatibility settings
     extraConfig.pipewire-pulse."92-high-quality" = {
       "pulse.properties" = {
         "pulse.default.format" = "F32LE";
@@ -89,6 +120,7 @@
     };
   };
 
+  # Your existing security settings
   security = {
     rtkit.enable = true;
     pam.loginLimits = [
@@ -107,15 +139,17 @@
     ];
   };
 
+  # Add Bluetooth-related packages to your system packages
   environment.systemPackages = with pkgs; [
     alsa-utils
     easyeffects
-    pulsemixer
     helvum
     pavucontrol
+    blueman
+    bluez
+    bluez-tools
   ];
-}
-## 32bit int
+}## 32bit int
 # { config, lib, pkgs, ... }:
 
 # {

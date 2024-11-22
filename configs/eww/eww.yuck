@@ -1,0 +1,177 @@
+(defwindow bar
+  :monitor 0
+  :geometry (geometry :x "0%"
+                     :y "0%"
+                     :width "40px"
+                     :height "100%"
+                     :anchor "right center")
+  :stacking "fg"
+  :exclusive true
+  (main-box))
+
+(defwidget main-box []
+  (box :orientation "v"
+       :space-evenly false
+    (workspaces)
+    (box :orientation "v"
+         :space-evenly false
+         :valign "end"
+         :vexpand true
+      (systray :orientation "v")
+      (volume-module)
+	  (bluetooth-module)
+      (power-profile)
+      (battery)
+      (brightness-module)
+      (clock-module)
+      (power))))
+
+(deflisten workspaces :initial "[]"
+  "niri msg -j windows")
+
+(defwidget workspaces []
+  (box :class "workspaces"
+       :orientation "v"
+       :space-evenly false
+       :spacing 4
+    (for workspace in workspaces
+      (button :class "workspace-btn ${workspace.focused ? "focused" : ""}"
+              :onclick "hyprctl dispatch workspace ${workspace.id}"
+        (label :text "${workspace.id == 1 ? "𑙑" :
+                      workspace.id == 2 ? "𑙒" :
+                      workspace.id == 3 ? "𑙓" :
+                      workspace.id == 4 ? "𑙔" :
+                      workspace.id == 5 ? "𑙕" :
+                      workspace.id == 6 ? "𑙖" :
+                      workspace.id == 7 ? "𑙗" :
+                      workspace.id == 8 ? "𑙘" :
+                      workspace.id == 9 ? "𑙙" : "𑙐"}")))))
+
+(defpoll volume :interval "1s"
+  "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}'")
+
+(defwidget volume-module []
+  (eventbox :onhover "${EWW_CMD} update volume_reveal=true"
+            :onhoverlost "${EWW_CMD} update volume_reveal=false"
+    (box :class "volume-module"
+         :orientation "v"
+         :space-evenly false
+      (button :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        (box :orientation "v"
+             :space-evenly false
+          (label :class "volume-icon" 
+                 :text "${volume == 0 ? "󰝟" :
+                        volume < 30 ? "󰕿" :
+                        volume < 70 ? "󰖀" : "󰕾"}")
+          (label :class "volume-text" 
+                 :text "${volume}")))
+      (revealer :transition "slideup"
+                :reveal volume_reveal
+                :duration "300ms"
+        (scale :class "volume-slider"
+               :orientation "v"
+               :flipped true
+               :min 0
+               :max 150
+               :height 250
+               :value volume
+               :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%")))))
+
+(defvar volume_reveal false)
+(defvar brightness_reveal false)
+(defvar clock_reveal false)
+
+(defpoll bluetooth :interval "2s"
+  `bluetoothctl show | grep Powered | cut -f 2- -d ' '`)
+
+(defwidget bluetooth-module []
+  (button :class "bluetooth ${bluetooth == 'yes' ? 'active' : 'inactive'}"
+          :onclick "blueman-manager"
+    (box :orientation "v"
+         :space-evenly false
+      (label :class "bluetooth-icon"
+             :text {bluetooth == "yes" ? "" : "󰂲"}))))
+
+(defpoll power_profile :interval "2s"
+  "powerprofilesctl get")
+
+(defwidget power-profile []
+		   (button :class "power-profile"
+				   :onclick "powerprofilesctl set $(echo '${power_profile}' | awk '{print $1 == \"power-saver\" ? \"balanced\" : $1 == \"balanced\" ? \"performance\" : \"power-saver\"}')"
+    (label :text {power_profile == "power-saver" ? "" :
+                 power_profile == "balanced" ? "󱈑" :
+                 power_profile == "performance" ? "" : ""})))
+
+(defpoll battery :interval "10s"
+  `cat /sys/class/power_supply/BAT0/capacity || cat /sys/class/power_supply/BAT1/capacity`)
+
+(defwidget battery []
+  (box :class "battery"
+       :orientation "v"
+       :space-evenly false
+    (label :class "battery-text"
+           :text "${battery}")))
+
+(defpoll brightness :interval "1s"
+  "brightnessctl -m | cut -d',' -f4 | tr -d '%'")
+
+(defwidget brightness-module []
+  (eventbox :onhover "${EWW_CMD} update brightness_reveal=true"
+            :onhoverlost "${EWW_CMD} update brightness_reveal=false"
+    (box :class "brightness-module"
+         :orientation "v"
+         :space-evenly false
+      (button :class "brightness"
+        (box :orientation "v"
+             :space-evenly false
+          (label :class "brightness-icon"
+                 :text {brightness < 20 ? "󰃞" :
+                        brightness < 40 ? "󰃟" :
+                        brightness < 60 ? "󰃝" :
+                        brightness < 80 ? "󰃠" : "󰃡"})
+          (label :class "brightness-text"
+                 :text "${brightness}")))
+      (revealer :transition "slideup"
+                :reveal brightness_reveal
+                :duration "300ms"
+        (scale :class "brightness-slider"
+               :orientation "v"
+               :flipped true
+               :min 0
+               :max 100
+               :height 250
+               :value brightness
+               :onchange "brightnessctl set {}%")))))
+
+(defpoll hours :interval "15s"
+  "date '+%H'")
+
+(defpoll minutes :interval "15s"
+  "date '+%M'")
+
+(defpoll date :interval "30m"
+  "date '+%d'")
+
+(defpoll day :interval "30m"
+  "date '+%a'")
+
+(defwidget clock-module []
+  (eventbox :onhover "${EWW_CMD} update clock_reveal=true"
+            :onhoverlost "${EWW_CMD} update clock_reveal=false"
+    (box :class "clock"
+         :orientation "v"
+         :space-evenly false
+      (label :text hours)
+      (label :text minutes)
+      (revealer :transition "slidedown"
+                :reveal clock_reveal
+                :duration "300ms"
+        (box :orientation "v"
+             :space-evenly false
+          (label :class "date" :text date)
+          (label :class "day" :text day))))))
+
+(defwidget power []
+  (button :class "power"
+          :onclick "wlogout"
+    (label :text "󰤆")))
