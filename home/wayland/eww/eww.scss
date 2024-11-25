@@ -1,0 +1,240 @@
+* {
+  all: unset;
+  font-family: "RobotoMono Nerd Font";
+  font-size: 14px;
+}
+
+.bar {
+  background-color: rgba(30, 30, 30, 0.9);
+  color: #ffffff;
+  padding: 4px;
+}
+
+// Shared border mixin for modules
+@mixin module-border {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
+// .workspaces {
+//   margin: 2px 0;
+//   padding: 2px;
+// }
+
+// .workspace-container {
+//   margin: 2px 0;
+// }
+
+// .workspace-btn {
+//   min-height: 28px;
+//   min-width: 28px;
+//   padding: 2px;
+//   border-radius: 2px;
+//   background-color: #383838;
+//   color: #888888;
+  
+//   &.focused {
+//     background-color: #5294e2;
+//     color: #ffffff;
+//   }
+  
+//   &.active {
+//     color: #ffffff;
+//   }
+  
+// }
+
+// .workspace-number {
+//   font-size: 14px;
+//   font-weight: bold;
+// }
+
+// Systray
+.systray {
+  margin: 8px 0;
+  padding: 0 4px;
+  @include module-border;
+}
+
+// Volume module
+.volume-module {
+  color: #89b4fa;
+  padding: 4px;
+  margin: 4px 0;
+  @include module-border;
+}
+
+.volume-icon {
+  font-size: 16px;
+  font-family: "RobotoMono Nerd Font";
+  margin-bottom: 4px;
+}
+
+.volume-text {
+  font-size: 12px;
+}
+
+.volume-slider {
+  margin: 8px 0;
+  
+  trough {
+    background-color: rgba(137, 180, 250, 0.2);
+    border-radius: 16px;
+    min-height: 100px;
+    min-width: 10px;
+    margin: 0 4px;
+    
+    highlight {
+      background-color: #89b4fa;
+      border-radius: 16px;
+    }
+  }
+}
+
+// Power profile
+.power-profile {
+  color: #cba6f7;
+  padding: 4px;
+  margin: 4px 0;
+  font-family: "RobotoMono Nerd Font";
+  @include module-border;
+}
+
+// Bluetooth
+.bluetooth {
+  @include module-border;
+}
+
+// Battery
+.battery {
+  color: #a6e3a1;
+  padding: 4px;
+  margin: 2px 0;
+  @include module-border;
+
+  .battery-icon {
+    font-size: 16px;
+    font-family: "RobotoMono Nerd Font";
+    margin-bottom: 2px;
+  }
+
+  .battery-text {
+    font-size: 12px;
+  }
+
+  &.warning {
+    color: #f9e2af;
+  }
+
+  &.critical {
+    color: #f38ba8;
+  }
+
+  &.charging {
+    color: #94e2d5;
+  }
+}
+
+// Brightness module
+.brightness-module {
+  color: #f9e2af;
+  padding: 4px;
+  margin: 4px 0;
+  @include module-border;
+}
+
+.brightness-icon {
+  font-size: 16px;
+  font-family: "RobotoMono Nerd Font";
+  margin-bottom: 4px;
+}
+
+.brightness-text {
+  font-size: 12px;
+}
+
+.brightness-slider {
+  margin: 8px 0;
+  
+  trough {
+    background-color: rgba(249, 226, 175, 0.2);
+    border-radius: 16px;
+    min-height: 100px;
+    min-width: 10px;
+    margin: 0 4px;
+    
+    highlight {
+      background-color: #f9e2af;
+      border-radius: 16px;
+    }
+  }
+}
+
+// Clock
+.clock {
+  color: #cba6f7;
+  padding: 4px;
+  margin: 4px 0;
+  margin-bottom: 8px;
+  @include module-border;
+  font-weight: bold;
+
+  label {
+    font-size: 14px;
+  }
+
+  .date, .day {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+}
+
+// Power
+.power {
+  color: #f38ba8;
+  padding: 8px 4px;
+  margin: 8px 0;
+  @include module-border;
+  font-family: "RobotoMono Nerd Font";
+  font-size: 16px;
+}
+// Power menu styling
+.power-menu-box {
+  background-color: rgba(30, 30, 46, 0.95);  // Matching your bar's background
+  border: 1px solid rgba(255, 255, 255, 0.2); // Matching your module borders
+  border-radius: 3px;
+  padding: 1px;
+}
+
+.power-menu-btn {
+  padding: 7px;
+  border-radius: 3px;
+  transition: all 200ms ease;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1); // Matching your workspace hover
+  }
+
+  box {
+    font-family: "RobotoMono Nerd Font";
+    
+    label {
+      font-size: 14px;
+      margin: 0 4px;
+    }
+  }
+}
+
+// Using your existing color scheme
+.shutdown-btn { 
+  color: #f38ba8;  // Matching your power button color
+}
+.reboot-btn { 
+  color: #a6e3a1;  // Matching your battery color
+}
+.suspend-btn { 
+  color: #f9e2af;  // Matching your brightness color
+}
+.hibernate-btn { 
+  color: #cba6f7;  // Matching your clock/power profile color
+}

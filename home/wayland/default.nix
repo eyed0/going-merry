@@ -9,9 +9,19 @@
 	./waybar.nix
 	./idle_lock.nix
 	./xdgdefault.nix
-	#./ewwright.nix
+	./eww/default.nix
   ];
+
+  home.packages = [
+	#pkgs.jq
+  ];
+  programs.jq.enable = true;
+  programs.eww-bar = {
+    enable = true;
+  };
+  
 }
+
 
 
 # TODO https://sr.ht/~emersion/kanshi/

@@ -141,10 +141,11 @@ in
       # Note that running niri as a session supports xdg-desktop-autostart,
       # which may be more convenient to use.
       (leaf "spawn-at-startup" [ "foot" "-e" "fish" ])
-	  (leaf "spawn-at-startup" [ "waybar" ])
+	  #(leaf "spawn-at-startup" [ "waybar" ])
+	  (leaf "spawn-at-startup" [ "eww" "open" "bar" ])
 	  #(leaf "spawn-at-startup" [ "swayidle" ])
 	  (leaf "spawn-at-startup" [ "syncthingtry"])
-	  (leaf "spawn-at-startup" [ "emacsclient -c" ])
+	  (leaf "spawn-at-startup" [ "emacsclient" "-c" ])
       #(leaf "spawn-at-startup" [ "kdeconnect"])
 
       # You can override environment variables for processes spawned by niri.
@@ -372,5 +373,6 @@ in
 
       (plain "debug" [
       ])
+	  
 	];
   }

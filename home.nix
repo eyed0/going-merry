@@ -16,7 +16,6 @@
 
   home.packages = [
     #pkgs.eza
-	pkgs.wlogout
 	pkgs.mako
 	pkgs.mpv
   ];
