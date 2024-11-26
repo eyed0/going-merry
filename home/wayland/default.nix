@@ -10,6 +10,8 @@
 	./idle_lock.nix
 	./xdgdefault.nix
 	./eww/default.nix
+	#./anyrun.nix # wait for next update
+	./clipboard.nix
   ];
 
   home.packages = [

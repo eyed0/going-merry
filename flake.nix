@@ -19,6 +19,11 @@
     niri-working-tree.url = "github:sodiboo/niri/sodi-bonus-features";
     niri-working-tree.flake = false;
 
+	anyrun = {
+      url = "github:anyrun-org/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";

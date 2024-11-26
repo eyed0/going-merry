@@ -1,3 +1,4 @@
+
 * {
   all: unset;
   font-family: "RobotoMono Nerd Font";
@@ -5,49 +6,48 @@
 }
 
 .bar {
-  background-color: rgba(30, 30, 30, 0.9);
-  color: #ffffff;
+  background-color: rgba(32, 37, 53, 1);  // Deep blue-gray background
+  color: #dcd7ba;  // Light beige text
   padding: 4px;
 }
 
 // Shared border mixin for modules
 @mixin module-border {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(223, 213, 178, 0.2);  // Soft border color
 }
 
+.workspaces {
+  margin: 2px 0;
+  padding: 2px;
+}
 
-// .workspaces {
-//   margin: 2px 0;
-//   padding: 2px;
-// }
+.workspace-container {
+  margin: 2px 0;
+}
 
-// .workspace-container {
-//   margin: 2px 0;
-// }
-
-// .workspace-btn {
-//   min-height: 28px;
-//   min-width: 28px;
-//   padding: 2px;
-//   border-radius: 2px;
-//   background-color: #383838;
-//   color: #888888;
+.workspace-btn {
+  min-height: 28px;
+  min-width: 28px;
+  padding: 2px;
+  border-radius: 2px;
+  background-color: #383838;
+  color: #888888;
   
-//   &.focused {
-//     background-color: #5294e2;
-//     color: #ffffff;
-//   }
+  &.focused {
+    background-color: #7e9cd8;
+    color: #ffffff;
+  }
   
-//   &.active {
-//     color: #ffffff;
-//   }
+  &.active {
+    color: #ffffff;
+  }
   
-// }
+}
 
-// .workspace-number {
-//   font-size: 14px;
-//   font-weight: bold;
-// }
+.workspace-number {
+  font-size: 14px;
+  font-weight: bold;
+}
 
 // Systray
 .systray {
@@ -58,7 +58,7 @@
 
 // Volume module
 .volume-module {
-  color: #89b4fa;
+  color: #7e9cd8;  // Wave blue
   padding: 4px;
   margin: 4px 0;
   @include module-border;
@@ -78,14 +78,14 @@
   margin: 8px 0;
   
   trough {
-    background-color: rgba(137, 180, 250, 0.2);
+    background-color: rgba(126, 156, 216, 0.2);  // Wave blue with transparency
     border-radius: 16px;
     min-height: 100px;
     min-width: 10px;
     margin: 0 4px;
     
     highlight {
-      background-color: #89b4fa;
+      background-color: #7e9cd8;  // Wave blue
       border-radius: 16px;
     }
   }
@@ -93,7 +93,7 @@
 
 // Power profile
 .power-profile {
-  color: #cba6f7;
+  color: #957fb8;  // Soft purple
   padding: 4px;
   margin: 4px 0;
   font-family: "RobotoMono Nerd Font";
@@ -107,7 +107,7 @@
 
 // Battery
 .battery {
-  color: #a6e3a1;
+  color: #98bb6c;  // Sage green
   padding: 4px;
   margin: 2px 0;
   @include module-border;
@@ -123,21 +123,21 @@
   }
 
   &.warning {
-    color: #f9e2af;
+    color: #ffa066;  // Sunset orange
   }
 
   &.critical {
-    color: #f38ba8;
+    color: #ff5d62;  // Coral red
   }
 
   &.charging {
-    color: #94e2d5;
+    color: #6a9589;  // Muted teal
   }
 }
 
 // Brightness module
 .brightness-module {
-  color: #f9e2af;
+  color: #ffa066;  // Sunset orange
   padding: 4px;
   margin: 4px 0;
   @include module-border;
@@ -157,14 +157,14 @@
   margin: 8px 0;
   
   trough {
-    background-color: rgba(249, 226, 175, 0.2);
+    background-color: rgba(255, 160, 102, 0.2);  // Sunset orange with transparency
     border-radius: 16px;
     min-height: 100px;
     min-width: 10px;
     margin: 0 4px;
     
     highlight {
-      background-color: #f9e2af;
+      background-color: #ffa066;  // Sunset orange
       border-radius: 16px;
     }
   }
@@ -172,7 +172,7 @@
 
 // Clock
 .clock {
-  color: #cba6f7;
+  color: #957fb8;  // Soft purple
   padding: 4px;
   margin: 4px 0;
   margin-bottom: 8px;
@@ -191,17 +191,18 @@
 
 // Power
 .power {
-  color: #f38ba8;
+  color: #ff5d62;  // Coral red
   padding: 8px 4px;
   margin: 8px 0;
   @include module-border;
   font-family: "RobotoMono Nerd Font";
   font-size: 16px;
 }
+
 // Power menu styling
 .power-menu-box {
-  background-color: rgba(30, 30, 46, 0.95);  // Matching your bar's background
-  border: 1px solid rgba(255, 255, 255, 0.2); // Matching your module borders
+  background-color: rgba(32, 42, 72, 0.95);  // Matching bar background
+  border: 1px solid rgba(223, 213, 178, 0.2);  // Soft border
   border-radius: 3px;
   padding: 1px;
 }
@@ -212,7 +213,7 @@
   transition: all 200ms ease;
   
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1); // Matching your workspace hover
+    background-color: rgba(223, 213, 178, 0.1);  // Soft hover effect
   }
 
   box {
@@ -225,16 +226,17 @@
   }
 }
 
-// Using your existing color scheme
+// Power menu button colors
 .shutdown-btn { 
-  color: #f38ba8;  // Matching your power button color
+  color: #ff5d62;  // Coral red
 }
 .reboot-btn { 
-  color: #a6e3a1;  // Matching your battery color
+  color: #98bb6c;  // Sage green
 }
 .suspend-btn { 
-  color: #f9e2af;  // Matching your brightness color
+  color: #ffa066;  // Sunset orange
 }
 .hibernate-btn { 
-  color: #cba6f7;  // Matching your clock/power profile color
+  color: #957fb8;  // Soft purple
 }
+

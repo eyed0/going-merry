@@ -1,0 +1,306 @@
+{ pkgs, ... }:
+
+{
+  programs.anyrun = {
+    enable = true;
+    config = {
+      plugins = with pkgs.anyrun-plugins; [
+        applications
+        rink
+        shell
+        symbols
+        websearch
+        kidex
+        dictionary
+        clipboard
+        randr
+        stdin
+        time
+        urls
+        calc    
+      ];
+      
+      width.fraction = 0.3;
+      y.absolute = 15;
+      hidePluginInfo = true;
+      closeOnClick = true;
+      
+      # Wayland specific settings
+      layer = "overlay";
+      hideIcons = false;
+      ignoreExclusiveZones = false;
+      showResultsImmediately = true;
+      maxEntries = 10;
+      
+      # Advanced window positioning
+      x.fraction = 0.5;
+      y.fraction = 0.0;
+      verticalOffset = 10;
+      horizontalOffset = 0;
+      hideOnAction = true;
+    };
+
+    # Kanagawa Wave styling (preserved from previous config)
+    extraCss = ''
+      * {
+        transition: 200ms ease;
+        font-family: "FiraCode Nerd Font";
+        font-size: 1.1rem;
+      }
+
+      #window {
+        background: transparent;
+      }
+
+      #entry {
+        padding: 0.75rem;
+        border-radius: 0.75rem;
+        background: rgba(31, 31, 40, 0.95);  /* Kanagawa sumiInk0 */
+        color: #DCD7BA;  /* Kanagawa fujiWhite */
+        margin: 0.2rem;
+      }
+
+      #entry:selected {
+        background: rgba(54, 54, 70, 0.95);  /* Kanagawa sumiInk3 */
+        border: 2px solid #7E9CD8;  /* Kanagawa crystalBlue */
+      }
+
+      #input {
+        padding: 0.75rem;
+        margin: 0.5rem;
+        border-radius: 0.75rem;
+        border: 2px solid #2D4F67;  /* Kanagawa winterGreen */
+        background: rgba(31, 31, 40, 0.95);  /* Kanagawa sumiInk0 */
+        color: #DCD7BA;  /* Kanagawa fujiWhite */
+      }
+
+      #input:focus {
+        border-color: #7E9CD8;  /* Kanagawa crystalBlue */
+      }
+
+      #plugin {
+        margin: 0.5rem 0;
+        padding: 0.75rem;
+        color: #C8C093;  /* Kanagawa oldWhite */
+      }
+
+      box#main {
+        background: rgba(31, 31, 40, 0.95);  /* Kanagawa sumiInk0 */
+        border-radius: 1rem;
+        padding: 0.5rem;
+        border: 2px solid #2D4F67;  /* Kanagawa winterGreen */
+      }
+
+      #match {
+        color: #7E9CD8;  /* Kanagawa crystalBlue */
+        font-weight: bold;
+      }
+
+      #description {
+        color: #957FB8;  /* Kanagawa oniViolet */
+      }
+    '';
+
+    extraConfigFiles = {
+      "applications.ron" = ''
+        Config(
+          desktop_actions: true,
+          max_entries: 10,
+          terminal: Some("foot"),
+          calculate_score: true,
+          ignore_case: true,
+        )
+      '';
+      
+      "websearch.ron" = ''
+        Config(
+          prefix: "?",
+          engines: [
+            Engine(
+              name: "DuckDuckGo",
+              url: "https://duckduckgo.com/?q={}",
+              icon: None,
+            ),
+            Engine(
+              name: "GitHub",
+              url: "https://github.com/search?q={}",
+              icon: None,
+            ),
+            Engine(
+              name: "NixOS Wiki",
+              url: "https://wiki.nixos.org/wiki/Special:Search?search={}",
+              icon: None,
+            ),
+            Engine(
+              name: "myNixOS",
+              url: "https://mynixos.com/search?q={}",
+              icon: None,
+            ),
+            Engine(
+              name: "NixOS Packages",
+              url: "https://search.nixos.org/packages?query={}",
+              icon: None,
+            ),
+            Engine(
+              name: "NixOS Options",
+              url: "https://search.nixos.org/options?query={}",
+              icon: None,
+            ),
+            Engine(
+              name: "Nix Discourse",
+              url: "https://discourse.nixos.org/search?q={}",
+              icon: None,
+            ),
+            Engine(
+              name: "YouTube",
+              url: "https://www.youtube.com/results?search_query={}",
+              icon: None,
+            ),
+          ]
+        )
+      '';
+      
+      "symbols.ron" = ''
+        Config(
+          prefix: ":",
+          symbols: {
+            "shrug": "¯\\_(ツ)_/¯",
+            "flip": "(╯°□°)╯︵ ┻━┻",
+            "unflip": "┬─┬ノ(º_ºノ)",
+            "check": "✓",
+            "cross": "✗",
+            "heart": "❤",
+            "star": "⭐",
+            "lambda": "λ",
+            "arrow": "→",
+          },
+        )
+      '';
+            
+      "shell.ron" = ''
+        Config(
+          prefix: "$",
+          shell: "fish",
+          max_entries: 10,
+          save_history: true,
+          history_file: ".anyrun-shell-history",
+          workdir: None,
+        )
+      '';
+
+      "dictionary.ron" = ''
+        Config(
+          prefix: "def",
+          max_entries: 5,
+          show_source: true,
+          show_pronunciation: true,
+          show_etymology: true,
+        )
+      '';
+
+      "clipboard.ron" = ''
+        Config(
+          max_entries: 100,
+          sync_primary: true,
+          paste_primary: true,
+          copy_on_select: true,
+          strip_whitespace: true,
+          blacklist: [
+            "^password",
+            "^token",
+          ],
+        )
+      '';
+
+      "time.ron" = ''
+        Config(
+          prefix: "time",
+          format: "%Y-%m-%d %H:%M:%S",
+          calendars: [
+            Calendar(
+              name: "Local",
+              format: "%Y-%m-%d %H:%M:%S %Z",
+              timezone: None,
+            ),
+            Calendar(
+              name: "UTC",
+              format: "%Y-%m-%d %H:%M:%S UTC",
+              timezone: Some("UTC"),
+            ),
+          ],
+        )
+      '';
+
+      "kidex.ron" = ''
+        Config(
+          ignore_case: true,
+          dirs_to_exclude: [
+            "node_modules",
+            ".git",
+            "target",
+            "result",
+          ],
+          follow_symlinks: false,
+          show_hidden: false,
+          show_icons: true,
+          max_entries: 10,
+        )
+      '';
+
+      "calc.ron" = ''
+        Config(
+          prefix: "=",
+          precision: 4,
+          show_zero_decimals: false,
+          thousands_separator: ",",
+          decimal_separator: ".",
+        )
+      '';
+
+      "urls.ron" = ''
+        Config(
+          max_entries: 10,
+          exclude_patterns: [
+            "^file://",
+            "^about:",
+          ],
+        )
+      '';
+
+      "randr.ron" = ''
+        Config(
+          prefix: "display",
+          max_entries: 10,
+          show_disabled: true,
+          show_modes: true,
+        )
+      '';
+
+      "stdin.ron" = ''
+        Config(
+          prefix: ">",
+          max_entries: 10,
+          trim_input: true,
+        )
+      '';
+    };
+  };
+
+  # Ensure all required packages are installed
+  home.packages = with pkgs; [
+    anyrun
+    anyrun-plugins.applications
+    anyrun-plugins.rink
+    anyrun-plugins.shell
+    anyrun-plugins.symbols
+    anyrun-plugins.websearch
+    anyrun-plugins.kidex
+    anyrun-plugins.dictionary
+    anyrun-plugins.clipboard
+    anyrun-plugins.randr
+    anyrun-plugins.stdin
+    anyrun-plugins.time
+    anyrun-plugins.urls
+    anyrun-plugins.calc
+  ];
+}
