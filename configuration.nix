@@ -17,6 +17,7 @@
 	  ./nixos/git.nix
 	  ./nixos/packages.nix
 	  ./nixos/pipwire.nix
+	  ./nixos/yazi.nix
     ];
 
   #latest linux kernel

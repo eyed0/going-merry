@@ -66,7 +66,6 @@
       typst # latex alternative
       #typstwriter # typst editor
       #tinymist # lsp for typst
-      yazi # terminal file manager
       #digikam5
       #kate
       okular
