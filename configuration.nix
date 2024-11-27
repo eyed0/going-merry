@@ -18,6 +18,7 @@
 	  ./nixos/packages.nix
 	  ./nixos/pipwire.nix
 	  ./nixos/yazi.nix
+	  ./nixos/bluetooth.nix
     ];
 
   #latest linux kernel

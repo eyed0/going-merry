@@ -16,8 +16,8 @@
 
   home.packages = [
     #pkgs.eza
-	pkgs.mako
 	pkgs.mpv
+	pkgs.scrcpy
   ];
 
   home.file = {

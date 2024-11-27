@@ -2,13 +2,13 @@
 * {
   all: unset;
   font-family: "RobotoMono Nerd Font";
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .bar {
-  background-color: rgba(12, 25, 25, 1);  // Deep blue-gray background
+  background-color: rgba(20, 27, 24, 1);  // Deep blue-gray background
   color: #dcd7ba;  // Light beige text
-  padding: 4px;
+  padding: 2px;
 }
 
 // Shared border mixin for modules
@@ -65,13 +65,13 @@
 }
 
 .volume-icon {
-  font-size: 16px;
+  font-size: 18px;
   font-family: "RobotoMono Nerd Font";
   margin-bottom: 4px;
 }
 
 .volume-text {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .volume-slider {
@@ -144,13 +144,13 @@
 }
 
 .brightness-icon {
-  font-size: 16px;
+  font-size: 18px;
   font-family: "RobotoMono Nerd Font";
   margin-bottom: 4px;
 }
 
 .brightness-text {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .brightness-slider {
@@ -180,7 +180,7 @@
   font-weight: bold;
 
   label {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .date, .day {

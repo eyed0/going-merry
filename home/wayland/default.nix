@@ -16,6 +16,7 @@
 
   home.packages = [
 	#pkgs.jq
+	pkgs.mako
   ];
   programs.jq.enable = true;
   programs.eww-bar = {

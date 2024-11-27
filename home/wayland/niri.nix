@@ -99,7 +99,8 @@ in
 		  #(flag "off")
 		  (leaf "width" 2)
           
-          (leaf "active-gradient" { from="#93A5CF"; to="#E4EfE9"; angle=45; })
+          (leaf "active-gradient" { from="#89FC04"; to="#AFFC41"; angle=45; })
+		  #(leaf "active-gradient" { from="#93A5CF"; to="#E4EfE9"; angle=45; })
 		  (leaf "inactive-gradient" { from="#505050"; to="#808080"; angle=45; relative-to="workspace-view"; })
 		])
 

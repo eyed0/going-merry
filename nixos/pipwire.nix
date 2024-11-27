@@ -5,21 +5,6 @@
   # Existing PipeWire configuration
   hardware.pulseaudio.enable = false;
   
-  # Enable Bluetooth
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        Enable = "Source,Sink,Media,Socket";
-        Experimental = true;
-      };
-    };
-  };
-
-  # Enable blueman for Bluetooth management
-  services.blueman.enable = true;
-
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -145,10 +130,8 @@
     easyeffects
     helvum
     pavucontrol
-    blueman
-    bluez
-    bluez-tools
   ];
+
 }## 32bit int
 # { config, lib, pkgs, ... }:
 

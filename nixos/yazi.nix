@@ -66,13 +66,13 @@
         sort_by = "alphabetical";
         sort_reverse = false;
         sort_dir_first = true;
-		linemode = ["mtime" "size" "permissions"];
+		linemode = "mtime";
       };
 	  preview = {
-		wrap = true;
+		wrap = "yes";
 		image_filter = "catmull-rom";
-		image_quality = 66;
-		sixel_fraction = 16;
+		image_quality = 75;
+		sixel_fraction = 18;
 	  };
 	  input = {
 		cursor_blink = false;
