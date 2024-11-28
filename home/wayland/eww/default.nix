@@ -41,21 +41,21 @@ in {
 
       xdg.configFile = ewwConfig;
 
-      # Optional: Add systemd user service for autostart
-      systemd.user.services.eww = {
-        Unit = {
-          Description = "Eww Daemon";
-          PartOf = ["graphical-session.target"];
-          After = ["graphical-session.target"];
-        };
-        Service = {
-          Environment = "PATH=/run/current-system/sw/bin";
-          ExecStart = "${config.programs.eww-bar.package}/bin/eww daemon --no-daemonize";
-          Restart = "on-failure";
-        };
-        Install = {
-          WantedBy = ["graphical-session.target"];
-        };
-      };
+      # # Optional: Add systemd user service for autostart
+      # systemd.user.services.eww = {
+      #   Unit = {
+      #     Description = "Eww Daemon";
+      #     PartOf = ["graphical-session.target"];
+      #     After = ["graphical-session.target"];
+      #   };
+      #   Service = {
+      #     Environment = "PATH=/run/current-system/sw/bin";
+      #     ExecStart = "${config.programs.eww-bar.package}/bin/eww daemon --no-daemonize";
+      #     Restart = "on-failure";
+      #   };
+      #   Install = {
+      #     WantedBy = ["graphical-session.target"];
+      #   };
+      # };
     };
 }

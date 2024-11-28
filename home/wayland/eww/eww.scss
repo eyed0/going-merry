@@ -1,7 +1,7 @@
 
 * {
   all: unset;
-  font-family: "RobotoMono Nerd Font";
+  font-family: "PragmataProLiga Nerd Font";
   font-size: 16px;
 }
 
@@ -16,37 +16,83 @@
   border-bottom: 1px solid rgba(223, 213, 178, 0.2);  // Soft border color
 }
 
+// Workspace container
 .workspaces {
-  margin: 2px 0;
+  margin: 4px 0;
   padding: 2px;
-}
-
-.workspace-container {
-  margin: 2px 0;
-}
-
-.workspace-btn {
-  min-height: 28px;
-  min-width: 28px;
-  padding: 2px;
-  border-radius: 2px;
-  background-color: #383838;
-  color: #888888;
   
+  // Add transition for smooth updates
+  transition: all 200ms ease;
+}
+
+// Individual workspace button
+.workspace-btn {
+  min-height: 24px;
+  min-width: 20px;
+  padding: 2px;
+  margin: 2px 0;
+  border-radius: 1px;
+  background-color: rgba(56, 56, 56, 0.7);
+  color: rgba(223, 213, 220, 0.9);
+  transition: all 200ms ease;
+  
+  // States
   &.focused {
     background-color: #7e9cd8;
     color: #ffffff;
   }
   
   &.active {
+    background-color: #7e9cd8;
     color: #ffffff;
   }
   
+  &:hover {
+    background-color: rgba(223, 213, 178, 0.7);
+  }
+  
+  // Number styling
+  .workspace-number {
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 200ms ease;
+  }
 }
 
-.workspace-number {
-  font-size: 14px;
-  font-weight: bold;
+.workspace-container {
+  margin: 2px 0;
+}
+
+.window-list {
+  margin-left: 8px;
+  margin-top: 2px;
+  background-color: rgba(20, 27, 24, 0.8);
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.window-item {
+  padding: 2px 4px;
+  border-radius: 2px;
+  transition: all 200ms ease;
+  
+  &:hover {
+    background-color: rgba(223, 213, 178, 0.1);
+  }
+  
+  &.focused {
+    background-color: rgba(126, 156, 216, 0.2);
+  }
+}
+
+.window-title {
+  font-size: 12px;
+  color: #dcd7ba;
+  opacity: 0.8;
+  
+  &:hover {
+    opacity: 1;
+  }
 }
 
 // Systray
@@ -66,7 +112,7 @@
 
 .volume-icon {
   font-size: 18px;
-  font-family: "RobotoMono Nerd Font";
+  font-family: "PragmataProLiga Nerd Font";
   margin-bottom: 4px;
 }
 
@@ -96,7 +142,7 @@
   color: #957fb8;  // Soft purple
   padding: 4px;
   margin: 4px 0;
-  font-family: "RobotoMono Nerd Font";
+  font-family: "PragmataProLiga Nerd Font";
   @include module-border;
 }
 
@@ -114,7 +160,7 @@
 
   .battery-icon {
     font-size: 16px;
-    font-family: "RobotoMono Nerd Font";
+    font-family: "PragmataProLiga Nerd Font";
     margin-bottom: 2px;
   }
 
@@ -145,7 +191,7 @@
 
 .brightness-icon {
   font-size: 18px;
-  font-family: "RobotoMono Nerd Font";
+  font-family: "PragmataProLiga Nerd Font";
   margin-bottom: 4px;
 }
 
@@ -195,7 +241,7 @@
   padding: 8px 4px;
   margin: 8px 0;
   @include module-border;
-  font-family: "RobotoMono Nerd Font";
+  font-family: "PragmataProLiga Nerd Font";
   font-size: 16px;
 }
 
@@ -217,7 +263,7 @@
   }
 
   box {
-    font-family: "RobotoMono Nerd Font";
+    font-family: "PragmataProLiga Nerd Font";
     
     label {
       font-size: 14px;
@@ -239,4 +285,5 @@
 .hibernate-btn { 
   color: #957fb8;  // Soft purple
 }
+
 

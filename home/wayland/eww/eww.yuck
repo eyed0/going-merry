@@ -12,7 +12,7 @@
 (defwidget main-box []
   (box :orientation "v"
        :space-evenly false
-    ;;(workspaces)
+    (workspaces)
     (box :orientation "v"
          :space-evenly false
          :valign "end"
@@ -27,28 +27,33 @@
       (power))))
 
 
-;; ;; NOTE this works but it has more idle drain and for me workspace are not deal breaker 
-;; ;; Listen for workspace updates
-;; (deflisten workspaces :initial "[]"
-;;   "bash -c 'while true; do niri msg -j workspaces; sleep 2; done'")
+;; Workspace state variable with initial empty state
+(defvar workspace_state "[]")
 
-;; ;; Define Modi script numbers map
-;; (defvar modi_numbers '[
-;;   "𑙐", "𑙑", "𑙒", "𑙓", "𑙔", "𑙕", "𑙖", "𑙗", "𑙘", "𑙙"
-;; ]')
+;; Poll workspaces with proper JSON array formatting
+(defpoll workspace_update :interval "2s"
+  :initial "[]"
+  :run-while true
+  `niri msg -j workspaces | jq -c 'sort_by(.idx)'`)
 
-;; ;; Workspace widget
-;; (defwidget workspaces []
-;;   (box :class "workspaces"
-;;        :orientation "v"
-;;        :space-evenly false
-;;        :spacing 4
-;;     (for workspace in workspaces
-;;       (button :class "workspace-btn ${workspace.is_focused ? "focused" : ""} ${workspace.is_active ? "active" : ""}"
-;;               :onclick "niri msg workspace-switch ${workspace.id}"
-;;         (label :class "workspace-number" 
-;;                :text "${modi_numbers[workspace.idx - 1]}")))))
+;; Alternative number styles
+(defvar workspace_numbers '[
+  "𑙑", "𑙒", "𑙓", "𑙔", "𑙕", "𑙖", "𑙗", "𑙘", "𑙙", "𑙑𑙐"
+]')
 
+;; Fixed workspace widget
+(defwidget workspaces []
+  (eventbox :onhover "${EWW_CMD} update workspace_state=\"$(niri msg -j workspaces | jq -c '.')\""
+    (box :class "workspaces"
+         :orientation "v"
+         :space-evenly false
+         :spacing 4
+      (for workspace in {workspace_update}
+        (button :class "workspace-btn ${workspace.is_focused ? "focused" : ""} ${workspace.is_active ? "active" : ""}"
+                :onclick "niri msg workspace-switch ${workspace.id}"
+                :tooltip "Workspace ${workspace.idx}"
+          (label :class "workspace-number" 
+                 :text "${workspace_numbers[workspace.idx - 1] ?: workspace.idx}"))))))
 
 (defpoll volume :interval "1s"
   "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}'")
@@ -230,3 +235,4 @@
                 :reveal power_menu_reveal
                 :duration "300ms"
         (power-menu-widget)))))
+
