@@ -130,6 +130,7 @@
     easyeffects
     helvum
     pavucontrol
+	zita-convolver
   ];
 
 }## 32bit int

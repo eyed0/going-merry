@@ -1,3 +1,6 @@
+// =============================================================================
+// Base Styles
+// =============================================================================
 
 * {
   all: unset;
@@ -5,27 +8,74 @@
   font-size: 16px;
 }
 
+// =============================================================================
+// Variables
+// =============================================================================
+
+$bg-color: rgba(20, 27, 24, 1);
+$text-color: #dcd7ba;
+$border-color: rgba(223, 213, 178, 0.2);
+
+// Colors
+$wave-blue: #7e9cd8;
+$sage-green: #98bb6c;
+$sunset-orange: #ffa066;
+$coral-red: #ff5d62;
+$soft-purple: #957fb8;
+$muted-teal: #6a9589;
+
+// =============================================================================
+// Mixins
+// =============================================================================
+
+@mixin module-border {
+  border-bottom: 1px solid $border-color;
+}
+
+@mixin hover-effect {
+  transition: all 200ms ease;
+  &:hover {
+    background-color: rgba(223, 213, 178, 0.1);
+  }
+}
+
+@mixin slider-style($color) {
+  margin: 8px 0;
+  
+  trough {
+    background-color: rgba($color, 0.2);
+    border-radius: 16px;
+    min-height: 100px;
+    min-width: 10px;
+    margin: 0 4px;
+    
+    highlight {
+      background-color: $color;
+      border-radius: 16px;
+    }
+  }
+}
+
+// =============================================================================
+// Main Bar
+// =============================================================================
+
 .bar {
-  background-color: rgba(20, 27, 24, 1);  // Deep blue-gray background
-  color: #dcd7ba;  // Light beige text
+  background-color: $bg-color;
+  color: $text-color;
   padding: 2px;
 }
 
-// Shared border mixin for modules
-@mixin module-border {
-  border-bottom: 1px solid rgba(223, 213, 178, 0.2);  // Soft border color
-}
+// =============================================================================
+// Workspaces
+// =============================================================================
 
-// Workspace container
 .workspaces {
   margin: 4px 0;
   padding: 2px;
-  
-  // Add transition for smooth updates
   transition: all 200ms ease;
 }
 
-// Individual workspace button
 .workspace-btn {
   min-height: 24px;
   min-width: 20px;
@@ -36,14 +86,8 @@
   color: rgba(223, 213, 220, 0.9);
   transition: all 200ms ease;
   
-  // States
-  &.focused {
-    background-color: #7e9cd8;
-    color: #ffffff;
-  }
-  
-  &.active {
-    background-color: #7e9cd8;
+  &.focused, &.active {
+    background-color: $wave-blue;
     color: #ffffff;
   }
   
@@ -51,60 +95,18 @@
     background-color: rgba(223, 213, 178, 0.7);
   }
   
-  // Number styling
   .workspace-number {
     font-size: 14px;
     font-weight: bold;
-    transition: all 200ms ease;
   }
 }
 
-.workspace-container {
-  margin: 2px 0;
-}
+// =============================================================================
+// Volume Module
+// =============================================================================
 
-.window-list {
-  margin-left: 8px;
-  margin-top: 2px;
-  background-color: rgba(20, 27, 24, 0.8);
-  border-radius: 3px;
-  padding: 4px;
-}
-
-.window-item {
-  padding: 2px 4px;
-  border-radius: 2px;
-  transition: all 200ms ease;
-  
-  &:hover {
-    background-color: rgba(223, 213, 178, 0.1);
-  }
-  
-  &.focused {
-    background-color: rgba(126, 156, 216, 0.2);
-  }
-}
-
-.window-title {
-  font-size: 12px;
-  color: #dcd7ba;
-  opacity: 0.8;
-  
-  &:hover {
-    opacity: 1;
-  }
-}
-
-// Systray
-.systray {
-  margin: 8px 0;
-  padding: 0 4px;
-  @include module-border;
-}
-
-// Volume module
 .volume-module {
-  color: #7e9cd8;  // Wave blue
+  color: $wave-blue;
   padding: 4px;
   margin: 4px 0;
   @include module-border;
@@ -112,7 +114,6 @@
 
 .volume-icon {
   font-size: 18px;
-  font-family: "PragmataProLiga Nerd Font";
   margin-bottom: 4px;
 }
 
@@ -121,69 +122,53 @@
 }
 
 .volume-slider {
-  margin: 8px 0;
-  
-  trough {
-    background-color: rgba(126, 156, 216, 0.2);  // Wave blue with transparency
-    border-radius: 16px;
-    min-height: 100px;
-    min-width: 10px;
-    margin: 0 4px;
-    
-    highlight {
-      background-color: #7e9cd8;  // Wave blue
-      border-radius: 16px;
-    }
-  }
+  @include slider-style($wave-blue);
 }
 
-// Power profile
-.power-profile {
-  color: #957fb8;  // Soft purple
-  padding: 4px;
-  margin: 4px 0;
-  font-family: "PragmataProLiga Nerd Font";
-  @include module-border;
-}
+// =============================================================================
+// System Modules
+// =============================================================================
 
 // Bluetooth
 .bluetooth {
+  padding: 4px;
+  margin: 4px 0;
+  @include module-border;
+  
+  &.active { color: $wave-blue; }
+  &.inactive { color: $text-color; opacity: 0.7; }
+}
+
+// Power Profile
+.power-profile {
+  color: $soft-purple;
+  padding: 4px;
+  margin: 4px 0;
   @include module-border;
 }
 
 // Battery
 .battery {
-  color: #98bb6c;  // Sage green
+  color: $sage-green;
   padding: 4px;
   margin: 2px 0;
   @include module-border;
-
-  .battery-icon {
-    font-size: 16px;
-    font-family: "PragmataProLiga Nerd Font";
-    margin-bottom: 2px;
-  }
 
   .battery-text {
     font-size: 12px;
   }
 
-  &.warning {
-    color: #ffa066;  // Sunset orange
-  }
-
-  &.critical {
-    color: #ff5d62;  // Coral red
-  }
-
-  &.charging {
-    color: #6a9589;  // Muted teal
-  }
+  &.warning { color: $sunset-orange; }
+  &.critical { color: $coral-red; }
+  &.charging { color: $muted-teal; }
 }
 
-// Brightness module
+// =============================================================================
+// Brightness Module
+// =============================================================================
+
 .brightness-module {
-  color: #ffa066;  // Sunset orange
+  color: $sunset-orange;
   padding: 4px;
   margin: 4px 0;
   @include module-border;
@@ -191,7 +176,6 @@
 
 .brightness-icon {
   font-size: 18px;
-  font-family: "PragmataProLiga Nerd Font";
   margin-bottom: 4px;
 }
 
@@ -200,25 +184,15 @@
 }
 
 .brightness-slider {
-  margin: 8px 0;
-  
-  trough {
-    background-color: rgba(255, 160, 102, 0.2);  // Sunset orange with transparency
-    border-radius: 16px;
-    min-height: 100px;
-    min-width: 10px;
-    margin: 0 4px;
-    
-    highlight {
-      background-color: #ffa066;  // Sunset orange
-      border-radius: 16px;
-    }
-  }
+  @include slider-style($sunset-orange);
 }
 
-// Clock
+// =============================================================================
+// Clock Module
+// =============================================================================
+
 .clock {
-  color: #957fb8;  // Soft purple
+  color: $soft-purple;
   padding: 4px;
   margin: 4px 0;
   margin-bottom: 8px;
@@ -235,20 +209,52 @@
   }
 }
 
-// Power
+// =============================================================================
+// Notification Module
+// =============================================================================
+
+.notification-module {
+  color: $text-color;
+  padding: 4px;
+  margin: 4px 0;
+  @include module-border;
+
+  .notification-icon {
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+
+  .notification-count {
+    font-size: 12px;
+  }
+}
+
+.notification-details {
+  margin-top: 4px;
+  
+  button {
+    padding: 2px;
+    @include hover-effect;
+    
+    &.clear-notifications { color: $coral-red; }
+    &.notification-center { color: $wave-blue; }
+  }
+}
+
+// =============================================================================
+// Power Menu
+// =============================================================================
+
 .power {
-  color: #ff5d62;  // Coral red
+  color: $coral-red;
   padding: 8px 4px;
   margin: 8px 0;
   @include module-border;
-  font-family: "PragmataProLiga Nerd Font";
-  font-size: 16px;
 }
 
-// Power menu styling
 .power-menu-box {
-  background-color: rgba(32, 42, 72, 0.95);  // Matching bar background
-  border: 1px solid rgba(223, 213, 178, 0.2);  // Soft border
+  background-color: rgba(32, 42, 72, 0.95);
+  border: 1px solid $border-color;
   border-radius: 3px;
   padding: 1px;
 }
@@ -256,15 +262,9 @@
 .power-menu-btn {
   padding: 7px;
   border-radius: 3px;
-  transition: all 200ms ease;
-  
-  &:hover {
-    background-color: rgba(223, 213, 178, 0.1);  // Soft hover effect
-  }
+  @include hover-effect;
 
   box {
-    font-family: "PragmataProLiga Nerd Font";
-    
     label {
       font-size: 14px;
       margin: 0 4px;
@@ -273,17 +273,7 @@
 }
 
 // Power menu button colors
-.shutdown-btn { 
-  color: #ff5d62;  // Coral red
-}
-.reboot-btn { 
-  color: #98bb6c;  // Sage green
-}
-.suspend-btn { 
-  color: #ffa066;  // Sunset orange
-}
-.hibernate-btn { 
-  color: #957fb8;  // Soft purple
-}
-
-
+.shutdown-btn { color: $coral-red; }
+.reboot-btn { color: $sage-green; }
+.suspend-btn { color: $sunset-orange; }
+.hibernate-btn { color: $soft-purple; }

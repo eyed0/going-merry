@@ -1,3 +1,7 @@
+;; ============================================================================
+;; Main Window and Container Definitions
+;; ============================================================================
+
 (defwindow bar
   :monitor 0
   :geometry (geometry :x "0%"
@@ -13,35 +17,47 @@
   (box :orientation "v"
        :space-evenly false
     (workspaces)
-    (box :orientation "v"
-         :space-evenly false
-         :valign "end"
-         :vexpand true
-      (systray :orientation "v")
-      (volume-module)
-	  (bluetooth-module)
-      (power-profile)
-      (battery)
-      (brightness-module)
-      (clock-module)
-      (power))))
+    (status-modules)))
 
+(defwidget status-modules []
+  (box :orientation "v"
+       :space-evenly false
+       :valign "end"
+       :vexpand true
+    (systray :orientation "v")
+    (top-modules)
+    (bottom-modules)))
 
-;; Workspace state variable with initial empty state
+(defwidget top-modules []
+  (box :orientation "v"
+       :space-evenly false
+    (volume-module)
+    (bluetooth-module)
+    (power-profile)
+    (battery)
+    (brightness-module)))
+
+(defwidget bottom-modules []
+  (box :orientation "v"
+       :space-evenly false
+    (notification-module)
+    (clock-module)
+    (power)))
+
+;; ============================================================================
+;; Workspace Module
+;; ============================================================================
+
 (defvar workspace_state "[]")
+(defvar workspace_numbers '[
+  "𑙑", "𑙒", "𑙓", "𑙔", "𑙕", "𑙖", "𑙗", "𑙘", "𑙙", "𑙑𑙐"
+]')
 
-;; Poll workspaces with proper JSON array formatting
 (defpoll workspace_update :interval "2s"
   :initial "[]"
   :run-while true
   `niri msg -j workspaces | jq -c 'sort_by(.idx)'`)
 
-;; Alternative number styles
-(defvar workspace_numbers '[
-  "𑙑", "𑙒", "𑙓", "𑙔", "𑙕", "𑙖", "𑙗", "𑙘", "𑙙", "𑙑𑙐"
-]')
-
-;; Fixed workspace widget
 (defwidget workspaces []
   (eventbox :onhover "${EWW_CMD} update workspace_state=\"$(niri msg -j workspaces | jq -c '.')\""
     (box :class "workspaces"
@@ -49,11 +65,20 @@
          :space-evenly false
          :spacing 4
       (for workspace in {workspace_update}
-        (button :class "workspace-btn ${workspace.is_focused ? "focused" : ""} ${workspace.is_active ? "active" : ""}"
-                :onclick "niri msg workspace-switch ${workspace.id}"
-                :tooltip "Workspace ${workspace.idx}"
-          (label :class "workspace-number" 
-                 :text "${workspace_numbers[workspace.idx - 1] ?: workspace.idx}"))))))
+        (workspace-button :workspace workspace)))))
+
+(defwidget workspace-button [workspace]
+  (button :class "workspace-btn ${workspace.is_focused ? "focused" : ""} ${workspace.is_active ? "active" : ""}"
+          :onclick "niri msg workspace-switch ${workspace.id}"
+          :tooltip "Workspace ${workspace.idx}"
+    (label :class "workspace-number" 
+           :text "${workspace_numbers[workspace.idx - 1] ?: workspace.idx}")))
+
+;; ============================================================================
+;; Audio Module
+;; ============================================================================
+
+(defvar volume_reveal false)
 
 (defpoll volume :interval "1s"
   "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}'")
@@ -64,30 +89,37 @@
     (box :class "volume-module"
          :orientation "v"
          :space-evenly false
-      (button :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        (box :orientation "v"
-             :space-evenly false
-          (label :class "volume-icon" 
-                 :text "${volume == 0 ? "󰝟" :
-                        volume < 30 ? "󰕿" :
-                        volume < 70 ? "󰖀" : "󰕾"}")
-          (label :class "volume-text" 
-                 :text "${volume}")))
-      (revealer :transition "slideup"
-                :reveal volume_reveal
-                :duration "300ms"
-        (scale :class "volume-slider"
-               :orientation "v"
-               :flipped true
-               :min 0
-               :max 150
-               :height 250
-               :value volume
-               :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%")))))
+		 :tooltip "Volume: ${volume}%"
+      (volume-button)
+      (volume-slider))))
 
-(defvar volume_reveal false)
-(defvar brightness_reveal false)
-(defvar clock_reveal false)
+(defwidget volume-button []
+  (button :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    (box :orientation "v"
+         :space-evenly false
+      (label :class "volume-icon" 
+             :text "${volume == 0 ? "󰝟" :
+                    volume < 30 ? "󰕿" :
+                    volume < 70 ? "󰖀" : "󰕾"}")
+      (label :class "volume-text" 
+             :text "${volume}"))))
+
+(defwidget volume-slider []
+  (revealer :transition "slideup"
+            :reveal volume_reveal
+            :duration "300ms"
+    (scale :class "volume-slider"
+           :orientation "v"
+           :flipped true
+           :min 0
+           :max 150
+           :height 250
+           :value volume
+           :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%")))
+
+;; ============================================================================
+;; System Modules (Bluetooth, Power Profile, Battery)
+;; ============================================================================
 
 (defpoll bluetooth :interval "2s"
   `bluetoothctl show | grep Powered | cut -f 2- -d ' '`)
@@ -95,10 +127,11 @@
 (defwidget bluetooth-module []
   (button :class "bluetooth ${bluetooth == 'yes' ? 'active' : 'inactive'}"
           :onclick "blueman-manager"
+		  :tooltip "Bluetooth ${bluetooth == 'yes' ? 'On' : 'Off'}"
     (box :orientation "v"
          :space-evenly false
       (label :class "bluetooth-icon"
-             :text {bluetooth == "yes" ? "" : "󰂲"}))))
+             :text {bluetooth == "yes" ? "" : "󰂲"}))))
 
 (defpoll power_profile :interval "2s"
   "powerprofilesctl get 2>/dev/null || echo 'balanced'")
@@ -106,11 +139,12 @@
 (defwidget power-profile []
   (button :class "power-profile"
           :onclick "powerprofilesctl set $(echo '${power_profile}' | awk '{print $1 == \"power-saver\" ? \"balanced\" : $1 == \"balanced\" ? \"performance\" : \"power-saver\"}') || makoclt 'Power Profile Error' 'Failed to switch profile'"
+		  :tooltip "Power Profile: ${power_profile}"
     (label :text {
-      power_profile == "power-saver" ? "" :    ; Icon for power-saver mode
-      power_profile == "balanced" ? "󱈑" :      ; Icon for balanced mode
-      power_profile == "performance" ? "" :   ; Icon for performance mode
-      ""                                      ; Default icon
+      power_profile == "power-saver" ? "" :
+      power_profile == "balanced" ? "󱈑" :
+      power_profile == "performance" ? "" :
+      ""
     })))
 
 (defpoll battery :interval "10s"
@@ -120,8 +154,15 @@
   (box :class "battery"
        :orientation "v"
        :space-evenly false
+	   :tooltip "Battery: ${battery}%"
     (label :class "battery-text"
            :text "${battery}")))
+
+;; ============================================================================
+;; Brightness Module
+;; ============================================================================
+
+(defvar brightness_reveal false)
 
 (defpoll brightness :interval "1s"
   "brightnessctl -m | cut -d',' -f4 | tr -d '%'")
@@ -132,27 +173,40 @@
     (box :class "brightness-module"
          :orientation "v"
          :space-evenly false
-      (button :class "brightness"
-        (box :orientation "v"
-             :space-evenly false
-          (label :class "brightness-icon"
-                 :text {brightness < 20 ? "󰃞" :
-                        brightness < 40 ? "󰃟" :
-                        brightness < 60 ? "󰃝" :
-                        brightness < 80 ? "󰃠" : "󰃡"})
-          (label :class "brightness-text"
-                 :text "${brightness}")))
-      (revealer :transition "slideup"
-                :reveal brightness_reveal
-                :duration "300ms"
-        (scale :class "brightness-slider"
-               :orientation "v"
-               :flipped true
-               :min 0
-               :max 100
-               :height 250
-               :value brightness
-               :onchange "brightnessctl set {}%")))))
+		 :tooltip "Brightness: ${brightness}%"
+      (brightness-button)
+      (brightness-slider))))
+
+(defwidget brightness-button []
+  (button :class "brightness"
+    (box :orientation "v"
+         :space-evenly false
+      (label :class "brightness-icon"
+             :text {brightness < 20 ? "󰃞" :
+                    brightness < 40 ? "󰃟" :
+                    brightness < 60 ? "󰃝" :
+                    brightness < 80 ? "󰃠" : "󰃡"})
+      (label :class "brightness-text"
+             :text "${brightness}"))))
+
+(defwidget brightness-slider []
+  (revealer :transition "slideup"
+            :reveal brightness_reveal
+            :duration "300ms"
+    (scale :class "brightness-slider"
+           :orientation "v"
+           :flipped true
+           :min 0
+           :max 100
+           :height 250
+           :value brightness
+           :onchange "brightnessctl set {}%")))
+
+;; ============================================================================
+;; Clock Module
+;; ============================================================================
+
+(defvar clock_reveal false)
 
 (defpoll hours :interval "15s"
   "date '+%H'")
@@ -172,20 +226,31 @@
     (box :class "clock"
          :orientation "v"
          :space-evenly false
-      (label :text hours)
-      (label :text minutes)
-      (revealer :transition "slidedown"
-                :reveal clock_reveal
-                :duration "300ms"
-        (box :orientation "v"
-             :space-evenly false
-          (label :class "date" :text date)
-          (label :class "day" :text day))))))
+		 :tooltip "${hours}:${minutes} ${day}"
+      (clock-time)
+      (clock-date))))
 
-;; Add these variable definitions
+(defwidget clock-time []
+  (box :orientation "v"
+       :space-evenly false
+    (label :text hours)
+    (label :text minutes)))
+
+(defwidget clock-date []
+  (revealer :transition "slidedown"
+            :reveal clock_reveal
+            :duration "300ms"
+    (box :orientation "v"
+         :space-evenly false
+      (label :class "date" :text date)
+      (label :class "day" :text day))))
+
+;; ============================================================================
+;; Power Menu
+;; ============================================================================
+
 (defvar power_menu_reveal false)
 
-;; Add these widget definitions
 (defwindow power-menu
   :monitor 0
   :geometry (geometry :x "60px"
@@ -196,33 +261,6 @@
   :stacking "overlay"
   (power-menu-widget))
 
-(defwidget power-menu-widget []
-  (box :class "power-menu-box"
-       :orientation "v"
-       :space-evenly true
-       :spacing 10
-    (button :class "power-menu-btn shutdown-btn"
-            :onclick "systemctl poweroff"
-      (box :space-evenly false
-           :spacing 8
-        (label :text "⏻")))
-    (button :class "power-menu-btn reboot-btn"
-            :onclick "systemctl reboot"
-      (box :space-evenly false
-           :spacing 8
-        (label :text "󰑙")))
-    (button :class "power-menu-btn suspend-btn"
-            :onclick "systemctl suspend"
-      (box :space-evenly false
-           :spacing 8
-        (label :text "󰒲")))
-    (button :class "power-menu-btn hibernate-btn"
-            :onclick "systemctl hibernate"
-      (box :space-evenly false
-           :spacing 8
-        (label :text "󰒳")))))
-
-;; Replace your existing power widget with this
 (defwidget power []
   (eventbox :onhover "${EWW_CMD} update power_menu_reveal=true"
             :onhoverlost "${EWW_CMD} update power_menu_reveal=false"
@@ -236,3 +274,63 @@
                 :duration "300ms"
         (power-menu-widget)))))
 
+(defwidget power-menu-widget []
+  (box :class "power-menu-box"
+       :orientation "v"
+       :space-evenly true
+       :spacing 10
+    (power-menu-button :class "shutdown-btn" :icon "⏻" :action "systemctl poweroff")
+    (power-menu-button :class "reboot-btn" :icon "󰑙" :action "systemctl reboot")
+    (power-menu-button :class "suspend-btn" :icon "󰒲" :action "systemctl suspend")
+    (power-menu-button :class "hibernate-btn" :icon "󰒳" :action "systemctl hibernate")))
+
+(defwidget power-menu-button [class icon action]
+  (button :class "power-menu-btn ${class}"
+          :onclick "${action}"
+    (box :space-evenly false
+         :spacing 8
+      (label :text "${icon}"))))
+
+;; ============================================================================
+;; Notification Module
+;; ============================================================================
+
+(defvar notifications_reveal false)
+(defvar notifications_count 0)
+
+(defpoll notifications :interval "5s"
+  `makoctl list | jq '.data[0] | length'`)
+
+(defwidget notification-module []
+  (eventbox :onhover "${EWW_CMD} update notifications_reveal=true"
+            :onhoverlost "${EWW_CMD} update notifications_reveal=false"
+    (box :class "notification-module"
+         :orientation "v"
+         :space-evenly false
+		 :tooltip "${notifications} notification(s)"
+      (notification-button)
+      (notification-details))))
+
+(defwidget notification-button []
+  (button :class "notification-btn"
+          :onclick "makoctl dismiss"
+    (box :orientation "v"
+         :space-evenly false
+      (label :class "notification-icon"
+             :text {notifications == 0 ? "󱅫" : ""})
+      (label :class "notification-count"
+             :text "${notifications}"))))
+
+(defwidget notification-details []
+  (revealer :transition "slideup"
+            :reveal notifications_reveal
+            :duration "300ms"
+    (box :class "notification-details"
+         :orientation "v"
+         :space-evenly false
+      (button :class "clear-notifications"
+              :onclick "makoctl dismiss -a"
+        (label :text "󰎟"))
+      (button :class "notification-center"
+              :onclick "makoctl list"
+        (label :text "󰂟")))))
