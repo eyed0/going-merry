@@ -1,6 +1,18 @@
 # 3 config 1st high qylity audio with 32bit float, 2nd high quality with flaot 32bit int, 3rd default
 { config, lib, pkgs, ... }:
 
+let 
+  # Create a proper derivation for your impulse response files
+  surroundImpulseFiles = pkgs.stdenv.mkDerivation {
+    name = "surround-impulse-files";
+    src = ./.; # Directory containing your .wav files
+    installPhase = ''
+      mkdir -p $out/share/surround
+      cp atmos.wav $out/share/surround/
+    '';
+  };
+in
+
 {
   # Existing PipeWire configuration
   hardware.pulseaudio.enable = false;
@@ -50,6 +62,84 @@
             },
           }
         '')
+
+		# Add convolver configuration for virtual surround
+        (pkgs.writeTextDir "share/wireplumber/main.lua.d/51-virtual-surround.lua" ''
+        surroundRule = {
+          matches = {{{ "node.name", "matches", "alsa_output.*" }}};
+          apply_properties = {
+            ["audio.position"] = "FL,FR,FC,LFE,SL,SR,RL,RR",  -- 7.1 speaker layout
+            ["audio.channels"] = 8,
+            ["node.pause-on-idle"] = false,  -- Prevent processing interruption
+            ["session.suspend-timeout-seconds"] = 0,
+            ["filter.graph"] = {
+              nodes = {
+                {
+                  type = "ladspa",
+                  name = "virtual_surround_front",
+                  plugin = "zita-convolver",
+                  label = "zita_convolver",
+                  config = {
+                    filename = "${surroundImpulseFiles}/share/surround/atmos.wav",
+                    channel = 0,  -- Front channels
+                    gain = 0.8,   -- Slightly reduced to prevent clipping
+                    delay = 0,
+                    partition = 8192,  -- Larger partition size for better performance
+                    maxsize = 65536,
+                  },
+                },
+                {
+                  type = "ladspa",
+                  name = "virtual_surround_rear",
+                  plugin = "zita-convolver",
+                  label = "zita_convolver",
+                  config = {
+                    filename = "${surroundImpulseFiles}/share/surround/atmos.wav",
+                    channel = 1,  -- Rear channels
+                    gain = 0.6,   -- Reduced gain for rear channels
+                    delay = 0,
+                    partition = 8192,
+                    maxsize = 65536,
+                  },
+                },
+                {
+                  type = "ladspa",
+                  name = "virtual_surround_center",
+                  plugin = "zita-convolver",
+                  label = "zita_convolver",
+                  config = {
+                    filename = "${surroundImpulseFiles}/share/surround/atmos.wav",
+                    channel = 2,  -- Center channel
+                    gain = 0.7,
+                    delay = 0,
+                    partition = 8192,
+                    maxsize = 65536,
+                  },
+                },
+              },
+              links = {
+                -- Front channels
+                { "virtual_surround_front:Out-L", "output:playback_FL" },
+                { "virtual_surround_front:Out-R", "output:playback_FR" },
+                -- Rear channels
+                { "virtual_surround_rear:Out-L", "output:playback_RL" },
+                { "virtual_surround_rear:Out-R", "output:playback_RR" },
+                -- Side channels (mixed from front and rear)
+                { "virtual_surround_front:Out-L", "output:playback_SL" },
+                { "virtual_surround_rear:Out-L", "output:playback_SL" },
+                { "virtual_surround_front:Out-R", "output:playback_SR" },
+                { "virtual_surround_rear:Out-R", "output:playback_SR" },
+                -- Center and LFE
+                { "virtual_surround_center:Out-L", "output:playback_FC" },
+                { "virtual_surround_center:Out-R", "output:playback_LFE" },
+              },
+            },
+          },
+        }
+        
+        table.insert(alsa_monitor.rules, surroundRule)
+      '')
+		
       ];
     };
 
@@ -60,6 +150,10 @@
         "default.clock.quantum" = 1024;
         "default.clock.min-quantum" = 1024;
         "default.clock.max-quantum" = 2048;
+		"core.daemon" = true;
+        "core.version" = 3;
+        "mem.allow-mlock" = true;
+        "support.dbus" = true;
       };
       "context.properties.rules" = [
         {
@@ -95,6 +189,8 @@
         "pulse.default.frag" = "1024/96000";
         "pulse.min.quantum" = "1024/96000";
         "pulse.quantum.limit" = "2048/96000";
+		"pulse.idle.timeout" = 0;
+        "pulse.min.latency" = "1024/96000";
       };
       "stream.properties" = {
         "resample.quality" = 10;
@@ -131,6 +227,8 @@
     helvum
     pavucontrol
 	zita-convolver
+	ladspa-sdk
+	qpwgraph
   ];
 
 }## 32bit int

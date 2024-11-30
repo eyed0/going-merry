@@ -16,7 +16,7 @@
 	  ./nixos/fishell.nix
 	  ./nixos/git.nix
 	  ./nixos/packages.nix
-	  ./nixos/pipwire.nix
+	  ./nixos/pipewire/pipwire.nix
 	  ./nixos/yazi.nix
 	  ./nixos/bluetooth.nix
     ];
