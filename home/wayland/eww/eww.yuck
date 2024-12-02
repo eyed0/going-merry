@@ -141,9 +141,9 @@
           :onclick "powerprofilesctl set $(echo '${power_profile}' | awk '{print $1 == \"power-saver\" ? \"balanced\" : $1 == \"balanced\" ? \"performance\" : \"power-saver\"}') || makoclt 'Power Profile Error' 'Failed to switch profile'"
 		  :tooltip "Power Profile: ${power_profile}"
     (label :text {
-      power_profile == "power-saver" ? "" :
-      power_profile == "balanced" ? "󱈑" :
-      power_profile == "performance" ? "" :
+      power_profile == "power-saver" ? "󱈑" :
+      power_profile == "balanced" ? "󰁹" :
+      power_profile == "performance" ? "󱐌" :
       ""
     })))
 

@@ -7,6 +7,8 @@
 	  ./home/kdeconnect.nix
 	  #./home/mpv/mpv.nix
     ./home/jujutsu.nix
+	#./home/music/beets.nix
+	./home/spell.nix
   ];
   home.username = "heehaw";
   home.homeDirectory = "/home/heehaw";

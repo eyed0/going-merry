@@ -17,15 +17,12 @@
       broot
       helix
       mg
-      emacsPackages.jinx
-      enchant
-      (aspellWithDicts (dicts: with dicts; [ en en-computers en-science mr])) #emacs spellcheck for
       rustup
 	  tree-sitter
       #android-studio
 	  inputs.agenix.packages.x86_64-linux.default
 	  age
-	  lapce
+	  statix # Lints and suggestions for the nix programming language
 
       #       email
 
