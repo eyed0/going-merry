@@ -26,7 +26,7 @@
 
     monospace = {
       package = pkgs.nerdfonts.override {fonts = ["SpaceMono"];};
-      name = "SpaceMono Nerd Font";
+      name = "PragmataProLiga Nerd Font";
     };
 
     emoji = {
