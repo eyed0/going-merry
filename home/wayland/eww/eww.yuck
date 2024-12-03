@@ -165,7 +165,8 @@
 (defvar brightness_reveal false)
 
 (defpoll brightness :interval "1s"
-  "brightnessctl -m | cut -d',' -f4 | tr -d '%'")
+  :initial "20"  ;; Default value if command fails
+  `brightnessctl -m | cut -d',' -f4 | tr -d '%' | awk '{print ($0 == "" ? "20" : $0)}'`)
 
 (defwidget brightness-module []
   (eventbox :onhover "${EWW_CMD} update brightness_reveal=true"
@@ -173,7 +174,7 @@
     (box :class "brightness-module"
          :orientation "v"
          :space-evenly false
-		 :tooltip "Brightness: ${brightness}%"
+         :tooltip "Brightness: ${brightness}%"
       (brightness-button)
       (brightness-slider))))
 

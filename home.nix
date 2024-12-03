@@ -9,6 +9,7 @@
     ./home/jujutsu.nix
 	#./home/music/beets.nix
 	./home/spell.nix
+	./home/kanata.nix
   ];
   home.username = "heehaw";
   home.homeDirectory = "/home/heehaw";

@@ -121,7 +121,7 @@
   users.users.heehaw = {
     isNormalUser = true;
     description = "heehaw";
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "input" ];
     packages = with pkgs; [
       kdePackages.kate
       #  thunderbird
