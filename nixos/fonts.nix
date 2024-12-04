@@ -3,7 +3,7 @@
 {
   
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "VictorMono" "SpaceMono" "RobotoMono" "FiraCode"]; })
+    #(nerd-fonts.override { fonts = [ "VictorMono" "SpaceMono" "RobotoMono" "FiraCode"]; })
     lexend
     lohit-fonts.marathi
     marathi-cursive

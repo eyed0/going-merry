@@ -3,13 +3,13 @@
 {
   imports = [
     ./home/stylix/stylix.nix 
-	  ./home/wayland/default.nix
-	  ./home/kdeconnect.nix
-	  #./home/mpv/mpv.nix
+	./home/wayland/default.nix
+	./home/kdeconnect.nix
+	#./home/mpv/mpv.nix
     ./home/jujutsu.nix
 	#./home/music/beets.nix
 	./home/spell.nix
-	./home/kanata.nix
+	#./home/kanata.nix
   ];
   home.username = "heehaw";
   home.homeDirectory = "/home/heehaw";

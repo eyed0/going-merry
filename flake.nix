@@ -29,6 +29,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+	# suyu switch imulator
+	suyu.url = "git+https://git.suyu.dev/suyu/nix-flake";
+    suyu.inputs.nixpkgs.follows = "nixpkgs";
+
     # nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # TODO deploy-rs.url = "github:serokell/deploy-rs";

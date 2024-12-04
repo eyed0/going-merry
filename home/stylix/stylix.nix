@@ -25,7 +25,7 @@
     };
 
     monospace = {
-      package = pkgs.nerdfonts.override {fonts = ["SpaceMono"];};
+      package = pkgs.cascadia-code;
       name = "PragmataProLiga Nerd Font";
     };
 

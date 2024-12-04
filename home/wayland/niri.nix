@@ -232,8 +232,10 @@ in
 		(plain "Mod+v" [(leaf "spawn" ["clapboard pick"])])
 
 		# Example volume keys mappings for PipeWire & WirePlumber.
-		(plain "XF86AudioRaiseVolume" [(leaf "spawn" ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"])])
-		(plain "XF86AudioLowerVolume" [(leaf "spawn" ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"])])
+		(plain "XF86AudioRaiseVolume" [(leaf "spawn" ["wpctl" "set-volume" "-l" "1.5" "@DEFAULT_AUDIO_SINK@" "5%+"])])
+		(plain "XF86AudioLowerVolume" [(leaf "spawn" ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"])])
+		# (plain "key_XF86MonBrightnessUp" [(leaf "spawn" ["brightnessctl" "set" "+5%"])])
+		# (plain "key_XF86MonBrightnessDown" [(leaf "spwan" ["brightnessctl" "set" "5%-"])])
 
 		(plain "Mod+Q" [(flag "close-window")])
 
