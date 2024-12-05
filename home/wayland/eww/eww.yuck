@@ -318,7 +318,7 @@
     (box :orientation "v"
          :space-evenly false
       (label :class "notification-icon"
-             :text {notifications == 0 ? "󱅫" : ""})
+             :text {notifications == 0 ? "" : "󱅫"})
       (label :class "notification-count"
              :text "${notifications}"))))
 

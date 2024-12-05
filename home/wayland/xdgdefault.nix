@@ -5,10 +5,27 @@
   xdg.configFile."mimeapps.list".force = true;
   xdg = {
     enable = true;
-    
+
+	# Configure org-protocol desktop entry
+  desktopEntries = {
+    org-protocol = {
+      name = "Org Protocol";
+      exec = "emacsclient %u";
+      icon = "emacs";
+      type = "Application";
+      terminal = false;
+      categories = [ "System" ];
+      mimeType = [ "x-scheme-handler/org-protocol" ];
+    };
+  };
+
     mimeApps = {
       enable = true;
       defaultApplications = {
+
+		# Configure MIME type associations
+		"x-scheme-handler/org-protocol" = [ "org-protocol.desktop" ];
+		
         # Document formats
         "application/pdf" = [ "org.pwmt.zathura.desktop" ];
         "text/plain" = [ "emacs.desktop" ];
