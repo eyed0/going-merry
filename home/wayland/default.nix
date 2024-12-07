@@ -12,6 +12,7 @@
 	./eww/default.nix
 	#./anyrun.nix # wait for next update
 	./clipboard.nix
+	./swaybg.nix
   ];
 
   home.packages = [

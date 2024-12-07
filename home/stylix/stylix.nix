@@ -5,7 +5,7 @@
   ...
 }: {
   stylix.enable = true;
-  stylix.image = ./../../wall/darknix.jpg;
+  stylix.image = ./../../wall/yotsuba.jpeg;
   stylix.polarity = "dark";
   #stylix.targets.nixos-icons.enable = true;
   #stylix.targets.gtk.enable = true;
@@ -46,17 +46,9 @@
   stylix.cursor.name = "Bibata-Modern-Ice";
   stylix.cursor.size = 24;
 
-  # # applications 
-  # stylix.targets.btop.enable = true;
-  # stylix.targets.firefox.enable = true;
-  # stylix.targets.kde.enable = true;
-  # stylix.targets.foot.enable = true;
-  # stylix.targets.yazi.enable = true;
-
   stylix = {
 	targets = {
 	  fuzzel.enable = true;
-	  #swaylock.enable = true;
 	  swaylock.useImage = true;
 	  mako.enable = true;
       foot.enable = true;
@@ -66,10 +58,6 @@
       firefox.enable = true;
       fzf.enable = true;
       yazi.enable = true;
-      # waybar.enable = true;
-	  # waybar.enableCenterBackColors =true;
-	  # waybar.enableLeftBackColors = true;
-	  # waybar.enableRightBackColors = true;
       gtk.enable = true;
       gtk.extraCss = with config.lib.stylix.colors; ''
         @define-color accent_color #${base0D};

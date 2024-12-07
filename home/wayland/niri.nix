@@ -118,7 +118,7 @@ in
 		])
 
 		(plain "default-column-width" [
-          (leaf "proportion" 0.9)
+          (leaf "proportion" 0.95)
 		])
 
 		(leaf "gaps" 2)
@@ -215,6 +215,7 @@ in
 	  (plain "window-rule" [
 		(leaf "geometry-corner-radius" 3)
 		(leaf "clip-to-geometry" true)
+		#(leaf "opacity" 0.90)
       ])
 
 ########### key bindings
@@ -234,8 +235,8 @@ in
 		# Example volume keys mappings for PipeWire & WirePlumber.
 		(plain "XF86AudioRaiseVolume" [(leaf "spawn" ["wpctl" "set-volume" "-l" "1.5" "@DEFAULT_AUDIO_SINK@" "5%+"])])
 		(plain "XF86AudioLowerVolume" [(leaf "spawn" ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"])])
-		# (plain "key_XF86MonBrightnessUp" [(leaf "spawn" ["brightnessctl" "set" "+5%"])])
-		# (plain "key_XF86MonBrightnessDown" [(leaf "spwan" ["brightnessctl" "set" "5%-"])])
+		# (plain "XF86MonBrightnessUp" [(leaf "spawn" ["brightnessctl" "-d" "amdgpu_bl2" "s" "+5%"])])
+		# (plain "XF86MonBrightnessDown" [(leaf "spwan" ["brightnessctl" "-d" "amdgpu_bl2" "s" "5%-"])])
 
 		(plain "Mod+Q" [(flag "close-window")])
 
