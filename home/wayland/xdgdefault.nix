@@ -14,8 +14,8 @@
       icon = "emacs";
       type = "Application";
       terminal = false;
-      categories = [ "System" ];
-      mimeType = [ "x-scheme-handler/org-protocol" ];
+      mimeType = ["x-scheme-handler/org-protocol"];
+      categories = ["System"];
     };
   };
 

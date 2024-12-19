@@ -22,15 +22,15 @@
       #android-studio
 	  inputs.agenix.packages.x86_64-linux.default
 	  age
+	  rage
 	  statix # Lints and suggestions for the nix programming language
 
       #       email
 
       aerc
       thunderbird
-      openssl
-	  isync
-	  mu 
+	  notmuch
+      lieer
 
       #       apps
 

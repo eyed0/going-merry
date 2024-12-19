@@ -9,6 +9,7 @@
     ./home/jujutsu.nix
 	#./home/music/beets.nix
 	./home/spell.nix
+	#./home/notmuch.nix TODO
 	#./home/kanata.nix
   ];
   home.username = "heehaw";
