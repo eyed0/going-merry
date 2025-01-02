@@ -73,6 +73,7 @@
           ./home.nix
           inputs.stylix.homeManagerModules.stylix
 		  inputs.niri.homeModules.niri
+		  #inputs.zen-browser.packages."${system}".default
 		];
 		extraSpecialArgs = { inherit inputs; };
       };

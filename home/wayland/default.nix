@@ -6,22 +6,35 @@
 	./niri.nix
 	./fuzzel.nix
 	./waybar.nix
-	./waybar.nix
 	./idle_lock.nix
 	./xdgdefault.nix
 	./eww/default.nix
 	#./anyrun.nix # wait for next update
-	./clipboard.nix
 	./swaybg.nix
   ];
 
-  home.packages = [
-	#pkgs.jq
-	pkgs.mako
+  home.packages = with pkgs; [
+    wl-clipboard
+    clipman
+    mako
   ];
   programs.jq.enable = true;
   programs.eww-bar = {
     enable = true;
+  };
+
+  systemd.user.services.clipman = {
+    Unit = {
+      Description = "Clipboard Manager Service";
+      PartOf = ["graphical-session.target"];
+    };
+    Service = {
+      ExecStart = "${pkgs.clipman}/bin/clipman listen";
+      Restart = "always";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+    };
   };
   
 }

@@ -78,6 +78,9 @@
       #freetube # youtube client
       #paperwork
       #pandoc # Conversion between documentation formats
+	  television # fuzzy finder
+	  gitnr # Create `.gitignore` files using one or more templates
+	  impala # TUI for managing wifi
 
       #       android 
       universal-android-debloater
