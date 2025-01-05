@@ -81,6 +81,9 @@
 	  television # fuzzy finder
 	  gitnr # Create `.gitignore` files using one or more templates
 	  impala # TUI for managing wifi
+	  hledger
+      hledger-ui
+      hledger-web
 
       #       android 
       universal-android-debloater

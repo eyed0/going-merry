@@ -4,7 +4,7 @@
   imports = [
     ./home/stylix/stylix.nix 
 	./home/wayland/default.nix
-	./home/kdeconnect.nix
+	#./home/kdeconnect.nix
 	#./home/mpv/mpv.nix
     ./home/jujutsu.nix
 	#./home/music/beets.nix
@@ -23,6 +23,8 @@
 	pkgs.mpv
 	pkgs.scrcpy
   ];
+
+  services.emacs.client.enable = true;
 
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in

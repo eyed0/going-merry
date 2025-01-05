@@ -19,6 +19,8 @@
 	  ./nixos/pipewire/pipwire.nix
 	  ./nixos/yazi.nix
 	  ./nixos/bluetooth.nix
+	  #./nixos/plymouth/plymouth-hexagon.nix
+	  #./nixos/plymouth/plymouth.nix
     ];
 
   #latest linux kernel
@@ -136,6 +138,8 @@
     startWithGraphical = true;
     defaultEditor = true;
   };
+
+  programs.kdeconnect.enable = true;
   
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

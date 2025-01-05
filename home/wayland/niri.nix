@@ -118,7 +118,7 @@ in
 		])
 
 		(plain "default-column-width" [
-          (leaf "proportion" 0.95)
+          (leaf "proportion" 1.0)
 		])
 
 		(leaf "gaps" 2)
@@ -230,7 +230,6 @@ in
 
 		# You can also use a shell:
 		# (plain "Mod+T" [(leaf "spawn" [ "bash" "-c" "notify-send hello && exec alacritty" ])])
-		(plain "Mod+V" [(leaf "spawn" ["~/.local/bin/clipman-fuzzel"])])
 
 		# Example volume keys mappings for PipeWire & WirePlumber.
 		(plain "XF86AudioRaiseVolume" [(leaf "spawn" ["wpctl" "set-volume" "-l" "1.5" "@DEFAULT_AUDIO_SINK@" "5%+"])])

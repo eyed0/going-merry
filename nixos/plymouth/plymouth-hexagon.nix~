@@ -1,6 +1,6 @@
-{ lib, inputes, stdenv, fetchurl, ...}:
+{ stdenv, fetchurl }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "plymouth-theme-hexagon";
   version = "1.0";
 
@@ -13,10 +13,4 @@ stdenv.mkDerivation rec {
     mkdir -p $out/share/plymouth/themes
     cp -r hexagon_alt $out/share/plymouth/themes/
   '';
-
-  meta = with lib; {
-    description = "Hexagon Plymouth Theme";
-    license = licenses.gpl3;
-    platforms = platforms.linux;
-  };
 }
