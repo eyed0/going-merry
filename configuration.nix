@@ -25,6 +25,9 @@
 
   #latest linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  services.scx.enable = true;
+  services.scx.scheduler = "scx_lavd"; # default is "scx_rustland"
+  
   #The kernel can load the correct driver right away:
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
