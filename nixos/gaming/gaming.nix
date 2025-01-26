@@ -27,6 +27,7 @@
       nexusmods-app
       vulkan-tools
       mesa
+	  # veloren # rpg game
     ];
 
     programs = {

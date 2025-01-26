@@ -25,6 +25,10 @@
 	  rage
 	  statix # Lints and suggestions for the nix programming language
 
+      jdk23
+      maven
+      jdt-language-server # For Eglot integration
+
       #       email
 
       aerc
@@ -68,6 +72,7 @@
       okular
       arianna # epub reader
       kdePackages.ark
+	  unrar
       #peazip
       xarchiver
       #syncthing
