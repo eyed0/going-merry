@@ -49,6 +49,7 @@
 	  ventoy # Bootable USB Solution
 	  av1an # command-line vdo encoding framework
 	  musikcube
+	  kdePackages.kdenlive # vdo editor
 
       #       utilities
 
