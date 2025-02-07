@@ -22,6 +22,8 @@
     #pkgs.eza
 	pkgs.mpv
 	pkgs.scrcpy
+	pkgs.jetbrains.idea-community
+
   ];
 
   services.emacs.client.enable = true;

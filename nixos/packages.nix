@@ -50,6 +50,7 @@
 	  av1an # command-line vdo encoding framework
 	  musikcube
 	  kdePackages.kdenlive # vdo editor
+	  jetbrains.rust-rover
 
       #       utilities
 

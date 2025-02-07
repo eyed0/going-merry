@@ -17,7 +17,7 @@
     environment.systemPackages = with pkgs; [
       lact
       lutris
-      wineWowPackages.staging
+      wineWowPackages.stagingFull
       ryujinx
       protonup
       protonup-qt
