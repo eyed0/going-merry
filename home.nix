@@ -23,9 +23,8 @@
 	pkgs.mpv
 	pkgs.scrcpy
 	pkgs.jetbrains.idea-community
-
+	pkgs.papirus-icon-theme
   ];
-
   services.emacs.client.enable = true;
 
   home.file = {

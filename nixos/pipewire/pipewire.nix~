@@ -1,0 +1,418 @@
+{ config, lib, pkgs, ... }:
+
+let 
+  surroundImpulseFiles = pkgs.stdenv.mkDerivation {
+    name = "surround-impulse-files";
+    src = ./.; 
+    installPhase = ''
+      mkdir -p $out/share/surround
+      cp atmos.wav $out/share/surround/
+    '';
+  };
+in
+{
+  services.pulseaudio.enable = false;
+  
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+    jack.enable = true;
+    audio.enable = true;
+    
+    wireplumber = {
+      enable = true;
+      configPackages = [
+        # 1. Base quality settings (loads first)
+        (pkgs.writeTextDir "share/wireplumber/main.lua.d/50-high-quality.lua" ''
+          alsa_monitor.rules = {
+            {
+              matches = {{{ "node.name", "matches", "*_*put.*" }}};
+              apply_properties = {
+                ["audio.format"] = "F32LE",
+                ["audio.rate"] = 96000,
+                ["api.alsa.period-size"] = 1024,
+                ["api.alsa.period-num"] = 4,
+                ["api.alsa.headroom"] = 256,
+                ["resample.quality"] = 10,
+                ["resample.disable"] = false,
+                ["channelmix.normalize"] = false,
+                ["channelmix.mix-lfe"] = false,
+                ["session.suspend-timeout-seconds"] = 0,
+              },
+            },
+          }
+
+       bluetooth_monitor.rules = {
+         {
+           matches = {{{ "node.name", "matches", "bluez_*" }}};
+             apply_properties = {
+              ["bluez5.autoswitch-profile"] = true,
+              ["bluez5.a2dp.ldac.quality"] = "auto",      # Adaptive LDAC quality
+              ["bluez5.a2dp.aac.bitratemode"] = "0",      # Variable bitrate for AAC
+              ["bluez5.a2dp.aac.quality"] = "high",       # High quality AAC encoding
+              ["bluez5.a2dp.ldac.bitrate"] = "adaptive",  # Adaptive LDAC bitrate
+              ["bluez5.role"] = "[ a2dp_sink a2dp_source hsp_hs hsp_ag ]",
+              ["bluez5.codecs"] = "[ ldac aac aptx aptx_hd sbc_xq ]",
+              ["bluez5.enable-sbc-xq"] = true,            # Enable high-quality SBC
+              ["bluez5.enable-hw-volume"] = true,         # Hardware volume control
+              ["session.suspend-timeout-seconds"] = 0,     # Prevent suspension
+            },
+          },
+        }
+		'')
+
+        # 2. LSP Spatial Processing (loads second)
+        (pkgs.writeTextDir "share/wireplumber/main.lua.d/51-spatial-processing.lua" ''
+          spatial_processing = {
+            matches = {{{ "node.name", "matches", "alsa_output.*" }}};
+            apply_properties = {
+              ["node.pause-on-idle"] = false,
+              ["session.suspend-timeout-seconds"] = 0,
+              ["filter.graph"] = {
+                nodes = {
+                  -- Transient Processor (for better spatial detail)
+                  {
+                    type = "ladspa",
+                    name = "transient_split",
+                    plugin = "lsp-plugins-sc-dyna-processor-stereo",
+                    label = "sc_dyna_processor_stereo",
+                    control = {
+                      ["alr"] = 0.05,      -- or 0.1 Ultra-fast attack for transients
+                      ["rls"] = 150.0,    -- or 100 Slower release
+                      ["drp"] = -20.0,    -- Boost transients
+                      ["scp"] = 2.5,      -- Enhance spatial cues
+                      ["bth"] = -35.0,    -- Threshold for boost
+                      ["cth"] = -25.0,    -- Threshold for cut
+                    },
+                  },
+
+                  -- Phase Alignment (crucial for spatial imaging)
+                  {
+                    type = "ladspa",
+                    name = "phase_analyzer",
+                    plugin = "lsp-plugins-phase-detector",
+                    label = "phase_detector_stereo",
+                    control = {
+                      ["mtf"] = 0.5,     -- Metering time
+                      ["crf"] = 50.0,    -- Correlation time
+                    },
+                  },
+
+                  -- Spatial Expander (for width enhancement)
+                  {
+                    type = "ladspa",
+                    name = "expander",
+                    plugin = "lsp-plugins-mb-expander-stereo",
+                    label = "mb_expander_stereo",
+                    control = {
+                      ["sf_0"] = 100.0,   -- Split frequency 1
+                      ["sf_1"] = 500.0,   -- Split frequency 2
+                      ["sf_2"] = 2000.0,  -- Split frequency 3
+                      ["alr_0"] = 5.0,    -- Attack time low
+                      ["rls_0"] = 100.0,  -- Release time low
+                      ["rat_0"] = 2.0,    -- Ratio low (more expansion)
+                      ["kn_0"] = 15.0,    -- Knee low
+                      ["alr_1"] = 4.0,    -- Attack time mid-low
+                      ["rls_1"] = 80.0,   -- Release time mid-low
+                      ["rat_1"] = 1.8,    -- Ratio mid-low
+                      ["kn_1"] = 12.0,    -- Knee mid-low
+                      ["boost"] = 3.0,    -- Overall boost
+                    },
+                  },
+
+                  -- Enhanced Stereo Field
+                  {
+                    type = "ladspa",
+                    name = "stereo_enhance",
+                    plugin = "lsp-plugins-sc-stereo-enhancer",
+                    label = "sc_stereo_enhancer",
+                    control = {
+                      ["balance"] = 0.0,     -- Center balance
+                      ["mid_level"] = 0.2,   -- Slight mid boost for better center image
+                      ["side_level"] = 2.0,  -- Less aggressive side for cleaner staging
+                      ["stereo"] = 1.6,      -- More natural width
+                      ["phase"] = 0.1,       -- Slight phase adjustment for depth
+                      ["ml_time"] = 0.8,     -- Mid/side linking
+                    },
+                  },
+
+                  -- Multi-band Spectral Processing
+                  {
+                    type = "ladspa",
+                    name = "spectral_proc",
+                    plugin = "lsp-plugins-spectrum-analyzer-x16-stereo",
+                    label = "spectrum_analyzer_x16_stereo",
+                    control = {
+                      ["mt_0"] = 10.0,     -- Integration time
+                      ["tl_0"] = -72.0,    -- Threshold level
+                      ["reactivity"] = 0.2, -- Fast reactivity
+                      ["shift"] = 1.0,     -- Shift factor
+                    },
+                  },
+
+                  -- Room Modeling Enhancement
+                  {
+                    type = "ladspa",
+                    name = "room_processor",
+                    plugin = "lsp-plugins-comp-delay-stereo",
+                    label = "comp_delay_stereo",
+                    control = {
+                      ["dl"] = 0.02,      -- Slight delay for depth
+                      ["dr"] = 0.02,      -- Matched right delay
+                      ["drl"] = 0.01,    -- Early reflection time
+                      ["drr"] = 0.01,    -- Matched right reflection
+                    },
+                  },
+                },
+                links = {
+                  -- Enhanced Spatial Processing Chain
+                  { "transient_split:out_l", "phase_analyzer:in_l" },
+                  { "transient_split:out_r", "phase_analyzer:in_r" },
+                  { "phase_analyzer:out_l", "expander:in_l" },
+                  { "phase_analyzer:out_r", "expander:in_r" },
+                  { "expander:out_l", "stereo_enhance:in_l" },
+                  { "expander:out_r", "stereo_enhance:in_r" },
+                  { "stereo_enhance:out_l", "spectral_proc:in_l" },
+                  { "stereo_enhance:out_r", "spectral_proc:in_r" },
+                  { "spectral_proc:out_l", "room_processor:in_l" },
+                  { "spectral_proc:out_r", "room_processor:in_r" },
+                  
+                  -- Connect to Virtual Surround (feed enhanced spatial signal)
+                  { "room_processor:out_l", "virtual_surround_front:in_l" },
+                  { "room_processor:out_r", "virtual_surround_front:in_r" },
+                  { "room_processor:out_l", "virtual_surround_rear:in_l" },
+                  { "room_processor:out_r", "virtual_surround_rear:in_r" },
+                  { "stereo_enhance:out_l", "virtual_surround_center:in_l" },
+                  { "stereo_enhance:out_r", "virtual_surround_center:in_r" },
+                },
+              },
+            },
+          }
+
+          -- Insert spatial processing rule
+          table.insert(alsa_monitor.rules, spatial_processing)
+        '')
+
+        # 3. Virtual Surround (loads last)
+        (pkgs.writeTextDir "share/wireplumber/main.lua.d/5-smart-surround.lua" ''
+          -- Define optimized virtual surround configuration
+          virtual_surround = {
+            matches = {{{ "node.name", "matches", "alsa_output.*" }}};
+            apply_properties = {
+              ["audio.position"] = "FL,FR,FC,LFE,SL,SR,RL,RR",  # 7.1 speaker layout
+              ["audio.channels"] = 8,
+              ["node.pause-on-idle"] = false,
+              ["session.suspend-timeout-seconds"] = 0,
+              ["filter.graph"] = {
+                nodes = {
+                  # Front channels - Enhanced for better stereo imaging and depth
+                  {
+                    type = "ladspa",
+                    name = "virtual_surround_front",
+                    plugin = "zita-convolver",
+                    label = "zita_convolver",
+                    config = {
+                      filename = "${surroundImpulseFiles}/share/surround/atmos.wav",
+                      channel = 0,
+                      gain = 0.85,    # Increased for better front soundstage
+                      delay = 0,
+                      partition = 32768,  # Larger partition for better detail
+                      maxsize = 262144,   # Increased for better room simulation
+                      offset = 0,
+                      length = 0,
+                      drywet = 0.80,  # Better balance between direct and processed sound
+                    },
+                  },
+                  # Rear channels - Optimized for more natural surround effect
+                  {
+                    type = "ladspa",
+                    name = "virtual_surround_rear",
+                    plugin = "zita-convolver",
+                    label = "zita_convolver",
+                    config = {
+                      filename = "${surroundImpulseFiles}/share/surround/atmos.wav",
+                      channel = 1,
+                      gain = 0.7,    # Adjusted for better balance with front
+                      delay = 0.015, # Refined delay for more natural space
+                      partition = 32768,
+                      maxsize = 262144,
+                      offset = 0,
+                      length = 0,
+                      drywet = 0.8,
+                    },
+                  },
+                  # Center and LFE - Enhanced for clearer dialog and tighter bass
+                  {
+                    type = "ladspa",
+                    name = "virtual_surround_center",
+                    plugin = "zita-convolver",
+                    label = "zita_convolver",
+                    config = {
+                      filename = "${surroundImpulseFiles}/share/surround/atmos.wav",
+                      channel = 2,
+                      gain = 0.85,   # Improved for dialog clarity
+                      delay = 0.005, # Slight delay for better integration
+                      partition = 32768,
+                      maxsize = 262144,
+                      offset = 0,
+                      length = 0,
+                      drywet = 0.95, # More direct sound for center channel
+                    },
+                  },
+                  # Enhanced spatial processor for better immersion
+                  {
+                    type = "ladspa",
+                    name = "room_enhancement",
+                    plugin = "matrix_spatialiser",
+                    label = "matrixSpatialiser",
+                    control = {
+                      "Width" = 1.6,   # Increased for wider soundstage
+                      "Depth" = 1.2,   # Enhanced depth perception
+                      "Focus" = 0.8,   # Added focus control for better imaging
+                      "Space" = 0.5,   # Added space control for ambience
+                    },
+                  },
+				  # Dragonfly reverb for subtle ambience
+                  {
+                    type = "ladspa",
+                    name = "ambient_space",
+                    plugin = "dragonfly-hall-reverb",
+                    label = "dragonfly-hall-reverb",
+                    control = {
+                      ["Dry Level"] = 0.0,
+                      ["Early Level"] = -25.0,
+                      ["Late Level"] = -35.0,
+                      ["Size"] = 30.0,
+                      ["Width"] = 90.0,
+                      ["Predelay"] = 10.0,
+                      ["Diffuse"] = 80.0,
+                      ["Low Cut"] = 120.0,
+                      ["High Cut"] = 12000.0,
+                      ["Early Send"] = -60.0,
+                      ["Modulation"] = 5.0,
+                    },
+                  },
+                },
+                links = {
+                  # Front channel processing with enhanced spatialization
+                  { "virtual_surround_front:Out-L", "room_enhancement:In-L" },
+                  { "virtual_surround_front:Out-R", "room_enhancement:In-R" },
+                  
+                  { "room_enhancement:Out-L", "ambient_space:in_left" },
+                  { "room_enhancement:Out-R", "ambient_space:in_right" },
+                  { "ambient_space:out_left", "output:playback_FL" },
+                  { "ambient_space:out_right", "output:playback_FR" },
+                  
+                  # Rear channels with improved positioning
+                  { "virtual_surround_rear:Out-L", "output:playback_RL" },
+                  { "virtual_surround_rear:Out-R", "output:playback_RR" },
+                  
+                  # Side channels with optimized mixing
+                  { "virtual_surround_front:Out-L", "output:playback_SL" },
+                  { "virtual_surround_rear:Out-L", "output:playback_SL" },
+                  { "virtual_surround_front:Out-R", "output:playback_SR" },
+                  { "virtual_surround_rear:Out-R", "output:playback_SR" },
+                  
+                  # Center and LFE with refined processing
+                  { "virtual_surround_center:Out-L", "output:playback_FC" },
+                  { "virtual_surround_center:Out-R", "output:playback_LFE" },
+                },
+              },
+            },
+          }
+
+          -- Insert rule directly
+          table.insert(alsa_monitor.rules, virtual_surround)
+        '')
+
+      ];
+    };
+
+    extraConfig.pipewire."92-high-quality" = {
+      "context.properties" = {
+        "default.clock.rate" = 96000;
+        "default.clock.quantum" = 1024;
+        "default.clock.min-quantum" = 1024;
+        "default.clock.max-quantum" = 2048;
+        "core.daemon" = true;
+        "core.version" = 3;
+        "mem.allow-mlock" = true;
+        "support.dbus" = true;
+      };
+      "context.properties.rules" = [
+        {
+          matches = [{ "node.name" = "~.*"; }];
+          actions = {
+            update-props = {
+              "clock.rate" = 96000;
+              "clock.quantum" = 1024;
+              "clock.min-quantum" = 1024;
+              "clock.max-quantum" = 2048;
+            };
+          };
+        }
+      ];
+      "context.modules" = [
+        {
+          name = "libpipewire-module-rt";
+          args = {
+            "nice.level" = -15;
+            "rt.prio" = 88;
+          };
+        }
+      ];
+    };
+
+    extraConfig.pipewire-pulse."92-high-quality" = {
+      "pulse.properties" = {
+        "pulse.default.format" = "F32LE";
+        "pulse.default.rate" = "96000";
+        "pulse.min.req" = "1024/96000";
+        "pulse.default.req" = "1024/96000";
+        "pulse.default.frag" = "1024/96000";
+        "pulse.min.quantum" = "1024/96000";
+        "pulse.quantum.limit" = "2048/96000";
+		"pulse.idle.timeout" = 0;
+        "pulse.min.latency" = "1024/96000";
+      };
+      "stream.properties" = {
+        "resample.quality" = 10;
+        "resample.disable" = false;
+        "channelmix.normalize" = false;
+        "channelmix.mix-lfe" = false;
+      };
+    };
+  };
+
+  # Required packages
+  environment.systemPackages = with pkgs; [
+    alsa-utils
+    pavucontrol
+    zita-convolver
+    ladspa-sdk
+    qpwgraph
+    lsp-plugins
+    dragonfly-reverb
+    bs2b-lv2
+  ];
+
+  # Security settings for real-time audio
+  security = {
+    rtkit.enable = true;
+    pam.loginLimits = [
+      {
+        domain = "@audio";
+        item = "memlock";
+        type = "-";
+        value = "unlimited";
+      }
+      {
+        domain = "@audio";
+        item = "rtprio";
+        type = "-";
+        value = "99";
+      }
+    ];
+  };
+}

@@ -36,7 +36,7 @@ in
                 ["api.alsa.period-size"] = 256,
                 ["api.alsa.period-num"] = 2,
                 ["api.alsa.headroom"] = 128,
-                ["resample.quality"] = 15,
+                ["resample.quality"] = 21,
                 ["resample.library"] = "libsoxr",
                 ["resample.disable"] = false,
                 ["channelmix.normalize"] = false,
@@ -261,16 +261,10 @@ in
 
   environment.systemPackages = with pkgs; [
     alsa-utils
-    easyeffects
     pavucontrol
     zita-convolver
     ladspa-sdk
     qpwgraph
-    sox
-    libsoxr
-    rnnoise
     calf
-    lsp-plugins
-    noise-repellent
   ];
 }

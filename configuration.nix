@@ -12,15 +12,15 @@
       ./nixos/syncthing.nix
       ./nixos/footerminal.nix
       ./nixos/firefox.nix
-	  ./nixos/fonts.nix
-	  ./nixos/fishell.nix
-	  ./nixos/git.nix
-	  ./nixos/packages.nix
-	  ./nixos/pipewire/pipwire.nix
-	  ./nixos/yazi.nix
-	  ./nixos/bluetooth.nix
-	  #./nixos/plymouth/plymouth-hexagon.nix
-	  #./nixos/plymouth/plymouth.nix
+      ./nixos/fonts.nix
+      ./nixos/fishell.nix
+      ./nixos/git.nix
+      ./nixos/packages.nix
+      ./nixos/pipewire/pipwire.nix
+      ./nixos/yazi.nix
+      ./nixos/bluetooth.nix
+      #./nixos/plymouth/plymouth-hexagon.nix
+      #./nixos/plymouth/plymouth.nix
     ];
 
   #latest linux kernel
