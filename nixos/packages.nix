@@ -2,7 +2,7 @@
 { config, pkgs, inputs, ... }:
 
 {
-    environment = {
+  environment = {
     systemPackages = with pkgs; [
 
       #tree
@@ -18,12 +18,12 @@
       helix
       mg
       rustup
-	  tree-sitter
+	    tree-sitter
       #android-studio
-	  inputs.agenix.packages.x86_64-linux.default
-	  age
-	  rage
-	  statix # Lints and suggestions for the nix programming language
+	    inputs.agenix.packages.x86_64-linux.default
+	    age
+	    rage
+	    statix # Lints and suggestions for the nix programming language
 
       jdk23
       maven
@@ -33,7 +33,7 @@
 
       aerc
       thunderbird
-	  notmuch
+	    notmuch
       lieer
 
       #       apps
@@ -46,15 +46,15 @@
       arduino # electronics prototyping platform
       #kanata # A tool to improve keyboard comfort and usability with advanced customization
       #anki
-	  ventoy # Bootable USB Solution
-	  av1an # command-line vdo encoding framework
-	  musikcube
-	  kdePackages.kdenlive # vdo editor
-	  jetbrains.rust-rover
+	    ventoy # Bootable USB Solution
+	    av1an # command-line vdo encoding framework
+	    musikcube
+	    kdePackages.kdenlive # vdo editor
+	    jetbrains.rust-rover
 
       #       utilities
 
-	  fontforge-gtk
+	    fontforge-gtk
       dust # disk usage
       gcompris # educational software for children
       zoxide # A fast cd command that learns your habits
@@ -71,10 +71,9 @@
       #tinymist # lsp for typst
       #digikam5
       #kate
-      okular
-      arianna # epub reader
+      kdePackages.okular 
       kdePackages.ark
-	  unrar
+      unrar
       #peazip
       xarchiver
       #syncthing
@@ -85,10 +84,10 @@
       #freetube # youtube client
       #paperwork
       #pandoc # Conversion between documentation formats
-	  television # fuzzy finder
-	  gitnr # Create `.gitignore` files using one or more templates
-	  impala # TUI for managing wifi
-	  hledger
+	    television # fuzzy finder
+	    gitnr # Create `.gitignore` files using one or more templates
+	    impala # TUI for managing wifi
+	    hledger
       hledger-ui
       hledger-web
 
@@ -98,15 +97,15 @@
 
       #       System
 
-	  # wluma # TODO https://github.com/maximbaz/wluma
-	  brightnessctl # brightness control for waybar
-	  pavucontrol # valum controls
+	    # wluma # TODO https://github.com/maximbaz/wluma
+	    brightnessctl # brightness control for waybar
+	    pavucontrol # valum controls
       cmake
       parted
       gparted
       #pciutils
       fastfetch
-	  networkmanagerapplet # for waybar
+	    networkmanagerapplet # for waybar
 
     ];
   };

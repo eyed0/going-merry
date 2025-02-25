@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-	niri = {
+	  niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -19,7 +19,7 @@
     niri-working-tree.url = "github:sodiboo/niri/sodi-bonus-features";
     niri-working-tree.flake = false;
 
-	anyrun = {
+	  anyrun = {
       url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -29,8 +29,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-	# suyu switch imulator
-	suyu.url = "git+https://git.suyu.dev/suyu/nix-flake";
+	  # suyu switch imulator
+	  suyu.url = "git+https://git.suyu.dev/suyu/nix-flake";
     suyu.inputs.nixpkgs.follows = "nixpkgs";
 
     # nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -50,33 +50,33 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
-  let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.x86_64-linux;
-  in
-	{
-      packages.x86_64-linux.hello = pkgs.hello;
-      packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-		specialArgs = { inherit inputs; };
-		modules = [
-          ./configuration.nix
-          inputs.stylix.nixosModules.stylix
-	      inputs.agenix.nixosModules.default
-		  inputs.niri.nixosModules.niri
-		];
-      };
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in
+	    {
+        packages.x86_64-linux.hello = pkgs.hello;
+        packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
+        nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./configuration.nix
+            #inputs.stylix.nixosModules.stylix
+            inputs.agenix.nixosModules.default
+            inputs.niri.nixosModules.niri
+          ];
+        };
 
-      homeConfigurations."heehaw" = home-manager.lib.homeManagerConfiguration {
-		inherit pkgs;
-		modules = [
-          ./home.nix
-          inputs.stylix.homeManagerModules.stylix
-		  inputs.niri.homeModules.niri
-		  #inputs.zen-browser.packages."${system}".default
-		];
-		extraSpecialArgs = { inherit inputs; };
-      };
-    
-	};  
+        homeConfigurations."heehaw" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./home.nix
+            inputs.stylix.homeManagerModules.stylix
+            inputs.niri.homeModules.niri
+            #inputs.zen-browser.packages."${system}".default
+		      ];
+		      extraSpecialArgs = { inherit inputs; };
+        };
+        
+	    };  
 }
