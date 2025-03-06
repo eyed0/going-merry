@@ -18,12 +18,16 @@
 
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
+  nixpkgs.config.allowUnfree = true;
+
   home.packages = [
     #pkgs.eza
-	pkgs.mpv
-	pkgs.scrcpy
-	pkgs.jetbrains.idea-community
-	pkgs.papirus-icon-theme
+  pkgs.mpv
+  pkgs.scrcpy
+  #pkgs.jetbrains.idea-community
+  #pkgs.jetbrains.rust-rover
+  pkgs.papirus-icon-theme
+  pkgs.claude-code
   ];
   services.emacs.client.enable = true;
 

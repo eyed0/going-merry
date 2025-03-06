@@ -50,12 +50,11 @@
 	    av1an # command-line vdo encoding framework
 	    musikcube
 	    kdePackages.kdenlive # vdo editor
-	    jetbrains.rust-rover
 
       #       utilities
 
 	    fontforge-gtk
-      dust # disk usage
+      #dust # disk usage
       gcompris # educational software for children
       zoxide # A fast cd command that learns your habits
       navi # An interactive cheatsheet tool for the command-line and application launchers
