@@ -8,8 +8,6 @@
   stylix.image = ./../../wall/yotsuba.jpeg;
   stylix.polarity = "dark";
   #stylix.targets.nixos-icons.enable = true;
-  #stylix.targets.gtk.enable = true;
-  #stylix.targets.fish.enable = true;
   #stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/vesper.yaml";
   stylix.base16Scheme = {
     base00 = "000000";
@@ -75,20 +73,20 @@
   stylix.opacity.terminal = 0.95;
 
   stylix = {
-	targets = {
-	  fuzzel.enable = true;
-	  swaylock.useImage = true;
-	  mako.enable = true;
+    targets = {
+      fuzzel.enable = true;
+      swaylock.useImage = true;
+      mako.enable = true;
       foot.enable = true;
-	  fish.enable = true;
-	  btop.enable = true;
+      fish.enable = true;
+      btop.enable = true;
       lazygit.enable = true;
-      kde.enable = true;
+      #kde.enable = true;
       firefox.enable = true;
       fzf.enable = true;
       yazi.enable = true;
-	  zathura.enable = true;
-	  qt.enable = true;
+      zathura.enable = true;
+      qt.enable = true;
       gtk.enable = true;
       gtk.extraCss = with config.lib.stylix.colors; ''
         @define-color accent_color #${base0D};

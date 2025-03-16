@@ -27,7 +27,8 @@
   #pkgs.jetbrains.idea-community
   #pkgs.jetbrains.rust-rover
   pkgs.papirus-icon-theme
-  pkgs.claude-code
+  pkgs.bookworm
+  #pkgs.claude-code
   ];
   services.emacs.client.enable = true;
 
