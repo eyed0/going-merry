@@ -3,14 +3,14 @@
 {
   imports = [
     ./home/stylix/stylix.nix 
-	./home/wayland/default.nix
-	#./home/kdeconnect.nix
-	#./home/mpv/mpv.nix
+	  ./home/wayland/default.nix
+	  #./home/kdeconnect.nix
+	  #./home/mpv/mpv.nix
     ./home/jujutsu.nix
-	#./home/music/beets.nix
-	./home/spell.nix
-	#./home/notmuch.nix TODO
-	#./home/kanata.nix
+	  #./home/music/beets.nix
+	  ./home/spell.nix
+	  #./home/notmuch.nix TODO
+	  #./home/kanata.nix
   ];
   home.username = "heehaw";
   home.homeDirectory = "/home/heehaw";
@@ -22,13 +22,13 @@
 
   home.packages = [
     #pkgs.eza
-  pkgs.mpv
-  pkgs.scrcpy
-  #pkgs.jetbrains.idea-community
-  #pkgs.jetbrains.rust-rover
-  pkgs.papirus-icon-theme
-  pkgs.bookworm
-  #pkgs.claude-code
+    pkgs.mpv
+    pkgs.scrcpy
+    #pkgs.jetbrains.idea-community
+    #pkgs.jetbrains.rust-rover
+    pkgs.papirus-icon-theme
+    pkgs.bookworm
+    #pkgs.claude-code
   ];
   services.emacs.client.enable = true;
 

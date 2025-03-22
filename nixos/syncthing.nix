@@ -71,17 +71,18 @@
           ignorePerms = false;
           rescanIntervalS = 1200;
         };
-		"emacsInit" = {
-		  path = "/home/heehaw/.emacs.d";
-		  # ignorePatterns = [
-		  # 	"*"
-		  # 	"!init.el"
-		  # 	"!early-init.el"
-		  # ];
-		  devices = [ "device1"];
-		  ignorePerms = false;
-		  rescanIntervalS = 1200;
-		};
+		    "emacsInit" = {
+		      path = "/home/heehaw/.emacs.d";
+		      ignorePatterns = [
+		      	"*"
+		      	"!/home/heehaw/.emacs.d/init.el"
+		      	"!/home/heehaw/.emacs.d/early-init.el"
+            "!/home/heehaw/.emacs.d/configs/**"
+		      ];
+		      devices = [ "device1"];
+		      ignorePerms = false;
+		      rescanIntervalS = 1200;
+		    };
       };
       # options = {
       #   listenAddress = "0.0.0.0:22000";  # Address and port for Syncthing to listen on

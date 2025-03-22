@@ -50,6 +50,8 @@
 	    av1an # command-line vdo encoding framework
 	    musikcube
 	    kdePackages.kdenlive # vdo editor
+      gurk-rs # Signal Messenger client for terminal
+      astroterm # Celestial viewer for the terminal
 
       #       utilities
 
@@ -83,7 +85,7 @@
       #freetube # youtube client
       #paperwork
       #pandoc # Conversion between documentation formats
-	    television # fuzzy finder
+	    television # fuzzy finder TODO
 	    gitnr # Create `.gitignore` files using one or more templates
 	    impala # TUI for managing wifi
 	    hledger

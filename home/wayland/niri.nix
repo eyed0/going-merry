@@ -127,7 +127,7 @@
       spawn-at-startup = [
         { command = [ "foot" "-e" "fish" ]; }
         { command = [ "eww" "opne" "bar" ]; }
-        { command = [ "syncthingtray" ]; }
+        #{ command = [ "syncthingtray" ]; }
         { command = [ "kdeconnect" ]; }
         { command = [ "emacsclient" "-c" ]; }
         #{ command = [ "nm-applet" ]; }
