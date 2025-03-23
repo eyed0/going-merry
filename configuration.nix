@@ -138,7 +138,7 @@
   services.emacs = {
     install = true;
     enable = true;
-    package = pkgs.emacs30-pgtk;
+    package = pkgs.emacs-pgtk;
     startWithGraphical = true;
     defaultEditor = true;
   };
