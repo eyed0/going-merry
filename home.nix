@@ -30,6 +30,7 @@
     pkgs.bookworm
     #pkgs.claude-code
     pkgs.mcomix
+    pkgs.powerstation
   ];
   services.emacs.client.enable = true;
 

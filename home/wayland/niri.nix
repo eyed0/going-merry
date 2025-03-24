@@ -118,6 +118,22 @@
         # };
         
         center-focused-column = "on-overflow"; # other options "never" "always"
+        default-column-display = "tabbed";
+
+        tab-indicator = {
+          hide-when-single-tab = true;
+          place-within-column = true;
+          gap = -5;
+          width = 4;
+          #length total-proportion=1.0;
+          position = "right";
+          gaps-between-tabs = 2;
+          corner-radius = 3;
+          active-color = "red";
+          inactive-color = "gray";
+          # active-gradient from="#80c8ff" to="#bbddff" angle=45
+          # inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+        };
       };
       
       # TODO
@@ -127,6 +143,7 @@
       spawn-at-startup = [
         { command = [ "foot" "-e" "fish" ]; }
         { command = [ "eww" "opne" "bar" ]; }
+        { command = [ "xwayland-satellite"]; }
         #{ command = [ "syncthingtray" ]; }
         { command = [ "kdeconnect" ]; }
         { command = [ "emacsclient" "-c" ]; }
@@ -136,6 +153,7 @@
       
       # You can override environment variables for processes spawnend by niri.
       environment = {
+        DISPLAY = ":0";
         # Set a variable like this:
         # QT_QPA_PLATFORM = "wayland";
         
@@ -246,6 +264,7 @@
         
         # Window management
         "Mod+Q".action = close-window;
+        "Mod+W".action = toggle-column-tabbed-display;
         
         # Focus movement
         "Mod+Left".action = focus-column-left;

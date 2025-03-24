@@ -52,6 +52,8 @@
 	    kdePackages.kdenlive # vdo editor
       gurk-rs # Signal Messenger client for terminal
       astroterm # Celestial viewer for the terminal
+      kdePackages.dolphin
+      kdePackages.dolphin-plugins
 
       #       utilities
 
