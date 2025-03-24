@@ -54,6 +54,7 @@
       astroterm # Celestial viewer for the terminal
       kdePackages.dolphin
       kdePackages.dolphin-plugins
+      kdePackages.kwalletmanager
 
       #       utilities
 

@@ -129,8 +129,8 @@
           position = "right";
           gaps-between-tabs = 2;
           corner-radius = 3;
-          active-color = "red";
-          inactive-color = "gray";
+          #active-color = "red";
+          #inactive-color = "gray";
           # active-gradient from="#80c8ff" to="#bbddff" angle=45
           # inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
         };
