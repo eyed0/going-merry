@@ -104,51 +104,12 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  #services.displayManager.sddm.enable = true;
-  services.displayManager.ly.enable = true;
-  services.displayManager.ly.settings = {
-    # Animation and visuals
-    animate = true;         # Enable/disable animations
-    animation = 0;          # Animation type (0 = stretch, 1 = fade, etc.)
-    fps = 60;               # Frames per second for animations
-    
-    # Login behavior
-    blank_box = true;       # Start with empty box (no saved username)
-    hide_borders = false;   # Hide input field borders
-    asterisk = "*";         # Character to use for password masking
-    min_refresh_delta = 5;  # Minimum refresh time
-    
-    # Interface options
-    load = true;            # Display desktop environments
-    save = true;            # Save the last session
-    save_file = "/etc/ly/save"; # Path to save last session info
-    
-    # Timeout options
-    timeout = 10;           # Timeout for automatic login (seconds)
-    shutdown_timeout = 150;  # Seconds to wait before shutdown
-    
-    # Key bindings
-    waylandsessions = "/run/current-system/sw/share/wayland-sessions";
-    xsessions = "/run/current-system/sw/share/xsessions";
-    
-    # Appearance
-    bg = "#000000";         # Background color
-    fg = "#ffffff";         # Foreground color
-    
-    # Security and tty options
-    mcookie_cmd = "/usr/bin/mcookie"; # mcookie command path
-    restart_cmd = "/usr/bin/killall -SIGUSR1 ly"; # Restart command
-    term_reset_cmd = "/usr/bin/tput reset"; # Terminal reset command
-    tty = 2;                # TTY to use
-  };
-  services.power-profiles-daemon.enable = true;
-  #services.desktopManager.plasma6.enable = true;
-  #services.xserver.desktopManager.plasma5.enable = true;
-  
+  services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.displayManager.sessionPackages =
 	  [pkgs.niri]; # for niri to show in sddm
+
+  services.power-profiles-daemon.enable = true;
   
   # Configure keymap in X11
   #services.xserver = {
