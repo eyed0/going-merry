@@ -1,4 +1,3 @@
-# In your home-manager configuration (e.g., home.nix)
 { config, pkgs, ... }:
 
 {
@@ -6,26 +5,26 @@
   xdg = {
     enable = true;
 
-	# Configure org-protocol desktop entry
-  desktopEntries = {
-    org-protocol = {
-      name = "Org Protocol";
-      exec = "emacsclient %u";
-      icon = "emacs";
-      type = "Application";
-      terminal = false;
-      mimeType = ["x-scheme-handler/org-protocol"];
-      categories = ["System"];
+	  # Configure org-protocol desktop entry
+    desktopEntries = {
+      org-protocol = {
+        name = "Org Protocol";
+        exec = "emacsclient %u";
+        icon = "emacs";
+        type = "Application";
+        terminal = false;
+        mimeType = ["x-scheme-handler/org-protocol"];
+        categories = ["System"];
+      };
     };
-  };
 
     mimeApps = {
       enable = true;
       defaultApplications = {
 
-		# Configure MIME type associations
-		"x-scheme-handler/org-protocol" = [ "org-protocol.desktop" ];
-		
+		    # Configure MIME type associations
+		    "x-scheme-handler/org-protocol" = [ "org-protocol.desktop" ];
+		    
         # Document formats
         "application/pdf" = [ "org.pwmt.zathura.desktop" ];
         "text/plain" = [ "emacs.desktop" ];
@@ -112,8 +111,8 @@
 
   # Ensure the applications are installed
   home.packages = with pkgs; [
-	zathura
-	xdg-utils
+	  zathura
+	  xdg-utils
   ];
 
   # xdg.userDirs = {

@@ -10,7 +10,7 @@
       nixd
       gcc
       lldb
-      #bat
+      bat
       ripgrep
       fd
       lsd # replacement for ls
@@ -47,7 +47,7 @@
       #kanata # A tool to improve keyboard comfort and usability with advanced customization
       #anki
 	    ventoy # Bootable USB Solution
-	    av1an # command-line vdo encoding framework
+	    #av1an # command-line vdo encoding framework
 	    musikcube
 	    kdePackages.kdenlive # vdo editor
       gurk-rs # Signal Messenger client for terminal
@@ -55,6 +55,7 @@
       kdePackages.dolphin
       kdePackages.dolphin-plugins
       kdePackages.kwalletmanager
+      sonusmix
 
       #       utilities
 
@@ -65,7 +66,7 @@
       navi # An interactive cheatsheet tool for the command-line and application launchers
       btop # graphical process/system monitor with a customizable interface
       gitui # Blazing fast terminal-ui for Git written in Rust
-      starship # customizable prompt for any shell
+      # starship # customizable prompt for any shell
       restic # A backup program that is fast, efficient and secure
       rsync # Fast incremental file transfer utility
       qbittorrent
@@ -91,9 +92,6 @@
 	    television # fuzzy finder TODO
 	    gitnr # Create `.gitignore` files using one or more templates
 	    impala # TUI for managing wifi
-	    hledger
-      hledger-ui
-      hledger-web
 
       #       android 
       universal-android-debloater

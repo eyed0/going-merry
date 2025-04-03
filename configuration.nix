@@ -75,6 +75,7 @@
   networking.networkmanager.wifi.backend = "iwd";
 
   programs.nm-applet.enable = true; # for niri setup
+  programs.nm-applet.indicator = true;
 
   # implementation of a message bus
   services.dbus.implementation = "broker";
@@ -106,7 +107,11 @@
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
+
+  #services.desktopManager.plasma6.enable = true;
+
+  services.desktopManager.cosmic.enable = true;
+  services.desktopManager.cosmic.xwayland.enable = true;
   
   services.displayManager.sessionPackages =
     [pkgs.niri]; # for niri to show in sddm

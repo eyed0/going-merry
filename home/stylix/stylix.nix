@@ -81,7 +81,7 @@
       fish.enable = true;
       btop.enable = true;
       lazygit.enable = true;
-      kde.enable = true;
+      #kde.enable = true;
       firefox.enable = true;
       fzf.enable = true;
       yazi.enable = true;

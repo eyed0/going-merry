@@ -1,8 +1,13 @@
+{ config, pkgs, ... }:
 
-let
-  heehaw = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDL6YromcLSOWQFllPHDUD+HVX2QxNe/CMovqM4cJrlUeie7LkuN8hcjh5K6CmVmHgDXVd82gnfQ4OOvO98wKcSo/GJ25XwJa7vK7oYksgYXHhygskJVrPP+6KpKvPouWjtkMkHENa77YguTXK9QLtrKO3Ogrebk0NVWwxBwa1r5aZRXjDxB13ARqiiceU9qDgo1bJ0fDk8UNsy58w+PkJaF54QepB/sS+SmzH1ddya1PYTY9BNip3yqSsI4TWA2RXJGiYRRJHpi6tL2MFnTSF9Y14cPLML+XsoNvjik/4h1sLiBb0+skrv+jbsMdhMXq2/qPOOjvasJ70mtlxRx0cqTDP9mz3Sr9lZbvvoM9uESWoeHSIAUSDysDVxofw1MI2ky7L5/BJEwCXq7cjju/pnPNL1RtFVDD+pX3QtTe1P67hNDkvPUC4hqxh9Obmhn5CIIuZjusksEplezlBBM3tTv09Vw9755s8Dyizl++qG7wvaAwv2CrCoyrU6UE07V/K7wIoww/EeFQ4PakGKm6ZoMcAKxIJcHllx9LhjpDGCFFx/Bx4CDaYoRldvQcVh7Yo3UyVNGPJAWQWv6mM0+JPabwpCZzMfdvz4X9loA2IoSOUxs7lUydTPNdO6sMaGzOvsnS7CwT8GZ4cqst8Ix27DeEqFsdTiKXSv83pGuB824Q== nldeshmukh000@gmail.com";
-  systemyx = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMnBd0hkHs7IrnZ+OGlOJjttIXMnU1SuMsJ0G2YBJHC8";
-in
-  {
-	"secrets1.age".publicKeys = [ heehaw systemyx ];
-  }
+{
+  environment.systemPackages = [ 
+    pkgs.age
+    config.inputs.agenix.packages.${pkgs.system}.default
+  ];
+  
+  # Basic agenix configuration
+  age = {
+    identityPaths = [ "/home/heehaw/.ssh/id_ed25519" ];
+  };
+}
