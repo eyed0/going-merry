@@ -2,6 +2,9 @@
 { config, pkgs, inputs, ... }:
 
 {
+
+  programs.thunar.enable = true;
+  
   environment = {
     systemPackages = with pkgs; [
 
@@ -20,10 +23,10 @@
       rustup
 	    tree-sitter
       #android-studio
-	    inputs.agenix.packages.x86_64-linux.default
-	    age
-	    rage
-	    statix # Lints and suggestions for the nix programming language
+	    # inputs.agenix.packages.x86_64-linux.default
+	    # age
+	    # rage
+	    # statix # Lints and suggestions for the nix programming language
 
       jdk23
       maven

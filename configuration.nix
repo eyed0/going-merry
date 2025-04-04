@@ -19,8 +19,7 @@
       ./nixos/pipewire/pipwire.nix
       ./nixos/yazi.nix
       ./nixos/bluetooth.nix
-      #./nixos/plymouth/plymouth-hexagon.nix
-      #./nixos/plymouth/plymouth.nix
+      ./secrets/secrets.nix
     ];
 
   #latest linux kernel
@@ -107,11 +106,9 @@
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
+  programs.light.brightnessKeys.enable = true;
 
-  #services.desktopManager.plasma6.enable = true;
-
-  services.desktopManager.cosmic.enable = true;
-  services.desktopManager.cosmic.xwayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
   
   services.displayManager.sessionPackages =
     [pkgs.niri]; # for niri to show in sddm
