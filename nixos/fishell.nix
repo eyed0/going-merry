@@ -6,6 +6,7 @@
   ...
 }:
 {
+  programs.zoxide.enableFishIntegration = true;
   programs.fish = {
     enable = true;
     shellAliases = {
@@ -13,18 +14,30 @@
       nfsw = "nixos-rebuild switch --flake .";
       hmsw = "home-manager switch --flake .";
       hmswb = "home-manager switch -b backup --flake .";
+
       gaa = "git add .";
       gs = "git status";
       ncgar = "nix-collect-garbage";
       gcm = "git commit -m";
+
       em = "emacsclient -c";
+
       btop = "btop --utf-force";
+
       ls = "lsd";
       l = "ls -l";
       la = "ls -a";
       lla = "ls -la";
       lt = "ls --tree";
+
+      cat = "bat";
     };
+    shellAbbrs = {
+  g = "git";
+  n = "nix";
+  hm = "home-manager";
+  e = "$EDITOR";
+};
     shellInit = ''
       zoxide init fish | source
       function fish_greeting
@@ -44,6 +57,10 @@
       bind Y fish_clipboard_copy
       bind -M visual y fish_clipboard_copy
       bind -M default p fish_clipboard_paste
+
+      set -g __fish_git_prompt_show_informative_status 1
+
+      # fzf_configure_bindings --directory=\cf --git_status=\cg --git_log=\cl --history=\cr --variables=\cv
       
       # Set fish prompt to "scales"
       set -g fish_prompt_pwd_dir_length 0
@@ -79,6 +96,11 @@
       # Set darker background for prompt
       set -g fish_color_cwd_root e67e80
       set -g fish_color_user 7fbbb3
+
+      # common directories to zoxide
+      zoxide add ~/flake/
+      zoxide add ~/.emacs.d/
+      zoxide add ~/org/
     '';
   };
   # Activate and set fish shell as default

@@ -1,4 +1,9 @@
 { config, pkgs, inputs, lib, ... }:
+let
+  makeCommand = command: {
+    command = [command];
+    };
+in
 
 {
   nixpkgs.overlays = [ inputs.niri.overlays.niri ];
@@ -107,10 +112,10 @@
         gaps = 2;
         
         struts = {
-          left = 2;
+          left = 1;
           right = 32;
-          top = 2;
-          bottom = 2;
+          top = 1;
+          bottom = 1;
         };
         
         # insert-hint = {
@@ -140,14 +145,13 @@
       # Add lines like this to spawn processes at startup.
       # Note that running niri as a session supports xdg-desktop-autostart,
       # which may be more convenient to use.
+      
       spawn-at-startup = [
-        { command = [ "foot" "-e" "fish" ]; }
-        { command = [ "eww" "opne" "bar" ]; }
-        { command = [ "xwayland-satellite"]; }
-        #{ command = [ "syncthingtray" ]; }
-        { command = [ "kdeconnect" ]; }
-        { command = [ "emacsclient" "-c" ]; }
-        #{ command = [ "nm-applet" ]; }
+        (makeCommand "foot -e fish")
+        (makeCommand "eww opne bar")
+        (makeCommand "xwayland-satellite")
+        (makeCommand "kdeconnect")
+        (makeCommand "emacsclient -c")
       ];
 
       

@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  # TODO https://claude.ai/chat/7d4a0325-e86d-45ae-b93b-897c67ec7fc2
 
   environment.systemPackages = [ pkgs.agenix ];
 

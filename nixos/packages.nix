@@ -13,18 +13,14 @@
       nixd
       gcc
       lldb
-      bat
-      ripgrep
-      fd
-      lsd # replacement for ls
       broot
       helix
       mg
       rustup
 	    tree-sitter
       #android-studio
-	    # inputs.agenix.packages.x86_64-linux.default
-	    # age
+	     inputs.agenix.packages.x86_64-linux.default
+	     age
 	    # rage
 	    # statix # Lints and suggestions for the nix programming language
 
@@ -62,6 +58,12 @@
 
       #       utilities
 
+      bat
+      ripgrep
+      fd
+      lsd # replacement for ls
+      fzf
+     
 	    fontforge-gtk
       #dust # disk usage
       gcompris # educational software for children

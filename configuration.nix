@@ -147,6 +147,7 @@
   };
 
   programs.kdeconnect.enable = true;
+  programs.fzf.fuzzyCompletion = true;
   
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
