@@ -8,25 +8,25 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" "sdhci_pci" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b57a3b60-8ec3-4270-90b5-4208cd5d946f";
+    { device = "/dev/disk/by-uuid/4f5cf271-4d72-496e-ae70-253d18c9ff86";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-a5e64d5c-abe2-4364-bda6-da87d0ede27a".device = "/dev/disk/by-uuid/a5e64d5c-abe2-4364-bda6-da87d0ede27a";
+  boot.initrd.luks.devices."luks-71ef5caf-1a3b-40ef-ad4a-5a6b9ab1333a".device = "/dev/disk/by-uuid/71ef5caf-1a3b-40ef-ad4a-5a6b9ab1333a";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/4C95-B1D5";
+    { device = "/dev/disk/by-uuid/4A65-DC77";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/home/heehaw/00" =
+    fileSystems."/home/heehaw/00" =
     { device = "/dev/disk/by-uuid/bd2e0d37-f881-45b8-99ce-3d0ef847086c";
       fsType = "ext4";
     };
@@ -39,6 +39,7 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp8s0f4u2.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

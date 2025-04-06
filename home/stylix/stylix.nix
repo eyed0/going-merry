@@ -40,10 +40,10 @@
       name = "Atkinson Hyperlegible";
     };
 
-    monospace = {
-      package = pkgs.cascadia-code;
-      name = "PragmataProLiga Nerd Font";
-    };
+    #monospace = {
+    #  package = pkgs.cascadia-code;
+    #  name = "PragmataProLiga Nerd Font";
+    #};
 
     emoji = {
       package = pkgs.noto-fonts-emoji;
@@ -81,7 +81,7 @@
       #fish.enable = true;
       btop.enable = true;
       lazygit.enable = true;
-      kde.enable = true;
+      #kde.enable = true;
       xfce.enable = true;
       mpv.enable = true;
       firefox.enable = true;
