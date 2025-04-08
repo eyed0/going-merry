@@ -1,336 +1,302 @@
-@media (prefers-color-scheme: light) {
-    #root {
-        /* Tab and PinnedTab height adjustment */
-        --tabs-height: 33px;
-        --tabs-pinned-height: var(--tabs-height);
-        /* Light Theme base settings */
-        --bg: #f1f5f9 !important;
-        --warn: #fca5a5 !important;
-    }
-
-    #root .Tab {
-        --tabs-indent: 7px;
-    }
-
-    /* TABS */
-
-    .Tab .lvl-wrapper:after {
-        display: none;
-    }
-
-    .Tab {
-        margin: auto;
-        width: 94%;
-        border-radius: 3px;
-    }
-
-    .Tab .close>svg:hover {
-        /* Styling the tab close button */
-        border-radius: 3px;
-        background: var(--warn) !important;
-        opacity: 80%;
-    }
-
-    .Tab .title {
-        overflow: hidden !important;
-    }
-
-    /* PINNED TABS */
-
-    .PinnedDock {
-        background-color: var(--bg) !important;
-    }
-
-    .PinnedTab {
-        margin: 5px 0px 4px 6px;
-        border-radius: 3px;
-    }
-
-    /* NAV BAR */
-
-    .NavigationBar {
-        height: 41px !important;
-        padding: 4.5px 0px 0px 4.5px !important;
-        /*background-color: # !important;*/
-        margin-bottom: 5px;
-    }
-
-    .NavigationBar .panel-btn:hover {
-        border-radius: 3px !important;
-        background-color: var(--tabs-bg-hover) !important;
-    }
-
-    .NavigationBar .panel-btn[data-active="true"] {
-        border-radius: 3px !important;
-        background-color: var(--bg) !important;
-    }
-
-    .NavigationBar .panel-btn[data-active="true"]:hover {
-        border-radius: 3px !important;
-        background-color: var(--tabs-bg-hover) !important;
-    }
-
-    .NavigationBar .panel-btn>svg,
-    .NavigationBar .panel-btn>img {
-        fill: var(--panel-btn) !important;
-    }
-
-    /* SIDEBAR HACK PATCHES */
-
-    @media (max-width: 50px) {
-
-        /* Fix to tab tree identation when minimised */
-        #root:not(:hover) .Tab {
-            --tabs-indent: 0px;
-        }
-
-        .Tab[data-lvl]>div.lvl-wrapper {
-            right: -2px;
-        }
-
-        .Tab {
-            max-width: 34px;
-        }
-
-        .Tab .fav {
-            z-index: 1;
-        }
-
-        .Tab .audio {
-            z-index: 1;
-            margin-left: -12px;
-            height: 26px;
-        }
-
-        .Tab .title {
-            display: none;
-        }
-
-        .PinnedTab {
-            margin-left: 5px;
-        }
-
-        .NavigationBar .settings-btn {
-            display: none;
-        }
-    }
-
-    /* OPTIONAL */
-
-    /* Disable these two snippets below to make pinned tabs wrap when minimised */
-    /*.PinnedDock {
-	flex-wrap: nowrap !important;
+/* Global variables for better consistency */
+:root {
+  --primary-accent: #4f6bfd;
+  --danger-color: #e06c75;
+  --success-color: #98c379;
+  --transition-standard: 200ms ease;
 }
 
-.PinnedTab {
-	overflow: hidden !important;
-	min-width: var(--tabs-pinned-width) !important;
-}*/
-
-    /* Optional patch for better tab notifications on pinned tabs */
-
-    .PinnedTab[data-audible] .fav>img,
-    .PinnedTab[data-muted] .fav>img,
-    .PinnedTab[data-loading] .fav>img {
-        mask: none;
-    }
-
-    .PinnedTab .fav>img {
-        mask: none;
-    }
-
-    .PinnedTab[data-updated="true"] .fav>img {
-        mask: radial-gradient(circle at calc(100% - 2px) calc(100% - 2px), rgba(0, 0, 0, 0.141), rgba(0, 0, 0, 0.141) 4px, #000 5px, #000);
-    }
-
-    .PinnedTab .audio-badge {
-        top: 5px;
-    }
-
-    .PinnedTab .update-badge {
-        opacity: 0;
-    }
-
-    .PinnedTab[data-updated="true"] .update-badge {
-        opacity: 100;
-    }
-
+/* Common styles for all tabs regardless of theme */
+.Tab {
+  margin: auto;
+  width: 94%;
+  border-radius: 3px;
+  --tabs-indent: 7px;
+  transition: width var(--transition-standard),
+              background-color var(--transition-standard),
+              opacity var(--transition-standard);
 }
 
-@media (prefers-color-scheme: dark) {
-    #root {
-        /* Tab and PinnedTab height adjustment */
-        --tabs-height: 33px;
-        --tabs-pinned-height: var(--tabs-height);
-
-        /* Dark Theme base settings */
-        --bg: #1a1b26 !important;
-        --tabs-fg: #d4d4d4 !important;
-        --tabs-bg-hover: #3b3948 !important;
-        --tabs-activated-bg: #5b5b66 !important;
-        --nav-btn-activated-bg: #1f222f !important;
-        --panel-btn: #f2f2f2 !important;
-        --warn: #8c4351 !important;
-    }
-
-    #root .Tab {
-        --tabs-indent: 7px;
-    }
-
-    /* TABS */
-
-    .Tab .lvl-wrapper:after {
-        display: none;
-    }
-
-    .Tab {
-        margin: auto;
-        width: 94%;
-        border-radius: 3px;
-    }
-
-    .Tab .close>svg:hover {
-        /* Styling the tab close button */
-        border-radius: 3px;
-        background: var(--warn) !important;
-        opacity: 80%;
-    }
-
-    .Tab .title {
-        overflow: hidden !important;
-    }
-
-    /* PINNED TABS */
-
-    .PinnedDock {
-        background-color: var(--bg) !important;
-    }
-
-    .PinnedTab {
-        margin: 5px 0px 4px 6px;
-        border-radius: 3px;
-    }
-
-    /* NAV BAR */
-
-    .NavigationBar {
-        height: 41px !important;
-        padding: 4.5px 0px 0px 4.5px !important;
-        /*background-color: # !important;*/
-        margin-bottom: 5px;
-    }
-
-    .NavigationBar .panel-btn:hover {
-        border-radius: 3px !important;
-        background-color: var(--tabs-bg-hover) !important;
-    }
-
-    .NavigationBar .panel-btn[data-active="true"] {
-        border-radius: 3px !important;
-        background-color: var(--bg) !important;
-    }
-
-    .NavigationBar .panel-btn[data-active="true"]:hover {
-        border-radius: 3px !important;
-        background-color: var(--tabs-bg-hover) !important;
-    }
-
-    .NavigationBar .panel-btn>svg,
-    .NavigationBar .panel-btn>img {
-        fill: var(--panel-btn) !important;
-    }
-
-    /* SIDEBAR HACK PATCHES */
-
-    @media (max-width: 50px) {
-
-        /* Fix to tab tree identation when minimised */
-        #root:not(:hover) .Tab {
-            --tabs-indent: 0px;
-        }
-
-        .Tab[data-lvl]>div.lvl-wrapper {
-            right: -2px;
-        }
-
-        .Tab {
-            max-width: 34px;
-        }
-
-        .Tab .fav {
-            z-index: 1;
-        }
-
-        .Tab .audio {
-            z-index: 1;
-            margin-left: -12px;
-            height: 26px;
-        }
-
-        .Tab .title {
-            display: none;
-        }
-
-        .PinnedTab {
-            margin-left: 5px;
-        }
-
-        .NavigationBar .settings-btn {
-            display: none;
-        }
-    }
-
-    /* OPTIONAL */
-
-    /* Disable these two snippets below to make pinned tabs wrap when minimised */
-    /*.PinnedDock {
-        flex-wrap: nowrap !important;
-    }
-    
-    .PinnedTab {
-        overflow: hidden !important;
-        min-width: var(--tabs-pinned-width) !important;
-    }*/
-
-    /* Optional patch for better tab notifications on pinned tabs */
-
-    .PinnedTab[data-audible] .fav>img,
-    .PinnedTab[data-muted] .fav>img,
-    .PinnedTab[data-loading] .fav>img {
-        mask: none;
-    }
-
-    .PinnedTab .fav>img {
-        mask: none;
-    }
-
-    .PinnedTab[data-updated="true"] .fav>img {
-        mask: radial-gradient(circle at calc(100% - 2px) calc(100% - 2px), rgba(0, 0, 0, 0.141), rgba(0, 0, 0, 0.141) 4px, #000 5px, #000);
-    }
-
-    .PinnedTab .audio-badge {
-        top: 5px;
-    }
-
-    .PinnedTab .update-badge {
-        opacity: 0;
-    }
-
-    .PinnedTab[data-updated="true"] .update-badge {
-        opacity: 100;
-    }
+.Tab .lvl-wrapper:after {
+  display: none;
 }
 
 .Tab .title {
-    transition: margin-left 300ms ease;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 50px);
+  white-space: nowrap;
+  transition: margin-left 300ms ease;
 }
+
 .Tab:hover {
-    --tabs-inner-gap: 8px;
+  --tabs-inner-gap: 8px;
+  transform: translateX(2px);
+  transition: transform 200ms ease-out, background-color 200ms ease;
 }
+
 .Tab:hover .title {
-    margin-left: 8px;
+  margin-left: 8px;
 }
 
 .Tab[data-discarded="true"] .title {
+  opacity: 80%;
+}
+
+.Tab[data-active="true"] {
+  border-left: 3px solid var(--tabs-activated-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.Tab[data-unread="true"] .title {
+  font-weight: 600;
+}
+
+.Tab[data-unread="true"]:before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--tabs-activated-bg);
+}
+
+/* Visual hierarchy for nested tabs */
+.Tab[data-lvl="1"] {
+  opacity: 0.95;
+}
+.Tab[data-lvl="2"] {
+  opacity: 0.9;
+}
+.Tab[data-lvl="3"] {
+  opacity: 0.85;
+}
+
+/* Loading animation */
+.Tab[data-loading="true"] .fav,
+.PinnedTab[data-loading="true"] .fav {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Pinned tabs styling */
+.PinnedTab {
+  margin: 5px 0px 4px 6px;
+  border-radius: 3px;
+  transition: transform 150ms ease;
+}
+
+.PinnedTab:hover {
+  transform: scale(1.05);
+}
+
+/* Custom scrollbar for better integration */
+#root .ScrollBox {
+  scrollbar-width: thin;
+  scrollbar-color: var(--tabs-bg-hover) transparent;
+}
+
+#root .ScrollBox:hover {
+  scrollbar-color: var(--tabs-activated-bg) transparent;
+}
+
+/* LIGHT THEME */
+@media (prefers-color-scheme: light) {
+  #root {
+    /* Tab and PinnedTab height adjustment */
+    --tabs-height: 33px;
+    --tabs-pinned-height: var(--tabs-height);
+
+    /* Light Theme base settings */
+    --bg: #f1f5f9 !important;
+    --warn: #fca5a5 !important;
+    --tabs-fg: #333333 !important;
+    --tabs-bg-hover: #e2e8f0 !important;
+    --tabs-activated-bg: #94a3b8 !important;
+    --accent-subtle: rgba(79, 107, 253, 0.15);
+    --hovering-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Tab styling */
+  .Tab .close>svg:hover {
+    border-radius: 3px;
+    background: var(--danger-color, var(--warn)) !important;
     opacity: 80%;
+  }
+
+  /* Pinned dock styling */
+  .PinnedDock {
+    background-color: var(--bg) !important;
+  }
+
+  /* Navigation bar styling */
+  .NavigationBar {
+    height: 41px !important;
+    padding: 4.5px 0px 0px 4.5px !important;
+    margin-bottom: 5px;
+    background-color: #e9eef5 !important;
+  }
+
+  .NavigationBar .panel-btn:hover {
+    border-radius: 3px !important;
+    background-color: var(--tabs-bg-hover) !important;
+  }
+
+  .NavigationBar .panel-btn[data-active="true"] {
+    border-radius: 3px !important;
+    background-color: var(--bg) !important;
+  }
+
+  .NavigationBar .panel-btn[data-active="true"]:hover {
+    border-radius: 3px !important;
+    background-color: var(--tabs-bg-hover) !important;
+  }
+
+  .NavigationBar .panel-btn>svg,
+  .NavigationBar .panel-btn>img {
+    fill: var(--panel-btn, #555) !important;
+  }
+}
+
+/* DARK THEME */
+@media (prefers-color-scheme: dark) {
+  #root {
+    /* Tab and PinnedTab height adjustment */
+    --tabs-height: 33px;
+    --tabs-pinned-height: var(--tabs-height);
+
+    /* Dark Theme base settings */
+    --bg: #1a1b26 !important;
+    --tabs-fg: #d4d4d4 !important;
+    --tabs-bg-hover: #3b3948 !important;
+    --tabs-activated-bg: #5b5b66 !important;
+    --nav-btn-activated-bg: #1f222f !important;
+    --panel-btn: #f2f2f2 !important;
+    --warn: #8c4351 !important;
+    --accent-subtle: rgba(79, 107, 253, 0.2);
+    --hovering-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Tab styling */
+  .Tab .close>svg:hover {
+    border-radius: 3px;
+    background: var(--danger-color, var(--warn)) !important;
+    opacity: 80%;
+  }
+
+  /* Pinned dock styling */
+  .PinnedDock {
+    background-color: var(--bg) !important;
+  }
+
+  /* Navigation bar styling */
+  .NavigationBar {
+    height: 41px !important;
+    padding: 4.5px 0px 0px 4.5px !important;
+    margin-bottom: 5px;
+    background-color: #16171f !important;
+  }
+
+  .NavigationBar .panel-btn:hover {
+    border-radius: 3px !important;
+    background-color: var(--tabs-bg-hover) !important;
+  }
+
+  .NavigationBar .panel-btn[data-active="true"] {
+    border-radius: 3px !important;
+    background-color: var(--bg) !important;
+  }
+
+  .NavigationBar .panel-btn[data-active="true"]:hover {
+    border-radius: 3px !important;
+    background-color: var(--tabs-bg-hover) !important;
+  }
+
+  .NavigationBar .panel-btn>svg,
+  .NavigationBar .panel-btn>img {
+    fill: var(--panel-btn) !important;
+  }
+}
+
+/* SIDEBAR HACK PATCHES */
+@media (max-width: 50px) {
+  /* Fix to tab tree indentation when minimized */
+  #root:not(:hover) .Tab {
+    --tabs-indent: 0px;
+  }
+
+  .Tab[data-lvl]>div.lvl-wrapper {
+    right: -2px;
+  }
+
+  .Tab {
+    max-width: 34px;
+    transition: max-width 200ms ease, background-color 200ms ease;
+  }
+
+  .Tab .fav {
+    z-index: 1;
+    transform: scale(1.15);
+    transition: transform 150ms ease;
+  }
+
+  /* Subtle hint for which tab is active when collapsed */
+  .Tab[data-active="true"] .fav {
+    transform: scale(1.25);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+
+  .Tab .audio {
+    z-index: 1;
+    margin-left: -12px;
+    height: 26px;
+  }
+
+  .Tab .title {
+    display: none;
+  }
+
+  .PinnedTab {
+    margin-left: 5px;
+  }
+
+  .NavigationBar .settings-btn {
+    display: none;
+  }
+}
+
+/* Optional patch for better tab notifications on pinned tabs */
+.PinnedTab[data-audible] .fav>img,
+.PinnedTab[data-muted] .fav>img,
+.PinnedTab[data-loading] .fav>img {
+  mask: none;
+}
+
+.PinnedTab .fav>img {
+  mask: none;
+}
+
+.PinnedTab[data-updated="true"] .fav>img {
+  mask: radial-gradient(circle at calc(100% - 2px) calc(100% - 2px), rgba(0, 0, 0, 0.141), rgba(0, 0, 0, 0.141) 4px, #000 5px, #000);
+}
+
+.PinnedTab .audio-badge {
+  top: 5px;
+}
+
+.PinnedTab .update-badge {
+  opacity: 0;
+}
+
+.PinnedTab[data-updated="true"] .update-badge {
+  opacity: 100;
 }

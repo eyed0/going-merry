@@ -1,6 +1,6 @@
 /* Hide the tab bar since we're using Sidebery */
 #TabsToolbar {
-visibility: collapse !important;
+  visibility: collapse !important;
 }
 
 /* Completely hide title bar and window controls */
@@ -12,46 +12,40 @@ visibility: collapse !important;
 #titlebar-buttonbox-container,
 #titlebar-spacer,
 #titlebar-buttonbox {
-display: none !important;
+  display: none !important;
 }
 
 /* Make the URL bar more compact and modern */
 #nav-bar {
-min-height: 32px !important;
-padding: 2px 4px !important;
-background-color: #000000 !important;
-border: none !important;
-box-shadow: none !important;
+  min-height: 32px !important;
+  padding: 2px 4px !important;
+  background-color: #000000 !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 #urlbar-container {
-min-width: 150px !important;
-margin: 0 !important;
+  min-width: 150px !important;
+  margin: 0 !important;
 }
 
 #urlbar {
-min-height: 28px !important;
-max-height: 28px !important;
-padding: 0 !important;
-border-radius: 4px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  padding: 0 !important;
+  border-radius: 4px !important;
 }
 
 #urlbar-background {
-background-color: #222121 !important;
-border: none !important;
-border-radius: 4px !important;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Smoother transitions for URL bar focus */
-#urlbar[focused] > #urlbar-background {
-transition: background-color 0.2s ease-in-out !important;
-background-color: #2d2d2d !important;
+  background-color: #222121 !important;
+  border: none !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
 }
 
 #urlbar-input-container {
-padding: 0 8px !important;
-height: 28px !important;
+  padding: 0 8px !important;
+  height: 28px !important;
 }
 
 /* URL bar suggestions popup styling */
@@ -74,22 +68,6 @@ height: 28px !important;
   background-color: #333333 !important;
 }
 
-/* Better spacing for URL suggestions */
-.urlbarView-row-inner {
-  padding: 4px 0 !important;
-}
-
-/* Highlight matched text in suggestions */
-.urlbarView-title-separator,
-.urlbarView-action {
-  color: #777777 !important;
-}
-
-.urlbarView-title strong,
-.urlbarView-url strong {
-  color: #4a90d9 !important;
-}
-
 .urlbarView-title,
 .urlbarView-secondary,
 .urlbarView-url {
@@ -109,43 +87,6 @@ height: 28px !important;
 .toolbarbutton-1:hover {
   background-color: rgba(255, 255, 255, 0.1) !important;
   border-radius: 4px !important;
-}
-
-/* Better visual feedback for active elements */
-.toolbarbutton-1:active {
-  background-color: rgba(255, 255, 255, 0.15) !important;
-}
-
-/* Add keyboard focus indicators */
-:focus-visible {
-  outline: 1px solid #4a90d9 !important;
-  outline-offset: -1px !important;
-}
-
-/* Improve reader mode appearance */
-.reader-mode-button[readeractive] {
-  fill: #4a90d9 !important;
-}
-
-/* Custom scrollbar for better integration */
-* {
-  scrollbar-width: thin !important;
-  scrollbar-color: #444444 #222222 !important;
-}
-
-/* More visible loading indicator */
-.tab-loading-burst {
-  background-color: #4a90d9 !important;
-}
-
-/* Improve notification styling */
-.popup-notification-body,
-.identity-popup-section {
-  padding: 8px 10px !important;
-}
-
-.popup-notification-button {
-  padding: 6px 12px !important;
 }
 
 /* Sidebery specific styles */
@@ -176,20 +117,18 @@ height: 28px !important;
   }
 
   & #sidebar {
-    transition: min-width var(--uc-autohide-transition-duration)
-    var(--uc-autohide-transition-type)
-    var(--uc-autohide-sidebar-delay) !important;
+    transition: min-width var(--uc-autohide-transition-duration) 
+                var(--uc-autohide-transition-type) 
+                var(--uc-autohide-sidebar-delay) !important;
     min-width: var(--uc-sidebar-width) !important;
     will-change: min-width;
-    border-right: 1px solid #333333 !important;
   }
 
   & #sidebar-box:hover > #sidebar {
     min-width: var(--uc-sidebar-hover-width) !important;
     transition: min-width var(--uc-hover-transition-duration)
-    var(--uc-autohide-transition-type)
-    var(--uc-hover-sidebar-delay) !important;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+                var(--uc-autohide-transition-type)
+                var(--uc-hover-sidebar-delay) !important;
   }
 
   & .sidebar-panel {
@@ -220,22 +159,22 @@ height: 28px !important;
 
 /* Remove sidebar splitter */
 #sidebar-splitter {
-display: none !important;
+  display: none !important;
 }
 
 /* Fix popup positioning */
 #appMenu-popup {
-margin-inline: -244px !important;
+  margin-inline: -244px !important;
 }
 
 /* Browser content styling */
 #appcontent
-> #tabbrowser-tabbox
-> #tabbrowser-tabpanels
-> .deck-selected
-> .browserContainer
-> .browserStack
-> browser {
+  > #tabbrowser-tabbox
+  > #tabbrowser-tabpanels
+  > .deck-selected
+  > .browserContainer
+  > .browserStack
+  > browser {
   border-radius: 2px !important;
   margin: 2px !important;
 }
