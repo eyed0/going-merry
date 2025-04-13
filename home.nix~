@@ -29,7 +29,9 @@
     pkgs.papirus-icon-theme
     pkgs.bookworm
     #pkgs.claude-code
+    pkgs.mcomix
     pkgs.powerstation
+    pkgs.mediawriter
   ];
   services.emacs.client.enable = true;
 

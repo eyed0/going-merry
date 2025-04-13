@@ -9,7 +9,7 @@
     [
       ./hardware-configuration.nix
       ./nixos/gaming/gaming.nix
-      #./nixos/syncthing.nix
+      ./nixos/syncthing.nix
       ./nixos/footerminal.nix
       ./nixos/firefox.nix
       ./nixos/fonts.nix
@@ -18,8 +18,7 @@
       ./nixos/packages.nix
       ./nixos/pipewire/pipwire.nix
       ./nixos/yazi.nix
-      ./nixos/stylix.nix
-      #./nixos/bluetooth.nix
+      ./nixos/bluetooth.nix
       ./secrets/secrets.nix
     ];
 
@@ -74,10 +73,8 @@
   networking.nftables.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
 
-  hardware.bluetooth.enable = true;
-
-  #programs.nm-applet.enable = true; # for niri setup
-  #programs.nm-applet.indicator = true;
+  programs.nm-applet.enable = true; # for niri setup
+  programs.nm-applet.indicator = true;
 
   # implementation of a message bus
   services.dbus.implementation = "broker";
@@ -136,7 +133,6 @@
     extraGroups = [ "networkmanager" "wheel" "video" "input" ];
     packages = with pkgs; [
       kdePackages.kate
-      mpv
       #  thunderbird
     ];
   };
@@ -171,41 +167,41 @@
     VISUAL = "emacs";
   };
   
-  # # TODO https://github.com/openlab-aux/vuizvui/tree/master/modules/user/sternenseemann/profiles
-  # # TODO shrink this module by extracting a niri module
-  # xdg.portal = {
-  #   enable = true;
-	#   wlr.enable = true;
-  #   extraPortals = with pkgs; [
-	#     xdg-desktop-portal-wlr
-  #     xdg-desktop-portal-gtk
-  #     xdg-desktop-portal-gnome
-  #     # keyring is added via its module
-  #   ];
-  #   # niri's screensharing depends on the GNOME portal
-  #   config.common.default = "gnome";
-  # };
+  # TODO https://github.com/openlab-aux/vuizvui/tree/master/modules/user/sternenseemann/profiles
+  # TODO shrink this module by extracting a niri module
+  xdg.portal = {
+    enable = true;
+	  wlr.enable = true;
+    extraPortals = with pkgs; [
+	    xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+      # keyring is added via its module
+    ];
+    # niri's screensharing depends on the GNOME portal
+    config.common.default = "gnome";
+  };
 
-  # systemd.packages = [
-  #   pkgs.niri
-  #   pkgs.xwayland-satellite
-  # ];
+  systemd.packages = [
+    pkgs.niri
+    pkgs.xwayland-satellite
+  ];
 
-  # systemd.user = {
-  #   # pipewire MUST start before niri, otherwise screen sharing doesn't work
-  #   services.pipewire = {
-  #     wantedBy = [ "niri.service" ];
-  #     before = [ "niri.service" ];
-  #   };
+  systemd.user = {
+    # pipewire MUST start before niri, otherwise screen sharing doesn't work
+    services.pipewire = {
+      wantedBy = [ "niri.service" ];
+      before = [ "niri.service" ];
+    };
 
-  #   targets.graphical-session.wants = [
-  #     # niri doesn't implement xwayland itself
-  #     "xwayland-satellite.service"
-  #     "foot-server.socket"
-  #   ];
-  # };
+    targets.graphical-session.wants = [
+      # niri doesn't implement xwayland itself
+      "xwayland-satellite.service"
+      "foot-server.socket"
+    ];
+  };
 
-  # security.pam.services.swaylock = {};
+  security.pam.services.swaylock = {};
   
   #     garbage collection
   nix = {

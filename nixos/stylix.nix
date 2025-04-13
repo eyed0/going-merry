@@ -5,6 +5,8 @@
   ...
 }: {
   stylix.enable = true;
+  stylix.autoEnable = true;
+  stylix.targets.qt.enable = false;
   stylix.image = ./../../wall/yotsuba.jpeg;
   stylix.polarity = "dark";
   #stylix.targets.nixos-icons.enable = true;
@@ -28,7 +30,7 @@
     base0F = "E67E80";
   };
 
-  # fonts settings
+    # fonts settings
   stylix.fonts = {
     serif = {
       package = pkgs.alegreya;
@@ -67,33 +69,6 @@
   # stylix.iconTheme.package = "papirus-icon-theme";
   # stylix.iconTheme.dark = "papirus-icon-theme";
 
-  #opacity
-  stylix.opacity.applications = 0.95;
-  stylix.opacity.desktop = 0.95;
-  stylix.opacity.terminal = 0.95;
-
-  stylix = {
-    targets = {
-      fuzzel.enable = true;
-      swaylock.useImage = true;
-      mako.enable = true;
-      foot.enable = true;
-      #fish.enable = true;
-      btop.enable = true;
-      lazygit.enable = true;
-      kde.enable = false;
-      mpv.enable = true;
-      firefox.enable = true;
-      fzf.enable = true;
-      yazi.enable = true;
-      zathura.enable = true;
-      bat.enable = true;
-      qt.enable = true;
-      gtk.enable = true;
-      gtk.extraCss = with config.lib.stylix.colors; ''
-        @define-color accent_color #${base0D};
-        @define-color accent_bg_color #${base0D};
-      '';
-    };
-  };
+  stylix.homeManagerIntegration.followSystem = true;
+  
 }

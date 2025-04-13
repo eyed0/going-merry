@@ -7,7 +7,7 @@
         enable32Bit = true;
         extraPackages = with pkgs; [
           amdvlk
-		  vulkan-loader
+          vulkan-loader
           vulkan-tools
           libvdpau
           libva
@@ -18,6 +18,7 @@
       lact
       lutris
       wineWowPackages.stagingFull
+      umu-launcher
       ryujinx
       protonup
       protonup-qt
@@ -31,7 +32,7 @@
     ];
 
     programs = {
-        # gamemode.enable = true;
+        gamemode.enable = true;
         gamescope.enable = true;
     };
 
