@@ -26,7 +26,6 @@
       winetricks
       protontricks
       nexusmods-app
-      vulkan-tools
       mesa
 	  # veloren # rpg game
     ];
@@ -35,6 +34,4 @@
         gamemode.enable = true;
         gamescope.enable = true;
     };
-
-
 }
