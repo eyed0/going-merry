@@ -133,7 +133,7 @@
   users.users.heehaw = {
     isNormalUser = true;
     description = "heehaw";
-    extraGroups = [ "networkmanager" "wheel" "video" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "input" "dialout" ];
     packages = with pkgs; [
       kdePackages.kate
       mpv
