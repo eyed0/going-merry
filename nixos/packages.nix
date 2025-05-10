@@ -43,6 +43,9 @@
       #signal-desktop #signal messanger
       #gimp-with-plugins
       arduino # electronics prototyping platform
+      arduinoOTA # Tool for uploading programs to Arduino boards over a network
+      arduino-mk # Makefile for Arduino sketches
+      arduino-ide # 
       #kanata # A tool to improve keyboard comfort and usability with advanced customization
       #anki
       ventoy # Bootable USB Solution

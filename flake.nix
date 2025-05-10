@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-	  niri = {
+    niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -19,7 +19,9 @@
     niri-working-tree.url = "github:sodiboo/niri/sodi-bonus-features";
     niri-working-tree.flake = false;
 
-	  anyrun = {
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
+    anyrun = {
       url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -64,6 +66,7 @@
             inputs.stylix.nixosModules.stylix
             inputs.agenix.nixosModules.default
             inputs.niri.nixosModules.niri
+            inputs.chaotic.nixosModules.default
           ];
         };
 

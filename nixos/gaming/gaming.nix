@@ -27,11 +27,13 @@
       protontricks
       nexusmods-app
       mesa
-	  # veloren # rpg game
+      # veloren # rpg game
+      # cemu
     ];
 
     programs = {
         gamemode.enable = true;
         gamescope.enable = true;
+        coolercontrol.enable = true;
     };
 }
