@@ -28,6 +28,8 @@
       maven
       jdt-language-server # For Eglot integration
 
+      ollama-rocm
+
       #       email
 
       aerc

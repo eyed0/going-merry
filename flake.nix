@@ -16,8 +16,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri-working-tree.url = "github:sodiboo/niri/sodi-bonus-features";
-    niri-working-tree.flake = false;
+    # niri-working-tree.url = "github:sodiboo/niri/sodi-bonus-features";
+    # niri-working-tree.flake = false;
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
