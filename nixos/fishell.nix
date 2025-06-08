@@ -22,7 +22,7 @@
 
       em = "emacsclient -c";
 
-      btop = "btop --utf-force";
+      #btop = "btop --utf-force";
 
       ls = "lsd";
       l = "ls -l";

@@ -19,17 +19,17 @@
     # niri-working-tree.url = "github:sodiboo/niri/sodi-bonus-features";
     # niri-working-tree.flake = false;
 
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    #chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
-    anyrun = {
-      url = "github:anyrun-org/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # anyrun = {
+    #   url = "github:anyrun-org/anyrun";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # agenix = {
+    #   url = "github:ryantm/agenix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
 	  # # suyu switch imulator
 	  # suyu.url = "git+https://git.suyu.dev/suyu/nix-flake";
@@ -60,13 +60,14 @@
         packages.x86_64-linux.hello = pkgs.hello;
         packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
         nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux"; 
           specialArgs = { inherit inputs; };
           modules = [
             ./configuration.nix
-            inputs.stylix.nixosModules.stylix
-            inputs.agenix.nixosModules.default
-            inputs.niri.nixosModules.niri
-            inputs.chaotic.nixosModules.default
+            #inputs.stylix.nixosModules.stylix
+            #inputs.agenix.nixosModules.default
+            #inputs.niri.nixosModules.niri
+            #inputs.chaotic.nixosModules.default
           ];
         };
 

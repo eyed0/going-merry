@@ -8,25 +8,25 @@
   environment = {
     systemPackages = with pkgs; [
 
-      #tree
+      tree
       nh # TODO https://github.com/viperML/nh, turn it module 
       nixd
-      gcc
+      libgcc
       lldb
-      broot
+      #broot
       helix
       mg
       rustup
       tree-sitter
       #android-studio
-      inputs.agenix.packages.x86_64-linux.default
+      #inputs.agenix.packages.x86_64-linux.default
       age
       # rage
       # statix # Lints and suggestions for the nix programming language
 
-      jdk23
-      maven
-      jdt-language-server # For Eglot integration
+      # jdk23
+      # maven
+      # jdt-language-server # For Eglot integration
 
       ollama-rocm
 
@@ -50,7 +50,6 @@
       arduino-ide # 
       #kanata # A tool to improve keyboard comfort and usability with advanced customization
       #anki
-      ventoy # Bootable USB Solution
       #av1an # command-line vdo encoding framework
       musikcube
       #kdePackages.kdenlive # vdo editor

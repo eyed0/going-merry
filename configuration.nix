@@ -18,9 +18,9 @@
       ./nixos/packages.nix
       ./nixos/pipewire/pipwire.nix
       ./nixos/yazi.nix
-      ./nixos/stylix.nix
+      #./nixos/stylix.nix
       #./nixos/bluetooth.nix
-      ./secrets/secrets.nix
+      #./secrets/secrets.nix
     ];
 
   #latest linux kernel
@@ -74,7 +74,7 @@
   networking.nftables.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
 
-  hardware.bluetooth.enable = true;
+  #hardware.bluetooth.enable = true;
 
   #programs.nm-applet.enable = true; # for niri setup
   #programs.nm-applet.indicator = true;
@@ -105,7 +105,7 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
@@ -113,10 +113,10 @@
 
   services.desktopManager.plasma6.enable = true;
   
-  services.displayManager.sessionPackages =
-    [pkgs.niri]; # for niri to show in sddm
+  #services.displayManager.sessionPackages =
+  #  [pkgs.niri]; # for niri to show in sddm
 
-  services.power-profiles-daemon.enable = true;
+  #services.power-profiles-daemon.enable = true;
   
   # Configure keymap in X11
   #services.xserver = {
@@ -140,16 +140,6 @@
       #  thunderbird
     ];
   };
-
-  # Add udev rules for better device permissions
-services.udev.extraRules = ''
-  # Arduino serial ports
-  SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", MODE="0666", GROUP="dialout"
-  # CP2102 serial converter commonly used with Pro Mini
-  SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE="0666", GROUP="dialout"
-  # CH340 serial converter (another common Pro Mini programmer)
-  SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", MODE="0666", GROUP="dialout"
-'';
 
   # Emacs TODO
   services.emacs = {
