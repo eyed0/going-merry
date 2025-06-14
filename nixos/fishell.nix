@@ -22,7 +22,7 @@
 
       em = "emacsclient -c";
 
-      #btop = "btop --utf-force";
+      btop = "btop --force-utf";
 
       ls = "lsd";
       l = "ls -l";
@@ -41,7 +41,6 @@
     shellInit = ''
       zoxide init fish | source
       function fish_greeting
-        fastfetch
       end
     '';
     interactiveShellInit = ''

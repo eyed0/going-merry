@@ -9,7 +9,7 @@
     [
       ./hardware-configuration.nix
       ./nixos/gaming/gaming.nix
-      #./nixos/syncthing.nix
+      ./nixos/syncthing.nix
       ./nixos/footerminal.nix
       ./nixos/firefox.nix
       ./nixos/fonts.nix
@@ -20,7 +20,7 @@
       ./nixos/yazi.nix
       #./nixos/stylix.nix
       #./nixos/bluetooth.nix
-      #./secrets/secrets.nix
+      ./secrets/secrets.nix
     ];
 
   #latest linux kernel
