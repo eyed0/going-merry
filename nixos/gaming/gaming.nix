@@ -14,10 +14,20 @@
         ];
     };
 
+    hardware.enableRedistributableFirmware = true;
+
+    hardware.amdgpu.opencl.enable = true;
+    services.ollama.enable = true;
+    services.ollama.acceleration = "rocm";
+
     environment.systemPackages = with pkgs; [
       lact
       lutris
-      wineWowPackages.stagingFull
+
+      #wineWowPackages.stagingFull
+      #wineWowPackages.waylandFull
+      wineWowPackages.unstableFull
+      
       umu-launcher
       ryujinx
       protonup
@@ -25,7 +35,7 @@
       scanmem
       winetricks
       protontricks
-      nexusmods-app
+      #nexusmods-app
       mesa
       # veloren # rpg game
       # cemu

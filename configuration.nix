@@ -25,6 +25,12 @@
 
   #latest linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [ 
+    "amd_pstate=guided"  # Better power management
+    "elevator=none"      # Better I/O scheduler for SSDs, Or "mq-deadline"/"bfq" for HDDs
+    "amdgpu.ppfeaturemask=0xffffffff" # Unlock all PowerPlay features
+    "amdgpu.gpu_recovery=1"           # Enable GPU recovery
+  ];
   services.scx.enable = true;
   services.scx.scheduler = "scx_lavd"; # default is "scx_rustland"
   
@@ -36,6 +42,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.systemd.enable = true;
+  #boot.loader.timeout = 5;
 
   # GRUB
   #  boot.loader = {
@@ -112,6 +119,12 @@
   programs.light.brightnessKeys.enable = true;
 
   services.desktopManager.plasma6.enable = true;
+
+  
+  # Optimize SSD performance
+  services.fstrim.enable = true; # TRIM support for SSDs
+
+  #services.preload.enable = true; # Preload frequently used applications
   
   #services.displayManager.sessionPackages =
   #  [pkgs.niri]; # for niri to show in sddm

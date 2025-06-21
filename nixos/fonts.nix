@@ -15,11 +15,16 @@
   ];
 
   fonts = {
-	fontconfig = {
+    #enableDefaultPackages = true; # Enable a basic set of fonts
+    fontconfig = {
       enable = true;
-      hinting.enable = true;
       cache32Bit = true;
-	};
+      antialias = true;
+      hinting.enable = true;
+      hinting.style = "slight";
+      subpixel.rgba = "rgb";
+      subpixel.lcdfilter = "default";
+    };
   };
   
 }

@@ -73,7 +73,7 @@
       #gcompris # educational software for children
       zoxide # A fast cd command that learns your habits
       navi # An interactive cheatsheet tool for the command-line and application launchers
-      btop # graphical process/system monitor with a customizable interface
+      btop-rocm # graphical process/system monitor with a customizable interface
       gitui # Blazing fast terminal-ui for Git written in Rust
       # starship # customizable prompt for any shell
       restic # A backup program that is fast, efficient and secure
