@@ -28,7 +28,7 @@
   boot.kernelParams = [ 
     "amd_pstate=guided"  # Better power management
     "elevator=none"      # Better I/O scheduler for SSDs, Or "mq-deadline"/"bfq" for HDDs
-    "amdgpu.ppfeaturemask=0xffffffff" # Unlock all PowerPlay features
+    #"amdgpu.ppfeaturemask=0xffffffff" # Unlock all PowerPlay features
     "amdgpu.gpu_recovery=1"           # Enable GPU recovery
   ];
   services.scx.enable = true;
@@ -123,6 +123,7 @@
   
   # Optimize SSD performance
   services.fstrim.enable = true; # TRIM support for SSDs
+  services.smartd.enable = true;
 
   #services.preload.enable = true; # Preload frequently used applications
   

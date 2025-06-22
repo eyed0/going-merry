@@ -9,6 +9,7 @@
           amdvlk
           vulkan-loader
           vulkan-tools
+          vulkan-validation-layers
           libvdpau
           libva
         ];
@@ -16,9 +17,9 @@
 
     hardware.enableRedistributableFirmware = true;
 
-    hardware.amdgpu.opencl.enable = true;
-    services.ollama.enable = true;
-    services.ollama.acceleration = "rocm";
+    # hardware.amdgpu.opencl.enable = true;
+    # services.ollama.enable = true;
+    # services.ollama.acceleration = "rocm";
 
     environment.systemPackages = with pkgs; [
       lact
