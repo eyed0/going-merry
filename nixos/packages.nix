@@ -101,6 +101,7 @@
       television # fuzzy finder TODO
       gitnr # Create `.gitignore` files using one or more templates
       impala # TUI for managing wifi
+      streamrip #Scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 
       #       android 
       universal-android-debloater
