@@ -17,6 +17,8 @@
     wl-clipboard
     # clipman
     mako
+    libnotify
+    kdePackages.plasma-nm
   ];
   programs.jq.enable = true;
   programs.eww-bar = {

@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./home/stylix/stylix.nix 
+    #./home/stylix/stylix.nix 
 	  ./home/wayland/default.nix
 	  #./home/kdeconnect.nix
 	  #./home/mpv/mpv.nix
@@ -22,7 +22,7 @@
 
   home.packages = [
     #pkgs.eza
-    pkgs.mpv
+    #pkgs.mpv
     pkgs.scrcpy
     #pkgs.jetbrains.idea-community
     #pkgs.jetbrains.rust-rover

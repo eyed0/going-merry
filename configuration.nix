@@ -18,7 +18,7 @@
       ./nixos/packages.nix
       ./nixos/pipewire/pipwire.nix
       ./nixos/yazi.nix
-      #./nixos/stylix.nix
+      ./nixos/stylix.nix
       #./nixos/bluetooth.nix
       ./secrets/secrets.nix
     ];
@@ -77,14 +77,9 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  #hardware.bluetooth.enable = true;
+  hardware.bluetooth.enable = true;
   networking.nftables.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
-
-  #hardware.bluetooth.enable = true;
-
-  #programs.nm-applet.enable = true; # for niri setup
-  #programs.nm-applet.indicator = true;
 
   # implementation of a message bus
   services.dbus.implementation = "broker";
@@ -187,39 +182,22 @@
   
   # # TODO https://github.com/openlab-aux/vuizvui/tree/master/modules/user/sternenseemann/profiles
   # # TODO shrink this module by extracting a niri module
-  # xdg.portal = {
-  #   enable = true;
-	#   wlr.enable = true;
-  #   extraPortals = with pkgs; [
-	#     xdg-desktop-portal-wlr
-  #     xdg-desktop-portal-gtk
-  #     xdg-desktop-portal-gnome
-  #     # keyring is added via its module
-  #   ];
-  #   # niri's screensharing depends on the GNOME portal
-  #   config.common.default = "gnome";
-  # };
+  xdg.portal = {
+    enable = true;
+	  wlr.enable = true;
+    extraPortals = with pkgs; [
+	    xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+    ];
+  };
 
-  # systemd.packages = [
-  #   pkgs.niri
-  #   pkgs.xwayland-satellite
-  # ];
-
-  # systemd.user = {
-  #   # pipewire MUST start before niri, otherwise screen sharing doesn't work
-  #   services.pipewire = {
-  #     wantedBy = [ "niri.service" ];
-  #     before = [ "niri.service" ];
-  #   };
-
-  #   targets.graphical-session.wants = [
-  #     # niri doesn't implement xwayland itself
-  #     "xwayland-satellite.service"
-  #     "foot-server.socket"
-  #   ];
-  # };
-
-  # security.pam.services.swaylock = {};
+  systemd.user = {
+    # pipewire MUST start before niri, otherwise screen sharing doesn't work
+    services.pipewire = {
+      wantedBy = [ "niri.service" ];
+      before = [ "niri.service" ];
+    };
   
   #     garbage collection
   nix = {

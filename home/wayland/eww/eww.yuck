@@ -31,6 +31,7 @@
 (defwidget top-modules []
   (box :orientation "v"
        :space-evenly false
+    (wifi-simple) 
     (volume-module)
     (bluetooth-module)
     (power-profile)
@@ -116,6 +117,36 @@
            :height 250
            :value volume
            :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%")))
+
+;; ============================================================================
+;; netowrk Module
+;; ============================================================================
+
+(defpoll wifi_status :interval "3s"
+  :initial "{\"connected\": false, \"ssid\": \"\", \"signal\": 0}"
+  `nmcli -t -f ACTIVE,SSID,SIGNAL dev wifi | awk -F: '
+    BEGIN { printf "{\"connected\": false, \"ssid\": \"\", \"signal\": 0}" }
+    $1 == "yes" { 
+      gsub(/\"/, "\\\"", $2); 
+      printf "{\"connected\": true, \"ssid\": \"%s\", \"signal\": %d}", $2, $3; 
+      exit 
+    }'`)
+
+;; Simple WiFi toggle with Plasma Network Manager integration
+(defwidget wifi-simple []
+  (button :class "wifi-simple ${wifi_status.connected ? 'connected' : 'disconnected'}"
+          :onclick "if [ '${wifi_status.connected}' = 'true' ]; then nmcli radio wifi off; else nmcli radio wifi on; fi"
+          :onrightclick "plasma-nm"
+          :tooltip "WiFi: ${wifi_status.connected ? wifi_status.ssid : 'Disconnected'} - Right click for settings"
+    (box :orientation "v"
+         :space-evenly false
+      (label :class "wifi-icon"
+             :text "${wifi_status.connected ? 
+                    (wifi_status.signal >= 75 ? '󰤨' :
+                     wifi_status.signal >= 50 ? '󰤥' :
+                     wifi_status.signal >= 25 ? '󰤢' : '󰤟') : '󰤮'}")
+      (label :class "wifi-text"
+             :text "${wifi_status.connected ? '${wifi_status.signal}' : 'OFF'}"))))
 
 ;; ============================================================================
 ;; System Modules (Bluetooth, Power Profile, Battery)
