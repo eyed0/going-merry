@@ -8,17 +8,17 @@
 // Variables
 // =============================================================================
 
-$bg-color: #121618;  // Kept as requested
-$text-color: #d3c6aa;  // Everforest foreground
-$border-color: rgba(211, 198, 170, 0.2);  // Everforest foreground with opacity
+$bg-color: #121618;
+$text-color: #d3c6aa;
+$border-color: rgba(211, 198, 170, 0.2);
 
 // Everforest Colors
-$wave-blue: #7fbbb3;     // Everforest aqua
-$sage-green: #a7c080;    // Everforest green
-$sunset-orange: #e69875; // Everforest orange
-$coral-red: #e67e80;     // Everforest red
-$soft-purple: #d699b6;   // Everforest purple
-$muted-teal: #83c092;    // Everforest blue
+$wave-blue: #7fbbb3;
+$sage-green: #a7c080;
+$sunset-orange: #e69875;
+$coral-red: #e67e80;
+$soft-purple: #d699b6;
+$muted-teal: #83c092;
 
 // =============================================================================
 // Mixins
@@ -53,13 +53,45 @@ $muted-teal: #83c092;    // Everforest blue
 }
 
 // =============================================================================
-// Main Bar
+// Main Container Structure
 // =============================================================================
 
 .bar {
   background-color: $bg-color;
   color: $text-color;
   padding: 2px;
+}
+
+.main-container {
+  background-color: $bg-color;
+  color: $text-color;
+}
+
+.status-container {
+  background-color: $bg-color;
+}
+
+.top-modules-container,
+.bottom-modules-container {
+  margin: 4px 0;
+}
+
+.module-container {
+  margin: 2px 0;
+}
+
+.module-button {
+  padding: 4px;
+  margin: 2px 0;
+  border-radius: 8px;
+  background: rgba($text-color, 0.05);
+  border: 1px solid $border-color;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: rgba($text-color, 0.1);
+    border-color: rgba($text-color, 0.3);
+  }
 }
 
 // =============================================================================
@@ -95,10 +127,19 @@ $muted-teal: #83c092;    // Everforest blue
     font-size: 14px;
     font-weight: bold;
   }
+  
+  .workspace-indicator {
+    background-color: transparent;
+    transition: background-color 200ms ease;
+    
+    &.focused {
+      background-color: #ffffff;
+    }
+  }
 }
 
 // =============================================================================
-// network Module
+// WiFi Module
 // =============================================================================
 
 .wifi-simple {
@@ -179,6 +220,10 @@ $muted-teal: #83c092;    // Everforest blue
 .volume-icon {
   font-size: 18px;
   margin-bottom: 4px;
+  
+  &.muted {
+    color: $coral-red;
+  }
 }
 
 .volume-text {
@@ -199,8 +244,21 @@ $muted-teal: #83c092;    // Everforest blue
   margin: 4px 0;
   @include module-border;
   
-  &.active { color: $wave-blue; }
-  &.inactive { color: $text-color; opacity: 0.7; }
+  &.active { 
+    color: $wave-blue;
+    background: rgba($wave-blue, 0.1);
+    border-color: rgba($wave-blue, 0.3);
+  }
+  
+  &.inactive { 
+    color: rgba($text-color, 0.7);
+    opacity: 0.7;
+  }
+}
+
+.bluetooth-icon {
+  font-size: 16px;
+  transition: color 0.2s ease;
 }
 
 // Power Profile
@@ -209,6 +267,16 @@ $muted-teal: #83c092;    // Everforest blue
   padding: 4px;
   margin: 4px 0;
   @include module-border;
+  
+  &:hover {
+    background: rgba($soft-purple, 0.1);
+    border-color: rgba($soft-purple, 0.3);
+  }
+}
+
+.power-profile-icon {
+  font-size: 16px;
+  transition: color 0.2s ease;
 }
 
 // Battery
@@ -221,10 +289,29 @@ $muted-teal: #83c092;    // Everforest blue
   .battery-text {
     font-size: 12px;
   }
+  
+  .battery-icon {
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
 
-  &.warning { color: $sunset-orange; }
-  &.critical { color: $coral-red; }
-  &.charging { color: $muted-teal; }
+  &.warning { 
+    color: $sunset-orange;
+    background: rgba($sunset-orange, 0.1);
+    border-color: rgba($sunset-orange, 0.3);
+  }
+  
+  &.critical { 
+    color: $coral-red;
+    background: rgba($coral-red, 0.1);
+    border-color: rgba($coral-red, 0.3);
+  }
+  
+  &.charging { 
+    color: $muted-teal;
+    background: rgba($muted-teal, 0.1);
+    border-color: rgba($muted-teal, 0.3);
+  }
 }
 
 // =============================================================================
@@ -266,11 +353,31 @@ $muted-teal: #83c092;    // Everforest blue
   label {
     font-size: 16px;
   }
+}
 
-  .date, .day {
-    font-size: 12px;
-    margin-top: 4px;
-  }
+.clock-hours,
+.clock-minutes {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.clock-seconds {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.clock-separator {
+  height: 2px;
+  width: 16px;
+  background-color: $soft-purple;
+  margin: 2px auto;
+  border-radius: 1px;
+}
+
+.clock-date,
+.clock-day {
+  font-size: 12px;
+  margin-top: 2px;
 }
 
 // =============================================================================
@@ -316,28 +423,46 @@ $muted-teal: #83c092;    // Everforest blue
   @include module-border;
 }
 
+.power-icon {
+  font-size: 18px;
+}
+
 .power-menu-box {
-  background-color: rgba(18, 22, 24, 0.95);  // Adjusted to match new background
+  background-color: rgba(18, 22, 24, 0.95);
   border: 1px solid $border-color;
   border-radius: 3px;
-  padding: 1px;
+  padding: 8px;
+  margin: 4px;
 }
 
 .power-menu-btn {
-  padding: 7px;
+  padding: 8px;
+  margin: 2px 0;
   border-radius: 3px;
   @include hover-effect;
-
-  box {
-    label {
-      font-size: 14px;
-      margin: 0 4px;
-    }
+  
+  .power-menu-icon {
+    font-size: 16px;
   }
 }
 
 // Power menu button colors
-.shutdown-btn { color: $coral-red; }
-.reboot-btn { color: $sage-green; }
-.suspend-btn { color: $sunset-orange; }
-.hibernate-btn { color: $soft-purple; }
+.shutdown-btn { 
+  color: $coral-red;
+  &:hover { background-color: rgba($coral-red, 0.2); }
+}
+
+.reboot-btn { 
+  color: $sage-green;
+  &:hover { background-color: rgba($sage-green, 0.2); }
+}
+
+.suspend-btn { 
+  color: $sunset-orange;
+  &:hover { background-color: rgba($sunset-orange, 0.2); }
+}
+
+.hibernate-btn { 
+  color: $soft-purple;
+  &:hover { background-color: rgba($soft-purple, 0.2); }
+}

@@ -115,6 +115,13 @@
 
   services.desktopManager.plasma6.enable = true;
 
+  services.displayManager.sessionPackages =
+   [pkgs.niri]; # for niri to show in sddm
+  systemd.packages = [
+    pkgs.niri
+    pkgs.xwayland-satellite
+  ];
+
   
   # Optimize SSD performance
   services.fstrim.enable = true; # TRIM support for SSDs
@@ -198,6 +205,7 @@
       wantedBy = [ "niri.service" ];
       before = [ "niri.service" ];
     };
+  };
   
   #     garbage collection
   nix = {

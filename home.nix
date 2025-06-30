@@ -9,6 +9,7 @@
     ./home/jujutsu.nix
 	  #./home/music/beets.nix
 	  ./home/spell.nix
+    #./home/firefox/firefoxhm.nix # it works but I will work on it later
 	  #./home/notmuch.nix TODO
 	  #./home/kanata.nix
   ];

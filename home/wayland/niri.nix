@@ -86,7 +86,7 @@ in
         focus-ring.enable = false;
         border = {
           enable = true;
-          #width = 2;
+          width = 2;
           active = {
             color = "rgb(153,188,133)";
           };
@@ -129,7 +129,7 @@ in
           hide-when-single-tab = true;
           place-within-column = true;
           gap = -5;
-          width = 4;
+          width = 3;
           #length total-proportion=1.0;
           position = "right";
           gaps-between-tabs = 2;

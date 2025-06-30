@@ -64,9 +64,9 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./configuration.nix
-            #inputs.stylix.nixosModules.stylix
+            inputs.stylix.nixosModules.stylix
             #inputs.agenix.nixosModules.default
-            #inputs.niri.nixosModules.niri
+            inputs.niri.nixosModules.niri
             #inputs.chaotic.nixosModules.default
           ];
         };
@@ -75,7 +75,7 @@
           inherit pkgs;
           modules = [
             ./home.nix
-            inputs.stylix.homeManagerModules.stylix
+            #inputs.stylix.homeManagerModules.stylix
             inputs.niri.homeModules.niri
             #inputs.zen-browser.packages."${system}".default
 		      ];

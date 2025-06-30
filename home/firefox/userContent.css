@@ -1,0 +1,92 @@
+/* userContent.css - Web Content Customization */
+
+/* Dark mode for internal Firefox pages */
+@-moz-document url-prefix(about:), url-prefix(chrome://), url-prefix(moz-extension://) {
+  :root {
+    --in-content-page-background: #1c1c1e !important;
+    --in-content-page-color: #ffffff !important;
+    --in-content-text-color: #ffffff !important;
+    --in-content-selected-text: #ffffff !important;
+    --in-content-box-background: #2c2c2e !important;
+    --in-content-box-background-odd: #323234 !important;
+    --in-content-box-info-background: #323234 !important;
+    --in-content-border-color: #52525e !important;
+    --in-content-button-background: #474749 !important;
+    --in-content-button-background-hover: #52525e !important;
+    --in-content-button-background-active: #5e5e62 !important;
+  }
+  
+  body, html {
+    background-color: var(--in-content-page-background) !important;
+    color: var(--in-content-page-color) !important;
+  }
+}
+
+/* Hide annoying cookie banners (basic rules - extensions do this better) */
+@-moz-document regexp("https?://.*") {
+  /* Common cookie banner selectors */
+  [id*="cookie" i][class*="banner" i],
+  [id*="cookie" i][class*="notice" i],
+  [id*="consent" i][class*="banner" i],
+  [class*="cookie" i][class*="banner" i],
+  [class*="cookie" i][class*="notice" i],
+  [class*="gdpr" i],
+  #cookieConsent,
+  .cookie-consent,
+  .cookie-banner,
+  .cookie-notice {
+    display: none !important;
+  }
+}
+
+/* Better readability for code on GitHub */
+@-moz-document domain(github.com) {
+  .highlight pre,
+  .blob-code-inner {
+    font-family: "JetBrains Mono", "Fira Code", "Source Code Pro", monospace !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* Improve Wikipedia readability */
+@-moz-document domain(wikipedia.org) {
+  #content {
+    max-width: 1000px !important;
+    margin: 0 auto !important;
+  }
+  
+  .mw-body {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+  }
+}
+
+/* Hide Reddit's new design promotions */
+@-moz-document domain(reddit.com) {
+  /* Hide "use new reddit" banner */
+  ._3wvbQo20mGWqDYyKwBAFKi,
+  .XPromoBottomBar,
+  ._1jNq8SVrFpB9Ur2UHXJ5Wl {
+    display: none !important;
+  }
+  
+  /* Hide promoted posts */
+  [data-promoted="true"] {
+    display: none !important;
+  }
+}
+
+/* Improve accessibility */
+@-moz-document regexp("https?://.*") {
+  /* Better focus indicators */
+  *:focus-visible {
+    outline: 2px solid #0060df !important;
+    outline-offset: 2px !important;
+  }
+  
+  /* Ensure minimum text contrast */
+  p, span, div, a, li, td, th {
+    color: contrast(1.5) !important;
+  }
+}

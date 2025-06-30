@@ -1,0 +1,93 @@
+/* userChrome.css - Firefox Interface Customization */
+
+/* Hide tab bar when using Sidebery sidebar */
+#TabsToolbar {
+  visibility: collapse !important;
+}
+
+/* Compact navigation bar */
+#nav-bar {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  height: 32px !important;
+}
+
+/* Hide URL bar's page actions (shield, reader mode, etc.) */
+#page-action-buttons {
+  display: none !important;
+}
+
+/* Minimize URL bar when not focused */
+#urlbar-container:not(:focus-within) {
+  width: 200px !important;
+  transition: width 0.2s ease !important;
+}
+
+#urlbar-container:focus-within {
+  width: 100% !important;
+}
+
+/* Hide "List all tabs" button since we use Sidebery */
+#alltabs-button {
+  display: none !important;
+}
+
+/* Compact bookmarks toolbar */
+#PersonalToolbar {
+  height: 24px !important;
+}
+
+/* Style the main content area for better spacing with sidebar */
+#main-window[sizemode="normal"] #browser {
+  margin-left: 0px !important;
+}
+
+/* Hide sidebar header when using Sidebery */
+#sidebar-header {
+  display: none !important;
+}
+
+/* Make sidebar splitter thinner */
+#sidebar-splitter {
+  width: 1px !important;
+  border: none !important;
+  background-color: var(--chrome-content-separator-color) !important;
+}
+
+/* Compact context menus */
+menupopup > menuitem,
+menupopup > menu {
+  padding-block: 2px !important;
+}
+
+/* Hide pocket button */
+#save-to-pocket-button {
+  display: none !important;
+}
+
+/* Clean up toolbar buttons */
+.toolbarbutton-1 {
+  margin: 0 1px !important;
+}
+
+/* Minimal status panel (appears when hovering links) */
+#statuspanel {
+  background: var(--toolbar-bgcolor) !important;
+  border: 1px solid var(--chrome-content-separator-color) !important;
+  border-radius: 3px !important;
+}
+
+/* Hide fullscreen warning */
+#fullscreen-warning {
+  display: none !important;
+}
+
+/* Compact find bar */
+.findbar-container {
+  padding: 2px !important;
+}
+
+/* Style web panels (for side-loaded web apps) */
+#webext-panels-browser {
+  background: var(--toolbar-bgcolor) !important;
+}
