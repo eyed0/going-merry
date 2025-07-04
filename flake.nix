@@ -26,10 +26,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    # agenix = {
-    #   url = "github:ryantm/agenix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
 	  # # suyu switch imulator
 	  # suyu.url = "git+https://git.suyu.dev/suyu/nix-flake";
@@ -65,7 +65,7 @@
           modules = [
             ./configuration.nix
             inputs.stylix.nixosModules.stylix
-            #inputs.agenix.nixosModules.default
+            inputs.agenix.nixosModules.default
             inputs.niri.nixosModules.niri
             #inputs.chaotic.nixosModules.default
           ];

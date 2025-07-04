@@ -27,8 +27,8 @@
 		    
         # Document formats
         "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-        "text/plain" = [ "emacs.desktop" ];
-        "text/x-markdown" = [ "emacs.desktop" ];
+        "text/plain" = [ "emacsclient.desktop" ];
+        "text/x-markdown" = [ "emacsclient.desktop" ];
         
         # Web protocols
         "text/html" = [ "firefox.desktop" ];
