@@ -13,29 +13,23 @@
       nixd
       libgcc
       lldb
-      #broot
       helix
-      mg
       rustup
       tree-sitter
-      #android-studio
-      #inputs.agenix.packages.x86_64-linux.default
       age
-      # rage
+      agenix-cli
+      rage
+      ragenix
       # statix # Lints and suggestions for the nix programming language
 
       # jdk23
       # maven
       # jdt-language-server # For Eglot integration
 
-      #ollama-rocm
-
       #       email
 
       aerc
       thunderbird
-      notmuch
-      lieer
 
       #       apps
 
@@ -43,21 +37,18 @@
       #appimage-run
       #inkscape
       #signal-desktop #signal messanger
-      #gimp-with-plugins
       arduino # electronics prototyping platform
       arduinoOTA # Tool for uploading programs to Arduino boards over a network
       arduino-mk # Makefile for Arduino sketches
       arduino-ide # 
       #kanata # A tool to improve keyboard comfort and usability with advanced customization
       #anki
-      #av1an # command-line vdo encoding framework
       musikcube
       #kdePackages.kdenlive # vdo editor
-      astroterm # Celestial viewer for the terminal
+      #astroterm # Celestial viewer for the terminal
       kdePackages.dolphin
       kdePackages.dolphin-plugins
       kdePackages.kwalletmanager
-      sonusmix
 
       #       utilities
 
@@ -71,25 +62,19 @@
       dust # disk usage
       #gcompris # educational software for children
       zoxide # A fast cd command that learns your habits
-      navi # An interactive cheatsheet tool for the command-line and application launchers
       btop-rocm # graphical process/system monitor with a customizable interface
-      gitui # Blazing fast terminal-ui for Git written in Rust
       # starship # customizable prompt for any shell
       restic # A backup program that is fast, efficient and secure
       rsync # Fast incremental file transfer utility
       qbittorrent
-      #nvtopPackages.full # top for gpu
       typst # latex alternative
-      #typstwriter # typst editor
       #tinymist # lsp for typst
-      #digikam5
+      #digikam5 #Photo management application
       #kate
       kdePackages.okular 
       kdePackages.ark
       unrar
-      #peazip
       xarchiver
-      #syncthing
       syncthingtray
       ffmpeg
       enchant #Generic spell checking library
@@ -98,9 +83,9 @@
       #paperwork
       #pandoc # Conversion between documentation formats
       television # fuzzy finder TODO
-      gitnr # Create `.gitignore` files using one or more templates
-      impala # TUI for managing wifi
-      streamrip #Scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
+      #gitnr # Create `.gitignore` files using one or more templates
+      #impala # TUI for managing wifi
+      #streamrip #Scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer
 
       #       android 
       universal-android-debloater

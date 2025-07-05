@@ -16,13 +16,18 @@
     };
 
     hardware.enableRedistributableFirmware = true;
+    hardware.amdgpu.amdvlk.supportExperimental.enable = true;
+
+    # # Whether to enable amdgpu overdrive mode for overclocking.
+    # hardware.amdgpu.overdrive.enable = true;
+
+    services.lact.enable = true;
 
     # hardware.amdgpu.opencl.enable = true;
     # services.ollama.enable = true;
     # services.ollama.acceleration = "rocm";
 
     environment.systemPackages = with pkgs; [
-      lact
       lutris
 
       #wineWowPackages.stagingFull

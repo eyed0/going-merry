@@ -12,6 +12,7 @@
     #./home/firefox/firefoxhm.nix # it works but I will work on it later
 	  #./home/notmuch.nix TODO
 	  #./home/kanata.nix
+    ./home/email.nix
   ];
   home.username = "heehaw";
   home.homeDirectory = "/home/heehaw";

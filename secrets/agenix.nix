@@ -5,7 +5,7 @@
 
   environment.systemPackages = [ pkgs.agenix ];
 
-  age.identityPaths = [ "~/.config/age/key.txt" ];
+  age.identityPaths = [ "~/.age/key.txt" ];
 
   age.secrets.example-secret = {
     file = ./secrets/example-secret.age;
@@ -29,10 +29,10 @@
     
   };
 
-  # Use the secret in a service
-  # Example: Using the secret as a password file for a service
-  services.someService = {
-    enable = true;
-    passwordFile = config.age.secrets.example-secret.path;
-  };
+  # # Use the secret in a service
+  # # Example: Using the secret as a password file for a service
+  # services.someService = {
+  #   enable = true;
+  #   passwordFile = config.age.secrets.example-secret.path;
+  # };
 }
