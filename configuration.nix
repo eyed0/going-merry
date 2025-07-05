@@ -20,7 +20,7 @@
       ./nixos/yazi.nix
       ./nixos/stylix.nix
       #./nixos/bluetooth.nix
-      ./secrets/secrets.nix
+      #./secrets/secrets.nix
       ./secrets/agenix.nix
     ];
 

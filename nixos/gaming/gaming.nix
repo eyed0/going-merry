@@ -27,6 +27,8 @@
     # services.ollama.enable = true;
     # services.ollama.acceleration = "rocm";
 
+    programs.steam.enable = true;
+
     environment.systemPackages = with pkgs; [
       lutris
 
