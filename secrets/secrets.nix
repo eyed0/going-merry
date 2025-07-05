@@ -9,7 +9,8 @@ let
   allKeys = [ heehawage heehawssh ];
 in
 {
-  # Define which keys can decrypt which secrets TODO
+  # Define which keys can decrypt which secrets first and then run "agenix -e secrets/password.age"
   #"secrets/example-secret.age".publicKeys = allKeys;
   #"secrets/another-secret.age".publicKeys = [ heehaw ];
+  "secrets/gnc3.age".publicKeys = [ heehawage ];
 }

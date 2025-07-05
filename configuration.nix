@@ -21,6 +21,7 @@
       ./nixos/stylix.nix
       #./nixos/bluetooth.nix
       ./secrets/secrets.nix
+      ./secrets/agenix.nix
     ];
 
   #latest linux kernel
