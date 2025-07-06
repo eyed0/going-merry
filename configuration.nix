@@ -12,7 +12,7 @@
       ./nixos/syncthing.nix
       ./nixos/footerminal.nix
       ./nixos/firefox.nix
-      ./nixos/fonts.nix
+      ./nixos/fonts/fonts.nix
       ./nixos/fishell.nix
       ./nixos/git.nix
       ./nixos/packages.nix
