@@ -47,6 +47,9 @@
       mesa
       # veloren # rpg game
       # cemu
+
+      steamtinkerlaunch
+      
     ];
 
     programs = {
