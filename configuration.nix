@@ -169,6 +169,9 @@
 
   programs.kdeconnect.enable = true;
   programs.fzf.fuzzyCompletion = true;
+
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true;
   
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

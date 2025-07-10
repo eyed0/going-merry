@@ -28,22 +28,6 @@
     base0D = "7FBBB3";
     base0E = "D699B6";
     base0F = "E67E80";
-    # base00 = "000000";
-    # base01 = "0a0a0a"; 
-    # base02 = "1a1a1a";
-    # base03 = "2a2a2a";
-    # base04 = "505050";
-    # base05 = "b8b8b8";
-    # base06 = "d0d0d0";
-    # base07 = "e8e8e8";
-    # base08 = "ff6b6b";
-    # base09 = "ff9500";
-    # base0A = "ffd700";
-    # base0B = "51cf66";
-    # base0C = "22d3ee";
-    # base0D = "339af0";
-    # base0E = "cc5de8";
-    # base0F = "d4af37";
   };
 
     # fonts settings

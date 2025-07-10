@@ -57,6 +57,8 @@
       fd
       lsd # replacement for ls
       fzf
+
+      solaar
      
       #fontforge-gtk
       dust # disk usage
