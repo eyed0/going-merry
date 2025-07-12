@@ -44,7 +44,12 @@
       #kanata # A tool to improve keyboard comfort and usability with advanced customization
       #anki
       musikcube
-      #kdePackages.kdenlive # vdo editor
+      kdePackages.kdenlive # vdo editor
+      ffmpeg-full
+      x264
+      svt-av1
+      libaom
+      
       #astroterm # Celestial viewer for the terminal
       kdePackages.dolphin
       kdePackages.dolphin-plugins
@@ -59,6 +64,7 @@
       fzf
 
       solaar
+      klavaro
      
       #fontforge-gtk
       dust # disk usage
@@ -78,7 +84,6 @@
       unrar
       xarchiver
       syncthingtray
-      ffmpeg
       enchant #Generic spell checking library
       libreoffice
       #freetube # youtube client
