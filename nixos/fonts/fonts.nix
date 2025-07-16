@@ -17,47 +17,15 @@
   ];
   
   fonts = {
+    #enableDefaultPackages = true; # Enable a basic set of fonts
     fontconfig = {
       enable = true;
       cache32Bit = true;
       antialias = true;
-      hinting = {
-        enable = true;
-        style = "full";  # Changed from "slight" to "full" for 1080p
-        autohint = false;
-      };
-      subpixel = {
-        rgba = "rgb";
-        lcdfilter = "default";
-      };
-      
-      # Improve font smoothing
-      localConf = ''
-      <fontconfig>
-        <match target="font">
-          <edit name="lcdfilter" mode="assign">
-            <const>lcddefault</const>
-          </edit>
-        </match>
-        <match target="font">
-          <edit name="rgba" mode="assign">
-            <const>rgb</const>
-          </edit>
-        </match>
-        <!-- Better rendering for smaller fonts -->
-        <match target="font">
-          <test name="size" qual="any" compare="less">
-            <double>12</double>
-          </test>
-          <edit name="hinting" mode="assign">
-            <bool>true</bool>
-          </edit>
-          <edit name="hintstyle" mode="assign">
-            <const>hintslight</const>
-          </edit>
-        </match>
-      </fontconfig>
-    '';
+      hinting.enable = true;
+      hinting.style = "slight";
+      subpixel.rgba = "rgb";
+      subpixel.lcdfilter = "default";
     };
   };
 }
