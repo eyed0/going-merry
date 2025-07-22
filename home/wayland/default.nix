@@ -14,16 +14,22 @@
   ];
 
   home.packages = with pkgs; [
-    wl-clipboard
     # clipman
     #mako
     libnotify
     kdePackages.plasma-nm
   ];
-  programs.jq.enable = true;
-  programs.eww-bar = {
+
+  services.cliphist = {
     enable = true;
-  };  
+    allowImages = true;
+  };
+  
+  programs.jq.enable = true;
+  
+  # programs.eww-bar = {
+  #   enable = true;
+  # };  
 }
 
 

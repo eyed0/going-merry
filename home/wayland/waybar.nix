@@ -20,12 +20,9 @@
 		      "eDP-1"
 		    ];
 
-		    
 		    modules-left = [ "niri/workspaces" ];
 		    modules-center = [ ];
-		    modules-right = [ "tray" "wireplumber" "network" "power-profiles-daemon" "battery" "backlight" "clock" "custom/power" ];
-
-		    
+		    modules-right = [ "tray" "custom/cliphist" "custom/kdeconnect" "wireplumber" "network" "power-profiles-daemon" "battery" "backlight" "clock" "custom/power" ]; 
 		    
 		    "niri/workspaces" = {
           format = "{icon}";
@@ -50,6 +47,22 @@
           spacing = 8;
         };
 
+        # add "custom/swayidle-toggle" to modules 
+        # "custom/swayidle-toggle" = {
+		    #   format = "{}";
+		    #   exec = "if pgrep -x swayidle > /dev/null; then echo '󰅶'; else echo '󰾪'; fi";
+		    #   on-click = "pkill swayidle || swayidle -w timeout 300 'swaylock' timeout 600 'systemctl suspend' before-sleep 'swaylock' &";
+		    #   interval = 2;
+		    #   tooltip-format = "Toggle auto-suspend\nClick to enable/disable";
+		    #   tooltip = true;
+		    # };
+
+        #   #custom-swayidle-toggle {
+        #   color: #f2cdcd;
+        #   padding: 4px 4px;
+        #   margin: 4px 0;
+        # }
+
 		    wireplumber =  {
 		      rotate = 270;
           format = "{icon}  {volume}%";
@@ -62,8 +75,8 @@
 
         network = {
           format = "{icon}";
-          format-ethernet = "󰈀 {bandwidthDownBits}";
-          format-wifi = "󰖩 {signalStrength}%";
+          format-ethernet = "󰈀";
+          format-wifi = "󰖩";
           format-disconnected = "󰖪";
           format-icons = ["󰤫" "󰤟" "󰤢" "󰤥" "󰤨"];
           tooltip-format-wifi = "{essid} ({signalStrength}%) - {ipaddr}";
@@ -114,7 +127,7 @@
 
 		    "clock" = {
 		      format = "{:%H\n%M}";
-		      tooltip-format = "<tt><small>{calendar}</small></tt>";
+		      tooltip-format = "<big>{calendar}</big>";
 		      calendar = {
 			      mode = "month";
 			      mode-mon-col = 3;
@@ -125,6 +138,23 @@
 			        today = "<span color='#a6e3a1'><b><u>{}</u></b></span>";
 			      };
 		      };
+		    };
+
+        "custom/cliphist" = {
+		      format = "󰅌";
+		      on-click = "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy";
+		      tooltip-format = "Clipboard History\nClick to open";
+		      tooltip = true;
+		    };
+
+		    "custom/kdeconnect" = {
+		      format = "󰄜";
+		      exec = "kdeconnect-cli --list-available --name-only | wc -l";
+		      exec-if = "command -v kdeconnect-cli";
+		      interval = 30;
+		      on-click = "kdeconnect-app";
+		      tooltip-format = "{} device(s) connected";
+		      tooltip = true;
 		    };
 
 		    "custom/power" = {
@@ -153,7 +183,7 @@
     border: none;
     border-radius: 0;
     font-family: "RobotMono Nerd Font";
-    font-size: 14px;
+    font-size: 16px;
     min-height: 0;
     padding: 0;
     margin: 0;
@@ -240,6 +270,18 @@
     margin: 8px 0;
 }
 
+#custom-cliphist {
+    color: #fab387;
+    padding: 4px 4px;
+    margin: 4px 0;
+}
+
+#custom-kdeconnect {
+    color: #89dceb;
+    padding: 4px 4px;
+    margin: 4px 0;
+}
+
 #power-profiles-daemon {
     padding: 4px 4px;
     margin: 4px 0;
@@ -251,11 +293,22 @@ tooltip {
     background: rgba(30, 30, 30, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
+    font-size: 16px;
 }
 
 tooltip label {
     color: #ffffff;
-    padding: 8px;
+    padding: 12px;
+}
+
+/* Specifically target calendar tooltips for larger size */
+#clock tooltip {
+    font-size: 18px;
+}
+
+#clock tooltip label {
+    padding: 16px;
+    font-family: "RobotoMono Nerd Font", monospace;
 }
 
 /* For rotated text */

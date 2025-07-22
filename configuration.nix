@@ -196,9 +196,16 @@
   # # TODO shrink this module by extracting a niri module
   xdg.portal = {
     enable = true;
-	  wlr.enable = true;
+    xdgOpenUsePortal = true;
+    wlr.enable = true;
+    config = {
+      common = {
+        default = ["kde" "gnome" "gtk" "wlr"];
+      };
+    };
     extraPortals = with pkgs; [
-	    xdg-desktop-portal-wlr
+      kdePackages.xdg-desktop-portal-kde
+      xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
     ];
