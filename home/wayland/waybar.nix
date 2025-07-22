@@ -8,50 +8,50 @@
       enable = false;
       target = "graphical-session.target";
     };
-	
-    settings = {
 	  
-	  mainBar = {
-		layer = "top";
-		position = "right";
-		margin = "0 0 0 0";
-		reload_style_on_change = true;
-		output = [
-		  "eDP-1"
-		];
+    settings = {
+	    
+	    mainBar = {
+		    layer = "top";
+		    position = "right";
+		    margin = "0 0 0 0";
+		    reload_style_on_change = true;
+		    output = [
+		      "eDP-1"
+		    ];
 
-		
-		modules-left = [ "niri/workspaces" ];
-		modules-center = [ ];
-		modules-right = [ "tray" "wireplumber" "network" "power-profiles-daemon" "battery" "backlight" "clock" "custom/power" ];
+		    
+		    modules-left = [ "niri/workspaces" ];
+		    modules-center = [ ];
+		    modules-right = [ "tray" "wireplumber" "network" "power-profiles-daemon" "battery" "backlight" "clock" "custom/power" ];
 
-		
-		
-		"niri/workspaces" = {
+		    
+		    
+		    "niri/workspaces" = {
           format = "{icon}";
-		  on-click = "activate";
-		  all-outputs = true;
+		      on-click = "activate";
+		      all-outputs = true;
           format-icons = {
-			"1" = "𑙑";
-			"2" = "𑙒";
-			"3" = "𑙓";
-			"4" = "𑙔";
-			"5" = "𑙕";
-			"6" = "𑙖";
-			"7" = "𑙗";
-			"8" = "𑙘";
-			"9" = "𑙙";
-			"10" = "𑙐";
+			      "1" = "𑙑";
+			      "2" = "𑙒";
+			      "3" = "𑙓";
+			      "4" = "𑙔";
+			      "5" = "𑙕";
+			      "6" = "𑙖";
+			      "7" = "𑙗";
+			      "8" = "𑙘";
+			      "9" = "𑙙";
+			      "10" = "𑙑𑙐";
           };
-		};
-		
-		tray = {
+		    };
+		    
+		    tray = {
           icon-size = 16;
           spacing = 8;
         };
 
-		wireplumber =  {
-		  rotate = 270;
+		    wireplumber =  {
+		      rotate = 270;
           format = "{icon}  {volume}%";
           format-muted = " ";
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
@@ -60,19 +60,19 @@
           format-icons = ["" "" " "];
         };
 
-		"network" = {
-          format = "";
-          format-ethernet = "󰈀";
-          format-wifi = "󰖩";
+        network = {
+          format = "{icon}";
+          format-ethernet = "󰈀 {bandwidthDownBits}";
+          format-wifi = "󰖩 {signalStrength}%";
           format-disconnected = "󰖪";
-          tooltip-format = "{ifname} via {gwaddr}";
-          tooltip-format-wifi = "connected to {essid}";
-          tooltip-format-ethernet = "{ifname}";
-          tooltip-format-disconnected = "Disconnected";
-		  on-click = "nm-connection-editor";
+          format-icons = ["󰤫" "󰤟" "󰤢" "󰤥" "󰤨"];
+          tooltip-format-wifi = "{essid} ({signalStrength}%) - {ipaddr}";
+          tooltip-format-ethernet = "{ifname} - {ipaddr}";
+          on-click = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
+          interval = 5;
         };
 
-		power-profiles-daemon = {
+		    power-profiles-daemon = {
           format = "{icon}";
           tooltip-format = "Power profile: {profile}\nDriver: {driver}";
           tooltip = true;
@@ -84,61 +84,72 @@
           };
         };
 
-		"battery" = {
-		  rotate = 270;
-		  states = {
-			good = 95;
-			warning = 20;
-			critical = 15;
-		  };
-		  format = "{icon}  {capacity}";
-		  format-charging = " {capacity}%";
-		  format-full = "<span color='#82A55F'><b>{icon}</b></span>";
-		  format-icons = ["󰁻" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹"];
-		  tooltip-format = "{timeTo} {capacity} % | {power} W";
-		};
+		    "battery" = {
+		      rotate = 270;
+		      states = {
+			      good = 95;
+			      warning = 20;
+			      critical = 15;
+		      };
+		      format = "{icon}  {capacity}";
+		      format-charging = " {capacity}%";
+		      format-full = "<span color='#82A55F'><b>{icon}</b></span>";
+		      format-icons = ["󰁻" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹"];
+		      tooltip-format = "{timeTo} {capacity} % | {power} W";
+		    };
 
-		backlight = {
-		  format = "{icon}";
-		  format-icons = [ "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
-		  ];
-		  tooltip = true;
-		  tooltip-format = "Brightness: {percent}% ";
-		  interval = 1;
-		  on-scroll-up = "brightnessctl s 1%+";
-          on-scroll-down = "brightnessctl s 1%";
-		  # on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set 1%+ &> /dev/null";  
-          # on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set 1%- &> /dev/null";
-		  smooth-scrolling-threshold = 1;
-		};
+		    backlight = {
+		      format = "{icon}";
+		      format-icons = [ "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+		                     ];
+		      tooltip = true;
+		      tooltip-format = "Brightness: {percent}% ";
+		      interval = 1;
+		      #on-scroll-up = "brightnessctl s 1%+";
+          #on-scroll-down = "brightnessctl s 1%";
+          on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set 1%+";
+          on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set 1%-";
+		      smooth-scrolling-threshold = 1;
+		    };
 
-		"clock" = {
-		  format = "{:%H\n%M}";
-		  tooltip-format = "<tt><small>{calendar}</small></tt>";
-		  calendar = {
-			mode = "month";
-			mode-mon-col = 3;
-			weeks-pos = "right";
-			on-scroll = 1;
-			on-click-right = "mode";
-			format = {
-			  today = "<span color='#a6e3a1'><b><u>{}</u></b></span>";
-			};
-		  };
-		};
+		    "clock" = {
+		      format = "{:%H\n%M}";
+		      tooltip-format = "<tt><small>{calendar}</small></tt>";
+		      calendar = {
+			      mode = "month";
+			      mode-mon-col = 3;
+			      weeks-pos = "right";
+			      on-scroll = 1;
+			      on-click-right = "mode";
+			      format = {
+			        today = "<span color='#a6e3a1'><b><u>{}</u></b></span>";
+			      };
+		      };
+		    };
 
-		"custom/power" = {
-		  format = "󰤆";
-		  on-click = "wlogout";
-		  tooltip = false;
-		};
-		
-	  };
+		    "custom/power" = {
+          format = "󰤆";
+          on-click = ''
+    bash -c '
+      option=$(echo -e "⏻ Shutdown\n🔄 Reboot\n⏾ Suspend\n🔒 Lock\n🚪 Logout" | ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt="Power: " --width=25 --lines=5)
+      case "$option" in
+        "⏻ Shutdown") systemctl poweroff ;;
+        "🔄 Reboot") systemctl reboot ;;
+        "⏾ Suspend") systemctl suspend ;;
+        "🔒 Lock") ${pkgs.swaylock}/bin/swaylock ;;
+        "🚪 Logout") niri msg action quit ;;
+      esac
+    '
+  '';
+          tooltip = "Power Menu";
+        };
+		    
+	    };
     };
 
 
-	style =
-	  ''* {
+	  style =
+	    ''* {
     border: none;
     border-radius: 0;
     font-family: "RobotMono Nerd Font";
@@ -146,7 +157,7 @@
     min-height: 0;
     padding: 0;
     margin: 0;
-}
+      }
 
 #waybar {
     background: rgba(30, 30, 30, 0.9);

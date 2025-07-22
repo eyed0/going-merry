@@ -56,6 +56,6 @@
     programs = {
         gamemode.enable = true;
         gamescope.enable = true;
-        coolercontrol.enable = true;
+        #coolercontrol.enable = true;
     };
 }

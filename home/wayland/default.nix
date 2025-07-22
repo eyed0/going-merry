@@ -8,7 +8,7 @@
 	  ./waybar.nix
 	  #./idle_lock.nix
 	  ./xdgdefault.nix
-	  ./eww/default.nix
+	  #./eww/default.nix
 	  #./anyrun.nix # wait for next update
 	  ./swaybg.nix
   ];

@@ -1,29 +1,40 @@
 {
-  config,
-  lib,
-  inputs,
   pkgs,
+  inputs,
   ...
-}:
-let
-  package = inputs.anyrun.packages.${pkgs.system}.anyrun-with-all-plugins;
-in
-  {
-	imports = [ inputs.anyrun.homeManagerModules.default ];
-    programs.anyrun = {
-      enable = true;
-      package = package;
+}: {
+  programs.anyrun = {
+    enable = true;
+    config = {
+      plugins = with inputs.anyrun.packages.${pkgs.system}; [
+        applications
+        shell
+        symbols
+        translate
+      ];
 
-      config = {
-        y.fraction = 0.3;
-        plugins = [
-          "${package}/lib/libapplications.so"
-          "${package}/lib/librink.so"
-          "${package}/lib/libshell.so"
-          "${package}/lib/libdictionary.so"
-          "${package}/lib/libsymbols.so"
-          "${package}/lib/libtranslate.so"
-        ];
-      };
+      width.fraction = 0.25;
+      y.fraction = 0.3;
+      hidePluginInfo = true;
+      closeOnClick = true;
     };
-  }
+
+    extraCss = builtins.readFile (./. + "/anyrun.css");
+
+    extraConfigFiles = {
+      "applications.ron".text = ''
+        Config(
+          desktop_actions: false,
+          max_entries: 5,
+          terminal: Some("ghostty"),
+        )
+      '';
+
+      "shell.ron".text = ''
+        Config(
+          prefix: ">"
+        )
+      '';
+    };
+  };
+}

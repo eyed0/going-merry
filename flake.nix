@@ -21,11 +21,6 @@
 
     #chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
-    # anyrun = {
-    #   url = "github:anyrun-org/anyrun";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
