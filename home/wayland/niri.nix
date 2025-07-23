@@ -14,13 +14,13 @@ in
       input = {
 
         keyboard = {
+          numlock = true;
           xkb = {
             # For more information, see xkeyboard-config(7).
             layout = "us";
             # in,in(marathi)
             
             options = "ctrl:nocaps,keypad:pointerkeys";
-            numlock = true;
           };
           repeat-delay = 500;
           repeat-rate = 25;
@@ -84,6 +84,12 @@ in
         #setting for multiple screeens
         position = { x = 1920; y = 0; };
       };
+
+      overview = {
+        zoom = 0.33;
+        workspace-shadow.enable = false;
+        backdrop-color = "transparent";
+      };
       
       layout = {
         focus-ring.enable = false;
@@ -115,8 +121,8 @@ in
         gaps = 2;
         
         struts = {
-          left = 1;
-          right = 32;
+          left = 16;
+          right = 16;
           top = 1;
           bottom = 1;
         };
@@ -128,9 +134,6 @@ in
         center-focused-column = "always"; # other options "never" "always" "on-overflow"
         default-column-display = "tabbed";
 
-        overview = {
-          zoom = 0.25;
-        };
 
         tab-indicator = {
           hide-when-single-tab = true;
