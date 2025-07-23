@@ -70,7 +70,7 @@
           inherit pkgs;
           modules = [
             ./home.nix
-            #inputs.stylix.homeManagerModules.stylix
+            inputs.stylix.homeModules.stylix
             inputs.niri.homeModules.niri
             #inputs.zen-browser.packages."${system}".default
 		      ];

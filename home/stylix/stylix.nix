@@ -64,10 +64,10 @@
   # stylix.cursor.name = "Bibata-Modern-Ice";
   # stylix.cursor.size = 24;
 
-  #icon style
-  stylix.iconTheme.enable = true;
-  stylix.iconTheme.package = "papirus-icon-theme";
-  stylix.iconTheme.dark = "papirus-icon-theme";
+  # #icon style
+  # stylix.iconTheme.enable = true;
+  # stylix.iconTheme.package = "papirus-icon-theme";
+  # stylix.iconTheme.dark = "papirus-icon-theme";
 
   #opacity
   stylix.opacity.applications = 0.95;

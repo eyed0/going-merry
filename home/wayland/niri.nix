@@ -167,6 +167,7 @@ in
       ];
 
       xwayland-satellite.enable = true;
+      #xwayland-satellite.path = "${lib.getExe pkgs.xwayland-satellite-unstable}";
       
       # You can override environment variables for processes spawnend by niri.
       environment = {
@@ -195,29 +196,29 @@ in
         enable = true;
         slowdown = 1.0;
         
-        workspace-switch = {
+        workspace-switch.kind = {
           spring = { damping-ratio = 1.0; stiffness = 1000; epsilon = 0.0001; };
         };
         
-        horizontal-view-movement = {
+        horizontal-view-movement.kind = {
           spring = { damping-ratio = 1.0; stiffness = 800; epsilon = 0.0001; };
         };
         
-        window-open = {
+        window-open.kind = {
           easing = {
             curve = "ease-out-expo";
             duration-ms = 150;
           };
         };
         
-        window-close = {
+        window-close.kind = {
           easing = {
             curve = "ease-out-quad";
             duration-ms = 150;
           };
         };
         
-        window-movement = {
+        window-movement.kind = {
           spring = {
             damping-ratio = 1.000000;
             epsilon = 0.000100;
@@ -225,7 +226,7 @@ in
           };
         };
         
-        window-resize = {
+        window-resize.kind = {
           spring = {
             damping-ratio = 1.000000;
             epsilon = 0.000100;
@@ -233,7 +234,7 @@ in
           };
         };
         
-        config-notification-open-close = {
+        config-notification-open-close.kind = {
           spring = {
             damping-ratio = 0.600000;
             epsilon = 0.001000;
@@ -241,7 +242,7 @@ in
           };
         };
         
-        screenshot-ui-open = {
+        screenshot-ui-open.kind = {
           easing = {
             curve = "ease-out-quad";
             duration-ms = 200;

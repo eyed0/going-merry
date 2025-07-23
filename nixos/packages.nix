@@ -11,7 +11,7 @@
       tree
       nh # TODO https://github.com/viperML/nh, turn it module 
       nixd
-      libgcc
+      gcc
       lldb
       helix
       rustup
