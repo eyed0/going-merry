@@ -12,14 +12,15 @@ in
     package = pkgs.niri-unstable;
     settings = {
       input = {
+
         keyboard = {
           xkb = {
             # For more information, see xkeyboard-config(7).
             layout = "us";
             # in,in(marathi)
+            
             options = "ctrl:nocaps,keypad:pointerkeys";
-            # numpad:pc for numlock
-            # Layout of numeric keypad - keypad:legacy
+            numlock = true;
           };
           repeat-delay = 500;
           repeat-rate = 25;
@@ -35,9 +36,11 @@ in
           natural-scroll = false;
           # accel-speed = 0.2;
           # accel-profile = "flat";
-          tap-button-map = "left-middle-right";
+          tap-button-map = "left-right-middle";
           click-method = "clickfinger";
           scroll-method = "two-finger";
+          drag = true;
+          drag-lock = true;
         };
         
         mouse = {
@@ -88,11 +91,11 @@ in
           enable = true;
           width = 2;
           active = {
-            color = "rgb(153,188,133)";
+            color = "#E67E80";
           };
           # active-gradient = { from = "#93A5CF"; to = "#E4EfE9"; angle = 45; };
           inactive = {
-            color = "rgb(37,95,56)";
+            color = "#7FBBB3";
           };
         };
 
@@ -122,8 +125,12 @@ in
         #   color = "#DD2476";
         # };
         
-        center-focused-column = "on-overflow"; # other options "never" "always"
+        center-focused-column = "always"; # other options "never" "always" "on-overflow"
         default-column-display = "tabbed";
+
+        overview = {
+          zoom = 0.25;
+        };
 
         tab-indicator = {
           hide-when-single-tab = true;
@@ -147,13 +154,16 @@ in
       # which may be more convenient to use.
       
       spawn-at-startup = [
-        (makeCommand "foot -e fish")
-        (makeCommand "eww opne bar")
-        (makeCommand "xwayland-satellite")
+        (makeCommand "waybar")
         (makeCommand "kdeconnect")
-        (makeCommand "emacsclient -c")
+        {command = ["foot" "-e" "fish"];}
+        #{command = ["eww" "open" "bar"];}
+        {command = ["emacsclient" "-c"];}
+        {command = ["wl-paste" "--watch" "cliphist" "store"];}
+        {command = ["wl-paste" "--type text" "--watch" "cliphist" "store"];}
       ];
 
+      xwayland-satellite.enable = true;
       
       # You can override environment variables for processes spawnend by niri.
       environment = {
