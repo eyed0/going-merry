@@ -80,10 +80,10 @@
       name = "Atkinson Hyperlegible";
     };
 
-    #monospace = {
-    #  package = pkgs.cascadia-code;
-    #  name = "PragmataProLiga Nerd Font";
-    #};
+    monospace = {
+     package = pkgs.iosevka;
+     name = "Iosevka Nerd Font";
+    };
 
     emoji = {
       package = pkgs.noto-fonts-emoji;
