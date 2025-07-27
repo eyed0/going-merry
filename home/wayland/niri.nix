@@ -86,7 +86,7 @@ in
       };
 
       overview = {
-        zoom = 0.33;
+        zoom = 0.40;
         workspace-shadow.enable = false;
         backdrop-color = "transparent";
       };
@@ -121,8 +121,8 @@ in
         gaps = 2;
         
         struts = {
-          left = 16;
-          right = 16;
+          left = 20;
+          right = 20;
           top = 1;
           bottom = 1;
         };

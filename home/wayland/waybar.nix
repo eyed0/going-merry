@@ -66,7 +66,7 @@
 		    wireplumber =  {
 		      rotate = 270;
           format = "{icon}  {volume}%";
-          format-muted = " ";
+          format-muted = "";
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           max-volume = 120;
           scroll-step = 1;
@@ -105,7 +105,7 @@
 			      critical = 15;
 		      };
 		      format = "{icon}  {capacity}";
-		      format-charging = " {capacity}%";
+		      format-charging = " {capacity}%";
 		      format-full = "<span color='#82A55F'><b>{icon}</b></span>";
 		      format-icons = ["󰁻" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹"];
 		      tooltip-format = "{timeTo} {capacity} % | {power} W";
@@ -113,8 +113,7 @@
 
 		    backlight = {
 		      format = "{icon}";
-		      format-icons = [ "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
-		                     ];
+		      format-icons = [ "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""];
 		      tooltip = true;
 		      tooltip-format = "Brightness: {percent}% ";
 		      interval = 1;
@@ -192,6 +191,7 @@
 #waybar {
     background: rgba(30, 30, 30, 0.9);
     color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 #workspaces {
