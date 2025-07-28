@@ -2,7 +2,7 @@
 
 {
 
-  age.identityPaths = [ "/home/heehaw/.age/key.txt" ];
+  age.identityPaths = [ "/home/heehaw/.age/agekey.txt" ];
 
   age.secrets = {
     
