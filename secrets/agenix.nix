@@ -1,14 +1,18 @@
 { config, pkgs, ... }:
 
 {
-  # TODO https://claude.ai/chat/7d4a0325-e86d-45ae-b93b-897c67ec7fc2
 
   age.identityPaths = [ "/home/heehaw/.age/key.txt" ];
 
-  # age.secrets.example-secret = {
-  #   file = ./example-secret.age;
-  #   owner = "heehaw";
-
+  age.secrets = {
+    
+    gnc3 = {
+      file = ./secrets/gnc3.age;
+      mode = "400";
+      owner = "heehaw";  
+      group = "users";
+    };
+    
   #   # group = "users";
   #   # for group Common values include:
   #   # "users" - the standard users group on most systems
@@ -25,7 +29,7 @@
   #   # "0600" - read/write by owner (if the service needs to modify the file)
   #   # mode defaults to "0400" 
     
-  # };
+  };
 
   # # Use the secret in a service
   # # Example: Using the secret as a password file for a service
