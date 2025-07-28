@@ -11,4 +11,5 @@ in
   #"secrets/example-secret.age".publicKeys = allKeys;
   #"secrets/another-secret.age".publicKeys = [ heehaw ];
   "secrets/gnc3.age".publicKeys = allKeys;
+  "secrets/password.age".publicKeys = allKeys;
 }

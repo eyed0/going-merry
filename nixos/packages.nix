@@ -16,8 +16,6 @@
       helix
       rustup
       tree-sitter
-      age
-      agenix-cli
       rage
       ragenix
       # statix # Lints and suggestions for the nix programming language

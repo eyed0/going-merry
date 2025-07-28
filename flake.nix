@@ -21,8 +21,8 @@
 
     #chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
-    agenix = {
-      url = "github:ryantm/agenix";
+    ragenix = {
+      url = "github:yaxitech/ragenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -60,7 +60,7 @@
           modules = [
             ./configuration.nix
             inputs.stylix.nixosModules.stylix
-            inputs.agenix.nixosModules.default
+            inputs.ragenix.nixosModules.default
             inputs.niri.nixosModules.niri
             #inputs.chaotic.nixosModules.default
           ];
