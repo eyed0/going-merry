@@ -173,8 +173,16 @@
   hardware.logitech.wireless.enable = true;
   hardware.logitech.wireless.enableGraphical = true;
 
-  services.tailscale.enable = true;
-  
+  services.tailscale = {
+    enable = true;
+    extraUpFlags = [
+      "--ssh"
+      "--accept-routes"
+    ];
+  };
+
+  environment.systemPackages = with pkgs; [ tailscale ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   #nixpkgs.config.allowUnsupportedSystem = true;
