@@ -16,6 +16,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    zen-browser = {
+    url = "github:0xc000022070/zen-browser-flake";
+    inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # niri-working-tree.url = "github:sodiboo/niri/sodi-bonus-features";
     # niri-working-tree.flake = false;
 
@@ -72,7 +77,6 @@
             ./home.nix
             inputs.stylix.homeModules.stylix
             inputs.niri.homeModules.niri
-            #inputs.zen-browser.packages."${system}".default
 		      ];
 		      extraSpecialArgs = { inherit inputs; };
         };

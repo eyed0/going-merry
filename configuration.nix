@@ -183,6 +183,38 @@
 
   environment.systemPackages = with pkgs; [ tailscale ];
 
+  networking.firewall = {
+    allowedTCPPorts = [
+      7777
+      28900
+      28910
+    ];
+
+    allowedTCPPortRanges = [
+      {
+        from = 27015;
+        to = 27030;
+      }
+      {
+        from = 27036;
+        to = 27037;
+      }
+    ];
+
+    allowedUDPPorts = [
+      4380
+      7777
+      27036
+      27900
+    ];
+    allowedUDPPortRanges = [
+      {
+        from = 27000;
+        to = 27036;
+      }
+    ];
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   #nixpkgs.config.allowUnsupportedSystem = true;

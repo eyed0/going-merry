@@ -27,7 +27,7 @@
       #       email
 
       aerc
-      thunderbird
+      inputs.zen-browser.packages."${system}".beta
 
       #       apps
 

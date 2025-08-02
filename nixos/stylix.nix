@@ -64,22 +64,40 @@
     # base0E = "#a04545"; # Keywords - darker red
     # base0F = "#7a5219"; # Deprecated - darker brown orange
 
-    base00 = "0f1419"; # Default Background - very dark blue-grey
-    base01 = "1a1f29"; # Lighter Background (status bars, line numbers)
-    base02 = "232834"; # Selection Background - dark grey-blue
-    base03 = "2d3343"; # Comments, Invisibles, Line Highlighting
-    base04 = "4a5462"; # Dark Foreground (status bars)
-    base05 =  "a7b7c6"; # Default Foreground - muted blue-grey
-    base06 = "b8c5d1"; # Light Foreground (not often used)
-    base07 = "d3dae3"; # Light Background (not often used)
-    base08 = "d67e7e"; # Variables, XML Tags, Markup Link Text - muted red
-    base09 = "d69e5a"; # Integers, Boolean, Constants - darker orange
-    base0A = "c2b680"; # Classes, Markup Bold, Search Text Background - muted yellow
-    base0B = "7fb069"; # Strings, Inherited Class, Markup Code - forest green
-    base0C = "6bb3a0"; # Support, Regular Expressions, Escape Characters - teal
-    base0D = "7aa2d4"; # Functions, Methods, Attribute IDs, Headings - muted blue
-    base0E =  "b4a7d6"; # Keywords, Storage, Selector, Markup Italic - muted purple
-    base0F = "c17b69"; # Deprecated, Opening/Closing Embedded Language Tags - rust
+    # base00 = "0f1419"; # Default Background - very dark blue-grey
+    # base01 = "1a1f29"; # Lighter Background (status bars, line numbers)
+    # base02 = "232834"; # Selection Background - dark grey-blue
+    # base03 = "2d3343"; # Comments, Invisibles, Line Highlighting
+    # base04 = "4a5462"; # Dark Foreground (status bars)
+    # base05 =  "a7b7c6"; # Default Foreground - muted blue-grey
+    # base06 = "b8c5d1"; # Light Foreground (not often used)
+    # base07 = "d3dae3"; # Light Background (not often used)
+    # base08 = "d67e7e"; # Variables, XML Tags, Markup Link Text - muted red
+    # base09 = "d69e5a"; # Integers, Boolean, Constants - darker orange
+    # base0A = "c2b680"; # Classes, Markup Bold, Search Text Background - muted yellow
+    # base0B = "7fb069"; # Strings, Inherited Class, Markup Code - forest green
+    # base0C = "6bb3a0"; # Support, Regular Expressions, Escape Characters - teal
+    # base0D = "7aa2d4"; # Functions, Methods, Attribute IDs, Headings - muted blue
+    # base0E =  "b4a7d6"; # Keywords, Storage, Selector, Markup Italic - muted purple
+    # base0F = "c17b69"; # Deprecated, Opening/Closing Embedded Language Tags - rust
+
+    base00 = "232a2e";  # Default Background (bg_dim - darkest available)
+    base01 = "2d353b";  # Lighter Background (bg0)
+    base02 = "343f44";  # Selection Background (bg1)
+    base03 = "859289";  # Comments, Invisibles, Line Highlighting (grey1 - brighter for contrast)
+    base04 = "9da9a0";  # Dark Foreground (grey2 - brighter)
+    base05 = "e8dcc6";  # Default Foreground (brightened fg)
+    base06 = "f0e9d2";  # Light Foreground (even brighter)
+    base07 = "4f585e";  # Light Background (bg4)
+    base08 = "f85552";  # Variables, XML Tags, Markup Link Text (brightened red)
+    base09 = "f57c00";  # Integers, Boolean, Constants (enhanced orange)
+    base0A = "e6c547";  # Classes, Markup Bold, Search Text Background (brightened yellow)
+    base0B = "8fb573";  # Strings, Inherited Class, Markup Code (enhanced green)
+    base0C = "6ec398";  # Support, Regular Expressions, Escape Characters (enhanced aqua)
+    base0D = "5cb3cc";  # Functions, Methods, Attribute IDs (brightened blue)
+    base0E = "e27d60"; # Keywords, Storage, Selector (enhanced purple/pink)
+    base0F = "bf616a";  # Deprecated, Opening/Closing Embedded Language Tags (bright red-brown)
+
     
   };
 
