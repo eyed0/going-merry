@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 let
   ivoPro = pkgs.iosevka.override {
     set = "IvoPro";
@@ -7,114 +6,92 @@ let
       family = "IvoPro";
       spacing = "term";
       serifs = "sans";
+      no-cv-ss = false;
+      export-glyph-names = false;
       
       variants = {
         inherits = "ss08";
+        # Start with minimal variants, add more once this works
         design = {
-
-          capital-a = "straight-serifless";
-          capital-b = "standard-bilateral-serifless";
-          capital-c = "serifless";
-          capital-d = "standard-serifless";
-          capital-e = "serifless";
-          capital-f = "serifless";
-          capital-g = "toothless-corner-serifless-capped";
-          capital-h = "serifless";
-          capital-i = "serifless";
-          capital-j = "serifless";
-          capital-k = "straight-serifless";
-          capital-l = "serifless";
-          capital-m = "hanging-serifless";
-          capital-n = "standard-serifless";
-          capital-o = "serifless";
-          capital-p = "serifless";
-          capital-q = "detached-bend-serifless";
-          capital-r = "straight-serifless";
-          capital-s = "serifless";
-          capital-t = "serifless";
-          capital-u = "toothless-rounded-serifless";
-          capital-v = "straight-serifless";
-          capital-w = "straight-flat-top-serifless";
-          capital-x = "straight-serifless";
-          capital-y = "straight-serifless";
-          capital-z = "straight-serifless-with-crossbar";
-          
-          a = "double-storey-serifless";
-          b = "toothless-rounded-serifless";
-          c = "serifless";
-          d = "toothless-rounded-serifless";
-          e = "flat-crossbar";
-          f = "straight-serifless";
-          g = "single-storey-flat-hook-serifless";
-          h = "straight-serifless";
-          i = "serifed-flat-tailed";
-          j = "serifed-flat-tailed";
-          k = "straight-serifless";
-          l = "serifed-flat-tailed";
-          m = "earless-rounded-double-arch-serifless";
-          n = "earless-rounded-straight-serifless";
-          o = "serifless";
-          p = "earless-rounded-serifless";
-          q = "earless-rounded-serifless";
-          r = "serifless";
-          s = "serifless";
-          t = "standard";
-          u = "toothless-rounded-serifless";
-          v = "straight-serifless";
-          w = "straight-flat-top-serifless";
-          x = "straight-serifless";
-          y = "straight-turn-serifless";
-          z = "straight-serifless-with-crossbar";
-          
+          # Just a few key PragmataPro characteristics
           zero = "dotted";
-          one = "flat-top-base";
-          two = "straight-neck-serifless";
-          three = "two-arcs";
+          # one = "flat-top-base";
           four = "closed-serifless";
-          five = "straight-upper-left-serifless";
-          six = "straight-bar";
-          seven = "straight-serifless";
-          eight = "crossing";
-          nine = "straight-bar";
-          
-          # Symbols - PragmataPro style
-          at = "fourfold-solid";
-          ampersand = "flat-top";
-          dollar = "through";
-          percent = "dots";
-          question = "smooth";
-          asterisk = "turn-hex-low";
+          g = "single-storey-flat-hook-serifless";
+          a = "double-storey-serifless";
+        };
+      };
+      
+      weights = {
+        regular = {
+          shape = 380;  # Lighter than standard 400
+          menu = 380;
+          css = 380;
+        };
+        bold = {
+          shape = 680;  # Lighter than standard 700
+          menu = 680;
+          css = 680;
+        };
+      };
+      
+      slopes = {
+        upright = {
+          angle = 0;
+          shape = "upright";
+          menu = "upright";
+          css = "normal";
+        };
+        italic = {
+          angle = 9.4;
+          shape = "italic";
+          menu = "italic";
+          css = "italic";
         };
       };
       
       widths = {
-        normal = 480;
-      };
-      
-      slopes = {
-        upright = 0;
-        italic = 9.4;
-      };
-      
-      weights = {
-        regular = 380;
-        bold = 680;
+        normal = {
+          shape = 480;  # More compact than 500
+          menu = 5;
+          css = "normal";
+        };
       };
     };
   };
-
-  # Patch with Nerd Fonts
-  ivoProNerd = pkgs.nerdfonts.override {
-    fonts = [ ivoPro ];
+  
+  # Patch with Nerd Fonts using font-patcher
+  ivoProNerd = pkgs.stdenv.mkDerivation {
+    pname = "ivopro-nerd-font";
+    version = ivoPro.version;
+    
+    src = ivoPro;
+    
+    nativeBuildInputs = with pkgs; [
+      nerd-font-patcher
+    ];
+    
+    buildPhase = ''
+      mkdir -p $out/share/fonts/truetype
+      
+      # Patch all font files
+      for font in $src/share/fonts/truetype/*.ttf; do
+        echo "Patching font: $(basename "$font")"
+        nerd-font-patcher \
+          --complete \
+          --outputdir $out/share/fonts/truetype \
+          "$font"
+      done
+    '';
+    
+    installPhase = "true"; # Files already in place from buildPhase
+    
+    meta = ivoPro.meta // {
+      description = "IvoPro font patched with Nerd Fonts";
+    };
   };
 in
 {
   # For system-wide installation (configuration.nix)
   fonts.packages = [ ivoProNerd ];
-  
-  # OR for home-manager (home.nix)
-  # home.packages = [ ivoProNerd ];
-  
-  # Optional: Set as default monospace font
-  #fonts.fontconfig.defaultFonts.monospace = [ "IvoPro Nerd Font" ];
 }
