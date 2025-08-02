@@ -13,6 +13,7 @@
 	  #./home/notmuch.nix TODO
 	  #./home/kanata.nix
     ./home/email.nix
+    ./home/zen.nix
   ];
   home.username = "heehaw";
   home.homeDirectory = "/home/heehaw";
