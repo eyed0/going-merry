@@ -114,7 +114,7 @@
     };
 
     monospace = {
-      name = "IvoPro Nerd Font";
+      name = "IoPro Nerd Font";
     };
 
     emoji = {

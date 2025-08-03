@@ -8,7 +8,7 @@
 	  #./home/mpv/mpv.nix
     ./home/jujutsu.nix
 	  #./home/music/beets.nix
-	  ./home/spell.nix
+	  #./home/spell.nix
     #./home/firefox/firefoxhm.nix # it works but I will work on it later
 	  #./home/notmuch.nix TODO
 	  #./home/kanata.nix
@@ -26,13 +26,13 @@
   home.packages = [
     #pkgs.eza
     #pkgs.mpv
-    pkgs.scrcpy
+    #pkgs.scrcpy
     #pkgs.jetbrains.idea-community
     #pkgs.jetbrains.rust-rover
     pkgs.papirus-icon-theme
-    pkgs.bookworm
+    #pkgs.bookworm
     #pkgs.claude-code
-    pkgs.powerstation
+    #pkgs.powerstation
   ];
   services.emacs.client.enable = true;
 

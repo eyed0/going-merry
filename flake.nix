@@ -59,7 +59,7 @@
 	    {
         packages.x86_64-linux.hello = pkgs.hello;
         packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
-        nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        nixosConfigurations.nyxos = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux"; 
           specialArgs = { inherit inputs; };
           modules = [

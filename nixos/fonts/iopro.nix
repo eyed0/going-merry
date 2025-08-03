@@ -32,15 +32,24 @@ let
           css = 680;
         };
       };
+
+      widths = {
+        normal = {
+          shape = 456;
+          menu = 5;
+          css = "normal";
+        };
+      };
+
       
       # Metric overrides for better PragmataPro matching
       metricOverride = {
-        leading = 1180;           # Line height
-        winAscent = 975;         # Windows ascent
-        winDescent = 175;         # Windows descent
-        typoAscent = 975;         # Typographic ascent (match winAscent)
-        typoDescent = -175;       # Typographic descent (match winDescent)
-        xHeight = 530;            # x-height for better proportions
+        leading = 1200;           # Line height
+        winAscent = 1000;         # Windows ascent
+        winDescent = 200;         # Windows descent
+        typoAscent = 800;         # Typographic ascent (match winAscent)
+        typoDescent = -200;       # Typographic descent (match winDescent)
+        xHeight = 550;            # x-height for better proportions
         capHeight = 780;          # Capital height
       };
     };
