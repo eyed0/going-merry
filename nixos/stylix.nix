@@ -114,8 +114,7 @@
     };
 
     monospace = {
-      package = pkgs.iosevka;
-      name = "Iosevka Nerd Font";
+      name = "IvoPro Nerd Font";
     };
 
     emoji = {

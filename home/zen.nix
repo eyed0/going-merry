@@ -2,53 +2,6 @@
   imports = [inputs.zen-browser.homeModules.beta];
   programs.zen-browser = {
     enable = true;
-    # https://mozilla.github.io/policy-templates/
-    preferences = {
-      # Zen-specific settings
-      "zen.urlbar.replace-newtab" = false;
-      
-      # Privacy preferences
-      "privacy.donottrackheader.enabled" = true;
-      "privacy.trackingprotection.enabled" = true;
-      "privacy.trackingprotection.socialtracking.enabled" = true;
-      "privacy.firstparty.isolate" = true;
-      "privacy.resistFingerprinting" = true;
-      "privacy.clearOnShutdown.cookies" = false; # Set to true if you want cookies cleared
-      "privacy.clearOnShutdown.cache" = true;
-      "privacy.clearOnShutdown.downloads" = false;
-      "privacy.clearOnShutdown.formdata" = true;
-      "privacy.clearOnShutdown.history" = false;
-      "privacy.clearOnShutdown.sessions" = false;
-      
-      # Network settings
-      "network.cookie.sameSite.noneRequiresSecure" = true;
-      "network.dns.disablePrefetch" = true;
-      "network.prefetch-next" = false;
-      "network.predictor.enabled" = false;
-      
-      # UI/UX improvements
-      "browser.tabs.closeWindowWithLastTab" = false;
-      "browser.tabs.warnOnClose" = false;
-      "browser.urlbar.suggest.searches" = false;
-      "browser.urlbar.suggest.topsites" = false;
-      "browser.newtabpage.activity-stream.showSponsored" = false;
-      "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
-      "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
-      "browser.newtabpage.activity-stream.feeds.snippets" = false;
-      "browser.aboutConfig.showWarning" = false;
-      "browser.download.useDownloadDir" = true;
-      "browser.download.always_ask_before_handling_new_types" = false;
-      
-      # Performance
-      "gfx.webrender.all" = true;
-      "layers.acceleration.force-enabled" = true;
-      "media.ffmpeg.vaapi.enabled" = true; # Hardware video acceleration
-      
-      # Security
-      "security.tls.insecure_fallback_hosts" = "";
-      "security.mixed_content.block_active_content" = true;
-      "security.mixed_content.block_display_content" = true;
-    };
     
     policies = {
       # Existing policies
@@ -56,9 +9,7 @@
       AutofillCreditCardEnabled = false;
       DisableAppUpdate = true;
       DisableFeedbackCommands = true;
-      DisableFirefoxStudies = true;
       DisablePocket = true;
-      DisableTelemetry = true;
       DNSOverHTTPS = {
         Enabled = false;
         Locked = true;
@@ -77,10 +28,7 @@
       DisableSystemAddonUpdate = true;
       DisableProfileImport = true;
       DisableProfileRefresh = true;
-      DisablePasswordReveal = true;
       DisableCrashReporter = true;
-      DisableFirefoxStudies = true;
-      DisableTelemetry = true;
       BlockAboutAddons = false;
       BlockAboutConfig = false;
       BlockAboutProfiles = false;
@@ -104,7 +52,6 @@
       DisableForgetButton = false; # Keep this for privacy
       DisableFormHistory = true;
       DisableMasterPasswordCreation = false; # Allow if you want master passwords
-      DisablePasswordReveal = true;
       DisableSetDesktopBackground = true;
       
       # Network policies
@@ -216,14 +163,6 @@
         };
       };
       
-      # User preferences that can't be locked but are set
-      Preferences = {
-        "browser.cache.disk.enable" = false;
-        "browser.sessionstore.privacy_level" = 2;
-        "dom.security.https_only_mode" = true;
-        "network.http.referer.XOriginPolicy" = 2;
-        "network.http.referer.XOriginTrimmingPolicy" = 2;
       };
-    };
   };
 }

@@ -4,7 +4,7 @@ let
     set = "IvoPro";
     privateBuildPlan = {
       family = "IvoPro";
-      spacing = "term";
+      spacing = "normal";
       serifs = "sans";
       no-cv-ss = false;
       export-glyph-names = false;
@@ -106,14 +106,14 @@ let
       
       weights = {
         regular = {
-          shape = 370;  # Even lighter for PragmataPro feel
-          menu = 370;
-          css = 370;
+          shape = 400;  # Even lighter for PragmataPro feel
+          menu = 400;
+          css = 400;
         };
         bold = {
-          shape = 650;  # Medium-bold rather than heavy
-          menu = 650;
-          css = 650;
+          shape = 680;  # Medium-bold rather than heavy
+          menu = 680;
+          css = 680;
         };
       };
       
@@ -134,7 +134,7 @@ let
       
       widths = {
         normal = {
-          shape = 470;  # Slightly more compact
+          shape = 490;  # Slightly more compact
           menu = 5;
           css = "normal";
         };
@@ -142,13 +142,13 @@ let
       
       # Metric overrides for better PragmataPro matching
       metricOverride = {
-        leading = 1250;           # Line height
-        winAscent = 880;          # Windows ascent
-        winDescent = 220;         # Windows descent
-        typoAscent = 860;         # Typographic ascent  
-        typoDescent = -140;       # Typographic descent
-        xHeight = 520;            # x-height for better proportions
-        capHeight = 720;          # Capital height
+        leading = 1200;           # Line height
+        winAscent = 1000;          # Windows ascent
+        winDescent = 200;         # Windows descent
+        typoAscent = 800;         # Typographic ascent  
+        typoDescent = -200;       # Typographic descent
+        xHeight = 540;            # x-height for better proportions
+        capHeight = 780;          # Capital height
       };
     };
   };
@@ -213,3 +213,34 @@ in
     '';
   };
 }
+
+
+
+# leading (1200)
+
+# Total line height (space between baselines of consecutive lines)
+# Higher = more space between lines of text
+# 1200 units = slightly tighter than default Iosevka
+
+# winAscent (1000) & winDescent (200)
+
+# Windows-specific measurements for clipping
+# Define the absolute bounds of the character box
+# Total character box height = winAscent + winDescent = 1200 units
+
+# typoAscent (800) & typoDescent (-200)
+
+# Typography measurements for proper text layout
+# More precise than win metrics
+# Used by modern layout engines
+
+# xHeight (520)
+
+# Height of lowercase letters like 'x', 'a', 'e'
+# Affects readability and visual weight of text
+# 520 = slightly shorter x-height (more compact look)
+
+# capHeight (735)
+
+# Height of uppercase letters like 'A', 'B', 'C'
+# 735 = slightly shorter caps (less imposing uppercase)
