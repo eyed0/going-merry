@@ -3,8 +3,8 @@
 
   imports =
     [
-      ./ivopro.nix
-      ./iopro.nix
+      #./ivopro.nix
+      #./iopro.nix
     ];
   
   fonts.packages = with pkgs; [

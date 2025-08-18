@@ -38,7 +38,7 @@
       wineWowPackages.unstableFull
       
       umu-launcher
-      ryujinx
+      ryubing
       protonup
       protonup-qt
       scanmem

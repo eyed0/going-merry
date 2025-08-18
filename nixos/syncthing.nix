@@ -12,6 +12,7 @@
     #configDir = "~/.config/syncthing/";
     overrideDevices = true;     # Override devices configured in the WebUI
     overrideFolders = true;     # Override folders configured in the WebUI
+    
     settings = {
       devices = {
         "device1" = {
@@ -21,7 +22,9 @@
           introducer = true;   # Allow this device to introduce new devices
         };
       };
+      
       folders = {
+        
         "IMP" = {            # Folder ID for the Documents folder
           path = "/home/heehaw/Sync/IMP/";   # Local path to be synchronized
           devices = [ "device1" ];     # Devices to sync this folder with
@@ -35,54 +38,62 @@
           #   };
           # };
         };
+        
         "Photos" = {
           path = "/home/heehaw/Sync/Photos/";
           devices = [ "device1" ];
           ignorePerms = false;
           rescanIntervalS = 1200;
         };
+        
         "Whatsapp" = {
           path = "/home/heehaw/Sync/whatsapp";
           devices = [ "device1" ];
           ignorePerms = false;
           rescanIntervalS = 1200;
         };
+        
         "songs" = {
           path = "/home/heehaw/00/songs/";
           devices = [ "device1" ];
           ignorePerms = false;
           rescanIntervalS = 1200;
         };
+        
         "flakes" = {
           path = "/home/heehaw/flake/";
           devices = [ "device1" ];
           ignorePerms = false;
           rescanIntervalS = 1200;
         };
-        "doom" = {
-          path = "/home/heehaw/.config/doom/";
-          devices = [ "device1" ];
-          ignorePerms = false;
-          rescanIntervalS = 1200;
-        };
+        
+        # "doom" = {
+        #   path = "/home/heehaw/.config/doom/";
+        #   devices = [ "device1" ];
+        #   ignorePerms = false;
+        #   rescanIntervalS = 1200;
+        # };
+        
         "org" = {
           path = "/home/heehaw/org/";
           devices = [ "device1" ];
           ignorePerms = false;
           rescanIntervalS = 1200;
         };
-		    "emacsInit" = {
-		      path = "/home/heehaw/.emacs.d";
-		      ignorePatterns = [
-		      	"*"
-		      	"!/home/heehaw/.emacs.d/init.el"
-		      	"!/home/heehaw/.emacs.d/early-init.el"
-            "!/home/heehaw/.emacs.d/configs/**"
-		      ];
-		      devices = [ "device1"];
-		      ignorePerms = false;
-		      rescanIntervalS = 1200;
-		    };
+        
+		    # "emacsInit" = {
+		    #   path = "/home/heehaw/.emacs.d";
+		    #   ignorePatterns = [
+		    #   	"*"
+		    #   	"!/home/heehaw/.emacs.d/init.el"
+		    #   	"!/home/heehaw/.emacs.d/early-init.el"
+        #     "!/home/heehaw/.emacs.d/configs/**"
+		    #   ];
+		    #   devices = [ "device1"];
+		    #   ignorePerms = false;
+		    #   rescanIntervalS = 1200;
+		    # };
+        
       };
       # options = {
       #   listenAddress = "0.0.0.0:22000";  # Address and port for Syncthing to listen on

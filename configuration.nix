@@ -17,6 +17,7 @@
       ./nixos/git.nix
       ./nixos/packages.nix
       ./nixos/pipewire/pipwire.nix
+      #./nixos/pipewire/pipewiren.nix
       ./nixos/yazi.nix
       ./nixos/stylix.nix
       #./nixos/bluetooth.nix
