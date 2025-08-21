@@ -19,6 +19,7 @@
       rage
       ragenix
       # statix # Lints and suggestions for the nix programming language
+      sqlite
 
       # jdk23
       # maven
