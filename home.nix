@@ -14,6 +14,7 @@
 	  #./home/kanata.nix
     ./home/email.nix
     ./home/zen.nix
+    ./home/finance.nix
   ];
   home.username = "heehaw";
   home.homeDirectory = "/home/heehaw";
@@ -31,8 +32,8 @@
     #pkgs.jetbrains.rust-rover
     pkgs.papirus-icon-theme
     #pkgs.bookworm
-    #pkgs.claude-code
     #pkgs.powerstation
+    pkgs.poppler-utils
   ];
   services.emacs.client.enable = true;
 
