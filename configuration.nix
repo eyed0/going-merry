@@ -23,6 +23,7 @@
       #./nixos/bluetooth.nix
       #./secrets/secrets.nix
       ./secrets/agenix.nix
+      #./nixos/text.nix
     ];
 
   #latest linux kernel
@@ -33,8 +34,8 @@
     #"amdgpu.ppfeaturemask=0xffffffff" # Unlock all PowerPlay features
     "amdgpu.gpu_recovery=1"           # Enable GPU recovery
   ];
-  services.scx.enable = true;
-  services.scx.scheduler = "scx_lavd"; # default is "scx_rustland"
+  #services.scx.enable = true;
+  #services.scx.scheduler = "scx_lavd"; # default is "scx_rustland"
   
   #The kernel can load the correct driver right away:
   boot.initrd.kernelModules = [ "amdgpu" ];
