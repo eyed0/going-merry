@@ -22,7 +22,7 @@
     # # Whether to enable amdgpu overdrive mode for overclocking.
     # hardware.amdgpu.overdrive.enable = true;
 
-    services.lact.enable = true;
+    # services.lact.enable = true;
 
     # hardware.amdgpu.opencl.enable = true;
     # services.ollama.enable = true;

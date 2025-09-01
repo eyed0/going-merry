@@ -34,8 +34,8 @@
     #"amdgpu.ppfeaturemask=0xffffffff" # Unlock all PowerPlay features
     "amdgpu.gpu_recovery=1"           # Enable GPU recovery
   ];
-  #services.scx.enable = true;
-  #services.scx.scheduler = "scx_lavd"; # default is "scx_rustland"
+  services.scx.enable = true;
+  services.scx.scheduler = "scx_lavd"; # default is "scx_rustland"
   
   #The kernel can load the correct driver right away:
   boot.initrd.kernelModules = [ "amdgpu" ];
@@ -119,7 +119,7 @@
   services.desktopManager.plasma6.enable = true;
 
   services.displayManager.sessionPackages =
-   [pkgs.niri]; # for niri to show in sddm
+    [pkgs.niri]; # for niri to show in sddm
   systemd.packages = [
     pkgs.niri
     pkgs.xwayland-satellite
@@ -167,6 +167,11 @@
     package = pkgs.emacs-pgtk;
     startWithGraphical = true;
     defaultEditor = true;
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true; # Better Nix integration
   };
 
   programs.kdeconnect.enable = true;

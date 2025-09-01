@@ -181,7 +181,7 @@
 	    ''* {
     border: none;
     border-radius: 0;
-    font-family: "IvoPro Nerd Font";
+    font-family: "IoPro Nerd Font";
     font-size: 16px;
     min-height: 0;
     padding: 0;
@@ -308,7 +308,7 @@ tooltip label {
 
 #clock tooltip label {
     padding: 16px;
-    font-family: "IvoPro Nerd Font", monospace;
+    font-family: "IoPro Nerd Font", monospace;
 }
 
 /* For rotated text */
