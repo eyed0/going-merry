@@ -29,6 +29,7 @@
 
       aerc
       inputs.zen-browser.packages."${system}".beta
+      lnx
 
       #       apps
 
@@ -48,6 +49,7 @@
       x264
       svt-av1
       libaom
+      czkawka-full
       
       #astroterm # Celestial viewer for the terminal
       kdePackages.dolphin

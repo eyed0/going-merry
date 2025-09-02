@@ -66,10 +66,10 @@
   #};
   
   # Have a system with small amounts of RAM?
-  # zramSwap = {
-  #   enable = true;
-  #   algorithm = "zstd";
-  # };
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+  };
   
   networking.hostName = "nyxos"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
