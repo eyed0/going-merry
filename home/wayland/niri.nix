@@ -167,7 +167,7 @@ in
       ];
 
       xwayland-satellite.enable = true;
-      #xwayland-satellite.path = "${lib.getExe pkgs.xwayland-satellite-unstable}";
+      xwayland-satellite.path = "${lib.getExe pkgs.xwayland-satellite-unstable}";
       
       # You can override environment variables for processes spawnend by niri.
       environment = {
