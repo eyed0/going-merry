@@ -121,25 +121,25 @@ in
         gaps = 2;
         
         struts = {
-          left = 20;
-          right = 20;
-          top = 1;
-          bottom = 1;
+          left = 24;
+          right = 24;
+          top = 2;
+          bottom = 2;
         };
         
         # insert-hint = {
         #   color = "#DD2476";
         # };
         
-        center-focused-column = "always"; # other options "never" "always" "on-overflow"
+        center-focused-column = "on-overflow"; # other options "never" "always" "on-overflow"
         default-column-display = "tabbed";
 
 
         tab-indicator = {
           hide-when-single-tab = true;
           place-within-column = true;
-          gap = -5;
-          width = 3;
+          gap = -8;
+          width = 6;
           #length total-proportion=1.0;
           position = "right";
           gaps-between-tabs = 2;
@@ -158,10 +158,10 @@ in
       
       spawn-at-startup = [
         (makeCommand "waybar")
-        (makeCommand "kdeconnect")
+        #(makeCommand "kdeconnect")
         {command = ["foot" "-e" "fish"];}
         #{command = ["eww" "open" "bar"];}
-        {command = ["emacsclient" "-c"];}
+        {command = ["emacs" "-c"];}
         {command = ["wl-paste" "--watch" "cliphist" "store"];}
         {command = ["wl-paste" "--type text" "--watch" "cliphist" "store"];}
       ];
