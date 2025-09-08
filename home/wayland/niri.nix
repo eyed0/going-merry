@@ -121,8 +121,8 @@ in
         gaps = 2;
         
         struts = {
-          left = 24;
-          right = 24;
+          left = 2;
+          right = 32;
           top = 2;
           bottom = 2;
         };
@@ -131,7 +131,7 @@ in
         #   color = "#DD2476";
         # };
         
-        center-focused-column = "on-overflow"; # other options "never" "always" "on-overflow"
+        center-focused-column = "never"; # other options "never" "always" "on-overflow"
         default-column-display = "tabbed";
 
 
@@ -158,10 +158,10 @@ in
       
       spawn-at-startup = [
         (makeCommand "waybar")
-        #(makeCommand "kdeconnect")
+        (makeCommand "kdeconnect")
         {command = ["foot" "-e" "fish"];}
         #{command = ["eww" "open" "bar"];}
-        {command = ["emacs" "-c"];}
+        #{command = ["emacs" "-c"];}
         {command = ["wl-paste" "--watch" "cliphist" "store"];}
         {command = ["wl-paste" "--type text" "--watch" "cliphist" "store"];}
       ];

@@ -2,6 +2,19 @@
 
 {
   xdg.configFile."mimeapps.list".force = true;
+
+  xdg.configFile."menus/applications.menu".text = ''
+    <!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+     "http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
+    <Menu>
+      <Name>Applications</Name>
+      <Directory>X-GNOME-Menu-Applications.directory</Directory>
+      <DefaultAppDirs/>
+      <DefaultDirectoryDirs/>
+      <DefaultMergeDirs/>
+    </Menu>
+  '';
+  
   xdg = {
     enable = true;
 
@@ -113,6 +126,7 @@
   home.packages = with pkgs; [
 	  zathura
 	  xdg-utils
+    desktop-file-utils
   ];
 
   # xdg.userDirs = {
