@@ -27,15 +27,17 @@
     ];
 
   #latest linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest; #chaotic
+
   boot.kernelParams = [ 
     "amd_pstate=guided"  # Better power management
     "elevator=none"      # Better I/O scheduler for SSDs, Or "mq-deadline"/"bfq" for HDDs
     #"amdgpu.ppfeaturemask=0xffffffff" # Unlock all PowerPlay features
     "amdgpu.gpu_recovery=1"           # Enable GPU recovery
   ];
-  services.scx.enable = true;
-  services.scx.scheduler = "scx_lavd"; # default is "scx_rustland"
+
+  # services.scx.enable = true;
+  # services.scx.scheduler = "scx_lavd"; # default is "scx_rustland"
   
   #The kernel can load the correct driver right away:
   boot.initrd.kernelModules = [ "amdgpu" ];
@@ -180,47 +182,15 @@
   hardware.logitech.wireless.enable = true;
   hardware.logitech.wireless.enableGraphical = true;
 
-  services.tailscale = {
-    enable = true;
-    extraUpFlags = [
-      "--ssh"
-      "--accept-routes"
-    ];
-  };
+  # services.tailscale = {
+  #   enable = true;
+  #   extraUpFlags = [
+  #     "--ssh"
+  #     "--accept-routes"
+  #   ];
+  # };
 
-  environment.systemPackages = with pkgs; [ tailscale ];
-
-  networking.firewall = {
-    allowedTCPPorts = [
-      7777
-      28900
-      28910
-    ];
-
-    allowedTCPPortRanges = [
-      {
-        from = 27015;
-        to = 27030;
-      }
-      {
-        from = 27036;
-        to = 27037;
-      }
-    ];
-
-    allowedUDPPorts = [
-      4380
-      7777
-      27036
-      27900
-    ];
-    allowedUDPPortRanges = [
-      {
-        from = 27000;
-        to = 27036;
-      }
-    ];
-  };
+  # environment.systemPackages = with pkgs; [ tailscale ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

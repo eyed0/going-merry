@@ -86,9 +86,15 @@ in
       };
 
       overview = {
-        zoom = 0.40;
-        workspace-shadow.enable = false;
-        backdrop-color = "transparent";
+        zoom = 0.30;
+        workspace-shadow = {
+    enable = true;
+    softness = 16;
+    spread = 4;
+    offset = { x = 0; y = 8; };
+    color = "#00000040";
+  };
+  backdrop-color = "#00000020";  # Semi-transparent backdrop
       };
       
       layout = {
@@ -139,7 +145,7 @@ in
           hide-when-single-tab = true;
           place-within-column = true;
           gap = -8;
-          width = 6;
+          width = 8;
           #length total-proportion=1.0;
           position = "right";
           gaps-between-tabs = 2;
@@ -194,7 +200,7 @@ in
       # Animation settings.
       animations = {
         enable = true;
-        slowdown = 1.0;
+        slowdown = 0.6;
         
         workspace-switch.kind = {
           spring = { damping-ratio = 1.0; stiffness = 1000; epsilon = 0.0001; };
@@ -384,7 +390,9 @@ in
         "Mod+Shift+Equal".action = { set-window-height = "+10%"; };
         
         # Screenshot
-        "Print".action = screenshot;
+        "Print".action = {
+    spawn = ["sh" "-c" "niri msg action screenshot && notify-send 'Screenshot taken'"];
+  };
         #"Ctrl+Print".action = screenshot-screen;
         "Alt+Print".action = screenshot-window;
         

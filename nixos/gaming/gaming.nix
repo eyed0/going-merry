@@ -39,6 +39,7 @@
       
       umu-launcher
       ryubing
+      #torzu_git #chaotic, yuzu
       protonup
       protonup-qt
       scanmem
